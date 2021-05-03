@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { serverResponse } from '../modele/utilisateurs.model';
+import { ServerResponse } from '../modele/utilisateurs.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilisateursService {
 
@@ -14,14 +14,13 @@ export class UtilisateursService {
   constructor(private http: HttpClient) {
   }
 
-  getAllUtilisateur(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'utilisateurs', {
+  getAllUtilisateur(): Observable<ServerResponse> {
+    return this.http.get<ServerResponse>(this.url + 'utilisateurs', {
     });
   }
 
-  getAllRole(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'roles', {
+  getAllRole(): Observable<ServerResponse> {
+    return this.http.get<ServerResponse>(this.url + 'roles', {
     });
   }
-
 }

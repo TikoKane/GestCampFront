@@ -5,20 +5,20 @@ import { UtilisateursService } from '../../../services/utilisateurs.service';
 @Component({
   selector: 'ngx-listutilisateur',
   templateUrl: './listutilisateur.component.html',
-  styleUrls: ['./listutilisateur.component.scss']
+  styleUrls: ['./listutilisateur.component.scss'],
 })
-export class ListutilisateurComponent implements OnInit{
+export class ListutilisateurComponent implements OnInit {
 
   users: any;
 
   constructor(private UtilisateursService: UtilisateursService,
-              private router:Router) {
+              private router: Router) {
   }
 
   ngOnInit() {
     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
       this.users = data;
-      console.log(this.users)
+      console.log(this.users);
     }, (err) => {
       console.log(err);
     });

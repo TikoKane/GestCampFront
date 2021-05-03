@@ -10,10 +10,10 @@ export interface UtilisateurModelServer {
 }
 
 
-export interface serverResponse  {
+export interface ServerResponse  {
   count: number;
-  users: UtilisateurModelServer[]
-};
+  users: UtilisateurModelServer[];
+}
 
 
 export class Authentification {
