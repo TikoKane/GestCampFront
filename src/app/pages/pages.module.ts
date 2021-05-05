@@ -10,7 +10,7 @@ import { PagesComponent } from './pages.component';
   imports: [
     PagesRoutingModule,
     ThemeModule,
-    NbMenuModule,
+    NbMenuModule
   ],
   declarations: [
     PagesComponent,

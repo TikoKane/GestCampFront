@@ -10,11 +10,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     children: [
       {
-        title: 'Add utilisateur',
+        title: 'Ajouter utilisateur',
         link: '/pages/utilisateur/add',
       },
       {
-        title: 'List',
+        title: 'Liste des utilisateurs',
         link: '/pages/utilisateur/list',
       },
      

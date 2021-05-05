@@ -20,6 +20,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +41,8 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NgbModule,
+    FormsModule
   ],
   bootstrap: [AppComponent],
 })
