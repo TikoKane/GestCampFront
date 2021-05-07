@@ -1,1 +1,110 @@
-<p>addcontact works!</p>
+<div class="row">
+    <div class="col-lg-8" style="float:none;margin:auto;">
+        <nb-card>
+            <nb-card-header style="text-align: center;">Ajout d'un nouveau contact</nb-card-header>
+            <nb-card-body>
+                <form #form="ngForm">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nom Complet</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer le nom " fullWidth
+                                    #nameInput="ngModel" name="NomComplet" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Date de naissance</label>
+                                <input [(ngModel)]="text" nbInput placeholder="02/05/2051" fullWidth
+                                    #nameInput="ngModel" name="datenaissance" type="date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Adresse</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
+                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Profession</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
+                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Pays</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
+                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Région</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
+                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Situaion</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'email" fullWidth
+                                    #nameInput="ngModel" name="email" type="email" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Sexe</label>
+                                <nb-radio-group _ngcontent-tph-c356="">
+                                    <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183="" class="status-basic"><label
+                                            _ngcontent-tph-c183=""><input _ngcontent-tph-c183="" type="radio"
+                                                class="native-input visually-hidden" name="undefined"
+                                                value="This is value 3"><span _ngcontent-tph-c183=""
+                                                class="outer-circle"></span><span _ngcontent-tph-c183=""
+                                                class="inner-circle"></span><span _ngcontent-tph-c183="" class="text">
+                                                Masculin
+                                            </span></label></nb-radio>
+                                    <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183="" class="status-basic"><label
+                                            _ngcontent-tph-c183=""><input _ngcontent-tph-c183="" type="radio"
+                                                class="native-input visually-hidden" name="undefined"
+                                                value="This is value 1"><span _ngcontent-tph-c183=""
+                                                class="outer-circle"></span><span _ngcontent-tph-c183=""
+                                                class="inner-circle"></span><span _ngcontent-tph-c183="" class="text">
+                                                Féminin
+                                            </span></label></nb-radio>
+
+                                </nb-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-sm-3 col-sm-9">
+                            <br>
+                            <button type="submit" nbButton status="success" style="float: right;"
+                                [disabled]="!form.valid">Ajouter</button>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+</div>

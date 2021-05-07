@@ -49,4 +49,18 @@ private getDismissReason(reason: any): string {
   }
 }
 
+changestatut(){
+  this.UtilisateursService.changerStatutUtilisateur().subscribe((data) => {
+     console.log(data)
+     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
+      this.users = data;
+   //  console.log(this.users)
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+
+}
 }

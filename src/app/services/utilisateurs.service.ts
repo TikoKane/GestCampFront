@@ -19,6 +19,11 @@ export class UtilisateursService {
     });
   }
 
+  changerStatutUtilisateur(): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/changestatut/1', {
+    });
+  }
+
   AddUtilisateur(utilisateur : AddUser): Observable<serverResponse> {
     return this.http.post<serverResponse>(this.url + 'utilisateurs/add',utilisateur, {
     });
