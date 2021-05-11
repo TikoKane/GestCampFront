@@ -27,7 +27,7 @@
                 <label for="inputFirstName" class="label">Role</label>
                 <select name="idRole" id="IdRole" [(ngModel)]="user.idRole" class="col-sm-12 form-control" fullWidth
                   required>
-                  <option value="">Veuillez choisir un role</option>
+                  <option value="" disabled selected>Veuillez choisir un role</option>
                   <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">
                     {{data.libelle}}</option>
                 </select>

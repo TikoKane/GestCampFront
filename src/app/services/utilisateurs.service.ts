@@ -20,8 +20,19 @@ export class UtilisateursService {
     });
   }
 
-  changerStatutUtilisateur(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'utilisateurs/changestatut/1', {
+  getUtilisateurById(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/'+id, {
+    });
+  }
+
+  
+  changerStatutUtilisateur(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/changestatut/'+id, {
+    });
+  }
+
+  deleteUtilisateur(id): Observable<serverResponse> {
+    return this.http.delete<serverResponse>(this.url + 'utilisateurs/delete/'+id, {
     });
   }
 

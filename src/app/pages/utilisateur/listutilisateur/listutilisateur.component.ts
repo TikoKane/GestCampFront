@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UtilisateursService } from '../../../services/utilisateurs.service';
-import { FormGroup }   from '@angular/forms';
-import { UtilisateurModelServer } from "../../../modele/utilisateurs.model";
 
 
 @Component({
@@ -15,7 +13,9 @@ import { UtilisateurModelServer } from "../../../modele/utilisateurs.model";
 export class ListutilisateurComponent implements OnInit{
 
   users: any;
+  datauser: any;
   closeResult:string;
+  tiko :any;
 
   constructor(private UtilisateursService: UtilisateursService,
               private router:Router,
@@ -35,6 +35,7 @@ export class ListutilisateurComponent implements OnInit{
 open(content) {
   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
+    
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
   });
@@ -51,8 +52,8 @@ private getDismissReason(reason: any): string {
 }
 */
 
-changestatut(){
-  this.UtilisateursService.changerStatutUtilisateur().subscribe((data) => {
+changestatut(id){
+  this.UtilisateursService.changerStatutUtilisateur(id).subscribe((data) => {
      console.log(data)
      this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
       this.users = data;
@@ -64,5 +65,17 @@ changestatut(){
     console.log(err);
   });
 
+}
+
+supprimeruser(id){
+  this.UtilisateursService.deleteUtilisateur(id).subscribe((data1) => {
+     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
+      this.users = data;
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
 }
 }

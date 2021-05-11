@@ -17,6 +17,7 @@ text;
     private router: Router
   ) { }
 
+  public countries:any = countries
   ngOnInit(): void {
 
         // Récupérer tous les roles
