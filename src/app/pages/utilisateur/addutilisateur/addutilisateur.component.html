@@ -1,80 +1,73 @@
 <div class="row">
-    <div class="col-lg-8" style="float:none;margin:auto;">
-      <nb-card>
-        <nb-card-header style="text-align: center;">Ajout d'un nouveau utilisateur</nb-card-header>
-        <nb-card-body>
-          <form #form="ngForm">
-            <div class="row">
+  <div class="col-lg-8" style="float:none;margin:auto;">
+    <nb-card>
+      <nb-card-header style="text-align: center;">Ajout d'un nouveau utilisateur</nb-card-header>
+      <nb-card-body>
+        <form #form="ngForm" (ngSubmit)="Ajout(form)">
+          <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputFirstName" class="label">Nom</label>
-                  <input [(ngModel)]="user.NomComplet" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel" name="NomComplet" type="text"  required minlength="2" maxlength="50">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputLastName" class="label">Prénom</label>
-                  <input [(ngModel)]="titre" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel" name="titre" type="text"  required minlength="2" maxlength="50">
-                </div>
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Nom</label>
+                <input [(ngModel)]="user.nomComplet" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
+                  name="NomComplet" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="inputFirstName" class="label">Role</label>
-                      <select name="IdRole" id="IdRole" [(ngModel)]="user.IdRole"  class="col-sm-12 form-control"  fullWidth required>
-                        <option value="">Veuillez choisir un role</option>
-                        <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">{{data.libelle}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="inputLastName" class="label">Numéro Téléphone</label>
-                      <input [(ngModel)]="titre" nbInput placeholder="Entrer le téléphone" fullWidth #nameInput="ngModel" name="telephone" type="number"  required minlength="2" maxlength="50">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="inputFirstName" class="label">Email</label>
-                          <input [(ngModel)]="user.Email" nbInput placeholder="Entrer l'email" fullWidth #nameInput="ngModel" name="Email" type="email"  required minlength="2" maxlength="50">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="inputLastName" class="label">Login</label>
-                          <input [(ngModel)]="user.Login" nbInput placeholder="Entrer le login" fullWidth #nameInput="ngModel" name="Login" type="text"  required minlength="2" maxlength="50">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="inputFirstName" class="label">Mot de passe</label>
-                              <input [(ngModel)]="user.Password" nbInput placeholder="Entrer le mot de passe" fullWidth #nameInput="ngModel" name="Password" type="password"  required minlength="2" maxlength="50">
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="inputLastName" class="label">Confirmation</label>
-                              <input [(ngModel)]="confirmPassword" nbInput placeholder="Confirmer le mot de passe" fullWidth #nameInput="ngModel" name="confirmPassword" type="password"  required minlength="2" maxlength="50">
-                            </div>
-                          </div>
-                        </div>
-
-            <div class="form-group row">
-              <div class="offset-sm-3 col-sm-9">
-                <button type="submit" nbButton status="success" style="float: right;" [disabled]="!form.valid">Ajouter</button>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Prénom</label>
+                <input [(ngModel)]="titre" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel"
+                  name="titre" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
-          </form>
-        </nb-card-body>
-      </nb-card>
-    </div>
+          </div>
 
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Role</label>
+                <select name="idRole" id="IdRole" [(ngModel)]="user.idRole" class="col-sm-12 form-control" fullWidth
+                  required>
+                  <option value="">Veuillez choisir un role</option>
+                  <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">
+                    {{data.libelle}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Numéro Téléphone</label>
+                <input [(ngModel)]="user.telephone" nbInput placeholder="Entrer le téléphone" fullWidth
+                  #nameInput="ngModel" name="telephone" type="number" required minlength="2" maxlength="50">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Email</label>
+                <input [(ngModel)]="user.email" nbInput placeholder="Entrer l'email" fullWidth #nameInput="ngModel"
+                  name="email" type="email" required minlength="2" maxlength="50">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Login</label>
+                <input [(ngModel)]="user.login" nbInput placeholder="Entrer le login" fullWidth #nameInput="ngModel"
+                  name="login" type="text" required minlength="2" maxlength="50">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <br>
+              <button type="submit" nbButton status="success" style="float: right;"
+                [disabled]="!form.valid">Ajouter</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
   </div>
+
+</div>

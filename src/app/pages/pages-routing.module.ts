@@ -10,11 +10,6 @@ const routes: Routes = [{
     /*
 
     {
-      path: 'iot-dashboard',
-      component: DashboardComponent,
-    },
-    */
-    {
       path: 'canalenvoi',
       loadChildren: () => import('./canalenvoi/canalenvoi.module')
         .then(m => m.CanalenvoiModule),
