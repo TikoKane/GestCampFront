@@ -7,6 +7,7 @@ export interface UtilisateurModelServer {
   Etat: Number;
   Statut: Number;
   IdRole: String;
+  Telephone: String;
 }
 
 

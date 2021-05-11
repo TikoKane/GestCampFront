@@ -33,6 +33,7 @@ roles: any;
     Login:'',
     NomComplet :'',
     Password : '',
-    Statut :null
+    Statut :null,
+    Telephone:''
   };
 }

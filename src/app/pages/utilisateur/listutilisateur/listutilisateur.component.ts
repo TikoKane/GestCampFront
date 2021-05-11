@@ -31,6 +31,7 @@ export class ListutilisateurComponent implements OnInit{
     });
 
 }
+/*
 open(content) {
   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
@@ -48,5 +49,6 @@ private getDismissReason(reason: any): string {
     return `with: ${reason}`;
   }
 }
+*/
 
 }
