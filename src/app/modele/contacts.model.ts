@@ -7,13 +7,23 @@ export interface ContactModelServer {
     Statut: Number;
     Pays: String;
     Region: String;
-    DateDeNaissance: Date;
-    Sexe: Number;
-    Situation: Number;
+    DateDeNaissance: String;
+    Sexe: String;
+    Situation: String;
     Profession: String;
     IdNiveauVisibilite: Number;
   }
 
+  export interface AddContact {
+    nomComplet: String;
+    DateDeNaissance: String;
+    Adresse: String;
+    Profession: String;
+    Pays: String;
+    Region: String;
+    Sexe: String;
+    Situation: String;
+  }
 
   
 export interface serverResponse  {

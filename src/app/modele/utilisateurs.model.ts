@@ -1,8 +1,8 @@
 export interface UtilisateurModelServer {
   Id: Number;
-  NomComplet: String;
+  Nom: String;
+  Prenom: String;
   Email: String;
-  Telephone : String;
   Login: String;
   Password: String;
   Etat: Number;
@@ -12,7 +12,8 @@ export interface UtilisateurModelServer {
 }
 
 export interface AddUser {
-  nomComplet: String;
+  nom: String;
+  prenom: String
   email: String;
   telephone : String;
   login: String;

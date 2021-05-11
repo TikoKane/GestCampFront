@@ -7,7 +7,7 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    /*
+    
 
     {
       path: 'canalenvoi',
@@ -33,7 +33,8 @@ const routes: Routes = [{
       path: 'compte',
       loadChildren: () => import('./parametrecompte/parametrecompte.module')
         .then(m => m.ParametrcompteModule),
-    },/*
+    },
+    /*
     {
       path: 'ui-features',
       loadChildren: () => import('./ui-features/ui-features.module')

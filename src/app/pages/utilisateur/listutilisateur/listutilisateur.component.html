@@ -9,7 +9,8 @@
           <thead style='background-color: #2d8ac7'>
             <tr>
               <th>#</th>
-              <th style="text-align: center;">Nom Complet</th>
+              <th style="text-align: center;">Prénom</th>
+              <th style="text-align: center;">Nom </th>
               <th style="text-align: center;">Email </th>
               <th style="text-align: center;">Téléphone</th>
               <th style="text-align: center;">Role</th>
@@ -20,10 +21,11 @@
           <tbody style='background-color:white'>
             <tr *ngFor="let g of users;let i =index">
               <th scope='row'>{{i+1}}</th>
-              <td>{{g.nomComplet}}</td>
+              <td>{{g.prenom}}</td>
+              <td>{{g.nom}}</td>
               <td>{{g.email}}</td>
               <td>{{g.telephone}}</td>
-              <td>{{ g.idRole === 1 ? "Administratateur" : g.idRole === 2 ? "Editeur" : "Djay"}}</td>
+              <td>{{ g.idRole === 1 ? "Administrateur" : g.idRole === 2 ? "Editeur" : "Djay"}}</td>
               <td *ngIf="g.statut===true"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
                   Actif

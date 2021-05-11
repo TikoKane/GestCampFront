@@ -8,15 +8,15 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="inputFirstName" class="label">Nom</label>
-                <input [(ngModel)]="user.nomComplet" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
+                <input [(ngModel)]="user.nom" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
                   name="NomComplet" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="inputLastName" class="label">Prénom</label>
-                <input [(ngModel)]="titre" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel"
-                  name="titre" type="text" required minlength="2" maxlength="50">
+                <input [(ngModel)]="user.prenom" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel"
+                  name="PreNom" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
           </div>
