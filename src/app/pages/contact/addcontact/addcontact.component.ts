@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { countries } from '../../../services/country-data-store';
 
 @Component({
   selector: 'ngx-addcontact',
@@ -9,6 +10,7 @@ export class AddcontactComponent implements OnInit {
 text;
   constructor() { }
 
+  public countries:any = countries
   ngOnInit(): void {
   }
 

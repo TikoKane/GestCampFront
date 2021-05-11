@@ -8,15 +8,15 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="inputFirstName" class="label">Nom</label>
-                <input [(ngModel)]="user.nomComplet" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
-                  name="NomComplet" type="text" required minlength="2" maxlength="50">
+                <input [(ngModel)]="user.nom" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
+                  name="Nom" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="inputLastName" class="label">Prénom</label>
-                <input [(ngModel)]="titre" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel"
-                  name="titre" type="text" required minlength="2" maxlength="50">
+                <input [(ngModel)]="user.prenom" nbInput placeholder="Entrer le prenom" fullWidth #nameInput="ngModel"
+                  name="Prenom" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
                 <label for="inputFirstName" class="label">Role</label>
                 <select name="idRole" id="IdRole" [(ngModel)]="user.idRole" class="col-sm-12 form-control" fullWidth
                   required>
-                  <option value="">Veuillez choisir un role</option>
+                  <option value="" disabled selected>Veuillez choisir un role</option>
                   <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">
                     {{data.libelle}}</option>
                 </select>

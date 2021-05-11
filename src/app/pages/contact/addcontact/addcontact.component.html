@@ -7,67 +7,29 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="inputFirstName" class="label">Nom Complet</label>
+                                <label for="inputFirstName" class="label">Nom </label>
                                 <input [(ngModel)]="text" nbInput placeholder="Entrer le nom " fullWidth
                                     #nameInput="ngModel" name="NomComplet" type="text" required minlength="2"
                                     maxlength="50">
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Prénom</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer le prénom " fullWidth
+                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
 
+                    </div>
+
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="inputLastName" class="label">Date de naissance</label>
                                 <input [(ngModel)]="text" nbInput placeholder="02/05/2051" fullWidth
                                     #nameInput="ngModel" name="datenaissance" type="date">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="inputLastName" class="label">Adresse</label>
-                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
-                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
-                                    maxlength="50">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="inputLastName" class="label">Profession</label>
-                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
-                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
-                                    maxlength="50">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="inputLastName" class="label">Pays</label>
-                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
-                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
-                                    maxlength="50">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="inputLastName" class="label">Région</label>
-                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
-                                    #nameInput="ngModel" name="Adresse" type="text" required minlength="2"
-                                    maxlength="50">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="inputFirstName" class="label">Situaion</label>
-                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'email" fullWidth
-                                    #nameInput="ngModel" name="email" type="email" required minlength="2"
-                                    maxlength="50">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -77,21 +39,62 @@
                                     <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183="" class="status-basic"><label
                                             _ngcontent-tph-c183=""><input _ngcontent-tph-c183="" type="radio"
                                                 class="native-input visually-hidden" name="undefined"
-                                                value="This is value 3"><span _ngcontent-tph-c183=""
-                                                class="outer-circle"></span><span _ngcontent-tph-c183=""
-                                                class="inner-circle"></span><span _ngcontent-tph-c183="" class="text">
-                                                Masculin
-                                            </span></label></nb-radio>
-                                    <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183="" class="status-basic"><label
-                                            _ngcontent-tph-c183=""><input _ngcontent-tph-c183="" type="radio"
-                                                class="native-input visually-hidden" name="undefined"
-                                                value="This is value 1"><span _ngcontent-tph-c183=""
+                                                value="Feminin"><span _ngcontent-tph-c183=""
                                                 class="outer-circle"></span><span _ngcontent-tph-c183=""
                                                 class="inner-circle"></span><span _ngcontent-tph-c183="" class="text">
                                                 Féminin
                                             </span></label></nb-radio>
+                                    <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183="" class="status-basic"><label
+                                            _ngcontent-tph-c183=""><input _ngcontent-tph-c183="" type="radio"
+                                                class="native-input visually-hidden" name="undefined"
+                                                value="Masculin"><span _ngcontent-tph-c183=""
+                                                class="outer-circle"></span><span _ngcontent-tph-c183=""
+                                                class="inner-circle"></span><span _ngcontent-tph-c183="" class="text">
+                                                Masculin
+                                            </span></label></nb-radio>
 
                                 </nb-radio-group>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Pays</label>
+                                <select class="form-control" name="pays" id="pays">
+                                    <option value="" disabled selected>Veuillez choisir un pays</option>
+                                    <option *ngFor="let country of countries" [value]="country.name">{{country.name}} ({{country.code}})
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Adresse</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer l'Adresse " fullWidth
+                                    #nameInput="ngModel" name="adresse" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Situaion matrimoniale</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer la situation matrimoniale" fullWidth
+                                    #nameInput="ngModel" name="situation" type="text" required minlength="2"
+                                    maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Profession</label>
+                                <input [(ngModel)]="text" nbInput placeholder="Entrer la profession " fullWidth
+                                    #nameInput="ngModel" name="profession" type="text" required minlength="2"
+                                    maxlength="50">
                             </div>
                         </div>
                     </div>

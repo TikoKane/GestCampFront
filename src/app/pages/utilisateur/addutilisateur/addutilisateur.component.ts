@@ -36,7 +36,8 @@ roles: any;
     telephone :'',
     idRole: '',
     login:'',
-    nomComplet :''
+    nom :'',
+    prenom:''
   };
 
   Ajout(form :NgForm){
