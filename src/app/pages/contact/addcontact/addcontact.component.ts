@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Countries } from '../../../modele/contacts';
 import { countries } from '../../../services/country-data-store';
 
 @Component({
@@ -8,10 +10,37 @@ import { countries } from '../../../services/country-data-store';
 })
 export class AddcontactComponent implements OnInit {
 text;
-  constructor() { }
 
-  public countries:any = countries
-  ngOnInit(): void {
-  }
+firstForm: FormGroup;
+secondForm: FormGroup;
+thirdForm: FormGroup;
+public countries:any = countries;
+constructor(private fb: FormBuilder) {
+}
 
+ngOnInit() {
+  this.firstForm = this.fb.group({
+    firstCtrl: ['', Validators.required],
+  });
+
+  this.secondForm = this.fb.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  this.thirdForm = this.fb.group({
+    thirdCtrl: ['', Validators.required],
+  });
+}
+
+onFirstSubmit() {
+  this.firstForm.markAsDirty();
+}
+
+onSecondSubmit() {
+  this.secondForm.markAsDirty();
+}
+
+onThirdSubmit() {
+  this.thirdForm.markAsDirty();
+}
 }
