@@ -16,6 +16,7 @@ import { AddcontactComponent } from './addcontact/addcontact.component';
 
 @NgModule({
   imports: [
+    NbStepperModule,
     ReactiveFormsModule,
     ContactRoutingModule,
     ThemeModule,
