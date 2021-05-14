@@ -4,6 +4,7 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbDatepickerModule,
   NbRadioModule,
   NbSelectModule,
+  NbStepperModule,
   NbUserModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -30,6 +31,7 @@ import { AddcontactComponent } from './addcontact/addcontact.component';
     NbTreeGridModule,
     Ng2SmartTableModule,
     NbIconModule,
+    NbStepperModule
     ngFormsModule,
   ],
   declarations: [
