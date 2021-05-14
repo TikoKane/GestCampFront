@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddContact, ContactModelServer } from '../../../modele/contacts.model';
 import { ContactService } from '../../../services/contacts.service';
@@ -12,13 +12,18 @@ import { ContactService } from '../../../services/contacts.service';
 })
 export class AddcontactComponent implements OnInit {
 text;
+firstForm: FormGroup;
   constructor(
     private ContactService: ContactService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
-  public countries:any = countries
+  //public countries:any = countries
   ngOnInit(): void {
+    this.firstForm = this.fb.group({
+      firstCtrl: ['', Validators.required],
+    });
 
         // Récupérer tous les roles
   }
@@ -45,7 +50,9 @@ text;
       console.log(err);
     });
   }
-
+  onFirstSubmit() {
+    this.firstForm.markAsDirty();
+  }
 
 
 }
