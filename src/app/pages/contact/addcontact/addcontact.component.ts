@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AddContact, ContactModelServer } from '../../../modele/contacts.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { contactCanalInfo, Contacts, Countries } from '../../../modele/contacts';
 import { ContactService } from '../../../services/contacts.service';
-import { Countries } from '../../../modele/contacts';
 import { countries } from '../../../services/country-data-store';
 
 @Component({
@@ -13,14 +11,42 @@ import { countries } from '../../../services/country-data-store';
 })
 export class AddcontactComponent implements OnInit {
 text;
+tel = false;
+face = false;
+wha = false;
+mail = false;
+
+
 firstForm: FormGroup;
 secondForm: FormGroup;
 thirdForm: FormGroup;
-  constructor(
-    private ContactService: ContactService,
-    private router: Router,
-    private fb: FormBuilder
-  ) { }
+public countries:any = countries;
+
+con : contactCanalInfo = {
+  whatsapp :'',
+  telephone :'',
+  facebook : '',
+  mail : ''
+}
+
+contact : Contacts ={
+  Id: 0,
+  Nom: '',
+  Prenom:'',
+  Adresse: '',
+  Etat: 1,
+  Statut: 1,
+  Pays: '',
+  DateDeNaissance: '',
+  Sexe: true,
+  Situation: '',
+  Profession: '',
+  IdNiveauVisibilite: 1,
+  
+}
+
+constructor(private fb: FormBuilder, private contactService : ContactService) {
+}
 
   public countries:any = countries
   ngOnInit(): void {
@@ -75,5 +101,66 @@ thirdForm: FormGroup;
   onThirdSubmit() {
     this.thirdForm.markAsDirty();
   }
+
+onThirdSubmit() {
+  this.thirdForm.markAsDirty();
+}
+
+addTelephone(){
+  this.tel=true;
+}
+
+addFacebook(){
+  this.face=true;
+}
+
+addWhatsapp(){
+  this.wha=true;
+}
+
+addMail(){
+  this.mail=true;
+}
+
+addTelephoneAndWhatsapp(){
+  this.con.whatsapp=this.con.telephone;
+  this.tel=true;  
+  this.wha=true;
+
+}
+
+supTelephone(){
+  this.con.telephone='';
+  this.tel = false;
+  }
+  
+
+supFacebook(){
+  this.con.facebook='';
+  this.face = false;
+  }
+
+  supWhatsapp(){
+    this.con.whatsapp='';
+    this.wha = false;
+    }
+
+    supMail(){
+      this.con.mail='';
+      this.mail = false;
+      }
+
+    valider(){
+this.contactService.AddContact(this.contact).subscribe((data) => {
+    
+  console.log(data)
+ 
+}, (err) => {
+ // console.log(this.user)
+  console.log(err);
+});
+
+}
+
 
 }
