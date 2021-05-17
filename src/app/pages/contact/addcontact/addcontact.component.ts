@@ -3,7 +3,8 @@ import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddContact, ContactModelServer } from '../../../modele/contacts.model';
 import { ContactService } from '../../../services/contacts.service';
-
+import { Countries } from '../../../modele/contacts';
+import { countries } from '../../../services/country-data-store';
 
 @Component({
   selector: 'ngx-addcontact',
@@ -13,22 +14,33 @@ import { ContactService } from '../../../services/contacts.service';
 export class AddcontactComponent implements OnInit {
 text;
 firstForm: FormGroup;
+secondForm: FormGroup;
+thirdForm: FormGroup;
   constructor(
     private ContactService: ContactService,
     private router: Router,
     private fb: FormBuilder
   ) { }
 
-  //public countries:any = countries
+  public countries:any = countries
   ngOnInit(): void {
     this.firstForm = this.fb.group({
       firstCtrl: ['', Validators.required],
+    });
+
+    this.secondForm = this.fb.group({
+      secondCtrl: ['', Validators.required],
+    });
+  
+    this.thirdForm = this.fb.group({
+      thirdCtrl: ['', Validators.required],
     });
 
         // Récupérer tous les roles
   }
 
   // Ajout d'un contact
+  /*
   user: AddContact = {
     nomComplet: '',
     DateDeNaissance: '',
@@ -39,7 +51,7 @@ firstForm: FormGroup;
     Sexe: '',
     Situation: ''
   };  
-  
+  */
   Ajout(form :NgForm){
     this.ContactService.AddContact(this.user).subscribe((data) =>{
 
@@ -54,5 +66,12 @@ firstForm: FormGroup;
     this.firstForm.markAsDirty();
   }
 
+  onSecondSubmit() {
+    this.secondForm.markAsDirty();
+  }
+  
+  onThirdSubmit() {
+    this.thirdForm.markAsDirty();
+  }
 
 }
