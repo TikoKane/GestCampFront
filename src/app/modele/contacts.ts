@@ -1,15 +1,14 @@
 export class Contacts {
   Id: number;
-  NomComplet: string;
-  Matricule: string;
-  Adresse: string;
+  Nom: string;
+  Prenom:string;
   Etat: number;
   Statut: number;
   Pays: string;
-  Region: string;
   DateDeNaissance: string;
-  Sexe: number;
-  Situation: number;
+  Sexe: boolean;
+  Adresse:string
+  Situation: string;
   Profession: string;
   IdNiveauVisibilite: number;
 }
@@ -20,4 +19,11 @@ export interface Countries {
   code3: string
   name: string
   number: string
+}
+
+export interface contactCanalInfo{
+  facebook : string;
+  whatsapp : string;
+  telephone : string;
+  mail:string;
 }
