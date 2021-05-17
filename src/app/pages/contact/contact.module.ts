@@ -32,8 +32,8 @@ import { AddcontactComponent } from './addcontact/addcontact.component';
     NbTreeGridModule,
     Ng2SmartTableModule,
     NbIconModule,
-    NbStepperModule
-    ngFormsModule,
+    NbStepperModule,
+    ngFormsModule
   ],
   declarations: [
     ...routedComponents,

@@ -52,6 +52,7 @@ thirdForm: FormGroup;
     Situation: ''
   };  
   */
+ /*
   Ajout(form :NgForm){
     this.ContactService.AddContact(this.user).subscribe((data) =>{
 
@@ -62,6 +63,7 @@ thirdForm: FormGroup;
       console.log(err);
     });
   }
+  */
   onFirstSubmit() {
     this.firstForm.markAsDirty();
   }
