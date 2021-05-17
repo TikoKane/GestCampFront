@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Contacts } from '../modele/contacts';
 import { AddContact, serverResponse } from '../modele/contacts.model';
 
 
@@ -27,7 +28,7 @@ export class ContactService {
     });
   }
   
-  AddContact(contact :AddContact): Observable<serverResponse> {
+  AddContact(contact :Contacts): Observable<serverResponse> {
     return this.http.post<serverResponse>(this.url + 'contacts/add',contact, {
     });
   }
