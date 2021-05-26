@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddutilisateurComponent } from './addutilisateur/addutilisateur.component';
+import { AdddiffusionComponent } from "./adddiffusion/adddiffusion.component";
 
-
-import { ListutilisateurComponent } from './listutilisateur/listutilisateur.component';
-import { UtilisateurComponent } from './utilisateur.component';
+import { ListeDeDiffusionComponent } from "./liste-de-diffusion.component";
+import { ListdiffusionComponent } from "./listdiffusion/listdiffusion.component";
 
 
 const routes: Routes = [{
   path: '',
-  component: UtilisateurComponent,
+  component: ListeDeDiffusionComponent,
   children: [
     {
       path: 'list',
-      component: ListutilisateurComponent,
+      component: ListdiffusionComponent,
     },
     {
       path: 'add',
-      component: AddutilisateurComponent,
+      component: AdddiffusionComponent,
     },/*
     {
       path: 'accordion',
@@ -47,12 +46,14 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class UtilisateurRoutingModule {
+
+export class ListeDeDiffusionRoutingModule { 
+
 }
 
 export const routedComponents = [
-  ListutilisateurComponent,
-  UtilisateurComponent
+  ListdiffusionComponent,
+  ListeDeDiffusionComponent
 ];

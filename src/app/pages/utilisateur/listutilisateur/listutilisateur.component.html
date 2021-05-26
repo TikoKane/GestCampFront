@@ -4,13 +4,13 @@
       <nb-card-header style="text-align: center;">
         <b> Liste des utilisateurs</b>
       </nb-card-header>
+
       <nb-card-body>
         <table class='table table-bordered'>
           <thead style='background-color: #2d8ac7'>
             <tr>
               <th>#</th>
-              <th style="text-align: center;">Prénom</th>
-              <th style="text-align: center;">Nom </th>
+              <th style="text-align: center;">Nom Complet</th>
               <th style="text-align: center;">Email </th>
               <th style="text-align: center;">Téléphone</th>
               <th style="text-align: center;">Role</th>
@@ -21,12 +21,11 @@
           <tbody style='background-color:white'>
             <tr *ngFor="let g of users;let i =index">
               <th scope='row'>{{i+1}}</th>
-              <td>{{g.prenom}}</td>
-              <td>{{g.nom}}</td>
+              <td>{{g.nom | uppercase}} {{g.prenom}}</td>
               <td>{{g.email}}</td>
               <td>{{g.telephone}}</td>
-              <td>{{ g.idRole === 1 ? "Administrateur" : g.idRole === 2 ? "Editeur" : "Djay"}}</td>
-              <td *ngIf="g.statut===true"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
+              <td>{{ g.idRole === 1 ? "Administratateur" : g.idRole === 2 ? "Editeur" : "Djay"}}</td>
+              <td *ngIf="g.statut===true"><button type="button" (click)="open(g.id)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
                   Actif
                 </button></td>
@@ -41,7 +40,7 @@
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                  <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                  <button nbButton (click)="openEdit(contentEdit, userModel)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                       class="fa fa-edit" aria-hidden="true"></i> </button>
                 </div>
 
@@ -102,45 +101,57 @@
         </div>
       </div>
     </div>
+    
+
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+              <div class="modal-body">
+                  <div class="form-group"> 
+                   <label for="Nom">Nom</label> 
+                   <div class="input-group"> 
+                      <input formControlName="Nom" class="form-control"> 
+                   </div> 
+                 </div>
+                  <div class="form-group">
+                    <label for="Prenom">Prénom</label>
+                    <div class="input-group">
+                      <input formControlName="Prenom" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="Email">Email</label>
+                    <div class="input-group">
+                      <input formControlName="Email" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="IdRole">Role</label>
+                    <div class="input-group">
+                      <input formControlName="IdRole" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="Telephone">Téléphone</label>
+                    <div class="input-group">
+                      <input formControlName="Telephone" class="form-control">
+                    </div>
+                  </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-success">Enregistrer</button>
+            </div>
           </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-success">Enregistrer</button>
-          </div>
-        </div>
       </div>
     </div>
-    <div class="modal fade" id="exampleMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Informations de l'utilisateur {{datauser?.prenom | uppercase}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          <b> Nom :</b>  {{datauser?.nom | uppercase}}<br>
-          <b> Prenom :</b>  {{datauser?.prenom}}<br>
-          <b> Telephone :</b>  {{datauser?.telephone}}<br>
-          <b> Email :</b>  {{datauser?.email}}<br>
-          <b> Login :</b>  {{datauser?.login}}<br>
-          <b *ngIf="datauser?.statut===true"> Statut :</b> <span *ngIf="datauser?.statut===true" style="color: green;">  ACTIF</span>
-          <b *ngIf="datauser?.statut===false"> Statut :</b>  <span *ngIf="datauser?.statut===false" style="color: red;"> INACTIF</span>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

@@ -30,6 +30,11 @@ const routes: Routes = [{
         .then(m => m.CampagneModule),
     },
     {
+      path: 'liste_de_diffusion',
+      loadChildren: () => import('./liste_de_diffusion/liste-de-diffusion.module')
+        .then(m => m.ListeDeDiffusionModule),
+    },
+    {
       path: 'compte',
       loadChildren: () => import('./parametrecompte/parametrecompte.module')
         .then(m => m.ParametrcompteModule),

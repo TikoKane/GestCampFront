@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AddContact } from '../modele/contacts.model';
-import { AddUser, serverResponse, UtilisateurModelServer } from '../modele/utilisateurs.model';
+import { AddUser, serverResponse, UtilisateurModelServer, UserModel } from '../modele/utilisateurs.model';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,10 @@ import { AddUser, serverResponse, UtilisateurModelServer } from '../modele/utili
 export class UtilisateursService {
 
   private url = environment.serverURL;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
+  };
 
   constructor(private http: HttpClient) {
   }
@@ -43,6 +50,11 @@ export class UtilisateursService {
   getAllRole(): Observable<serverResponse> {
     return this.http.get<serverResponse>(this.url + 'roles', {
     });
+  }
+
+  
+  UpdateUtilisateur(id, userModel: UtilisateurModelServer):Observable<UtilisateurModelServer>{
+    return this.http.put<UtilisateurModelServer>(this.url + 'utilisateurs/put/' + id , userModel);
   }
 
 }

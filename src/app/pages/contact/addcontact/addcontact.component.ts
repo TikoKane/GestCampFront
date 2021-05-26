@@ -19,6 +19,7 @@ export class AddcontactComponent implements OnInit {
   secondForm: FormGroup;
   thirdForm: FormGroup;
   public countries:any = countries;
+  
   con : contactCanalInfo = {
     whatsapp :'',
     telephone :'',

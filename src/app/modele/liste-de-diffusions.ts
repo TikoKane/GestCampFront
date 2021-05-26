@@ -1,4 +1,4 @@
-export class ListeDeDiffusions {
+export interface ListeDeDiffusions {
   Id: number;
   Titre: string;
   Reference: string;

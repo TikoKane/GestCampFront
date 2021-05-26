@@ -10,7 +10,7 @@ import {ListeDeDiffusions} from '../modele/liste-De-Diffusions';
 })
 export class ListeDeDiffusionsService {
 
-  private url = environment.serverURL + 'listeDeDiffusions/';
+  private url = environment.serverURL + 'listedediffusion/';
 
   constructor(private http: HttpClient) {
   }
@@ -33,5 +33,9 @@ export class ListeDeDiffusionsService {
 
   DeleteListeDeDiffusion(id): Observable<ListeDeDiffusions> {
     return this.http.delete<ListeDeDiffusions>(this.url + 'delete/' + id);
+  }
+
+  changeEtatListeDeDiffusion(id): Observable<ListeDeDiffusions> {
+    return this.http.get<ListeDeDiffusions>(this.url + 'changeEtat/' + id);
   }
 }

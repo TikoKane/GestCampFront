@@ -51,11 +51,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Créer une liste de diffusion',
-        link: '/pages/contact/add',
+        link: '/pages/liste_de_diffusion/add',
       },
       {
         title: 'Liste des listes de diffusion',
-        link: '/pages/contact/list',
+        link: '/pages/liste_de_diffusion/list',
       },
     ],
   },

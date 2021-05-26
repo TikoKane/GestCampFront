@@ -14,8 +14,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     NbMenuModule,
   ],
   declarations: [
-    PagesComponent,
- 
+    PagesComponent
   ],
 })
 export class PagesModule {

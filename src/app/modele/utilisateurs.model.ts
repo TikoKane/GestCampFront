@@ -11,6 +11,16 @@ export interface UtilisateurModelServer {
   Telephone: String;
 }
 
+export class UserModel {
+  id: Number;
+  Nom: String;
+  Prenom : String;
+  Email: String;
+  IdRole: String;
+  Telephone: String;
+}
+
+
 export interface AddUser {
   nom: String;
   prenom: String;
@@ -21,7 +31,7 @@ export interface AddUser {
 }
 export interface serverResponse  {
   count: number;
-  users: UtilisateurModelServer[]
+  users: UtilisateurModelServer[];
 };
 
 

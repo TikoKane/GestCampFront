@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-lg-8" style="float:none;margin:auto;">
+      <nb-card>
+        <nb-card-header style="text-align: center;">Ajout d'une nouvelle Liste de Diffusion</nb-card-header>
+        <nb-card-body>
+          <form #form="ngForm" (ngSubmit)="Ajout(form)">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="inputFirstName" class="label">Libellé de la Liste de Diffusion</label>
+                  <input [(ngModel)]="liste.Titre" nbInput placeholder="Entrer le titre de la diffusion " fullWidth #nameInput="ngModel"
+                    name="Titre" type="text" required minlength="2" maxlength="50">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">
+                  <br>
+                  <button type="submit" nbButton status="success" style="float: right;"
+                    [disabled]="!form.valid">Ajouter</button>
+                </div>
+              </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+ </div>
