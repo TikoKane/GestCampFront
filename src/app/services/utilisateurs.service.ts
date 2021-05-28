@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { identifierModuleUrl } from '@angular/compiler';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable} from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, tap} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { AddContact } from '../modele/contacts.model';
 import { AddUser, serverResponse, UtilisateurModelServer, UserModel } from '../modele/utilisateurs.model';
@@ -52,9 +53,17 @@ export class UtilisateursService {
     });
   }
 
-  
-  UpdateUtilisateur(id, userModel: UtilisateurModelServer):Observable<UtilisateurModelServer>{
-    return this.http.put<UtilisateurModelServer>(this.url + 'utilisateurs/put/' + id , userModel);
+  /*
+  UpdateUtilisateur(id: number, userModel: UserModel):Observable<UserModel>{
+    return this.http.put<UserModel>(this.url + 'utilisateurs/put/' + id , userModel);
+  }
+  */
+
+  UpdateUtilisateur(userModel:UserModel): Observable<any>{
+    const httOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(`${this.url}/${userModel.id}`, userModel);
   }
 
 }

@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                  <button nbButton (click)="openEdit(contentEdit, userModel)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                  <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                       class="fa fa-edit" aria-hidden="true"></i> </button>
                 </div>
 
@@ -101,57 +101,88 @@
         </div>
       </div>
     </div>
-    
-
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+              <h5 class="modal-title" id="exampleModalLabel" >Modification</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-              <div class="modal-body">
-                  <div class="form-group"> 
-                   <label for="Nom">Nom</label> 
-                   <div class="input-group"> 
-                      <input formControlName="Nom" class="form-control"> 
-                   </div> 
-                 </div>
-                  <div class="form-group">
-                    <label for="Prenom">Prénom</label>
-                    <div class="input-group">
-                      <input formControlName="Prenom" class="form-control">
+            <div class="modal-body">
+              <form [formGroup]="editForm" novalidate>
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label for="inputFirstName" class="label">Nom</label>
+                      <input  nbInput  fullWidth value={{datauser?.nom}}
+                        name="NomComplet" type="text" required minlength="2" maxlength="50">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="Email">Email</label>
-                    <div class="input-group">
-                      <input formControlName="Email" class="form-control">
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label for="inputLastName" class="label">Prénom</label>
+                      <input  nbInput  fullWidth
+                        name="PreNom" type="text" required minlength="2" maxlength="50"
+                        value={{datauser?.prenom}}>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="IdRole">Role</label>
-                    <div class="input-group">
-                      <input formControlName="IdRole" class="form-control">
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label for="inputLastName" class="label">Email</label>
+                      <input  nbInput  fullWidth
+                        name="Telephone" type="text" required minlength="2" maxlength="50"
+                        value={{datauser?.email}}>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="Telephone">Téléphone</label>
-                    <div class="input-group">
-                      <input formControlName="Telephone" class="form-control">
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label for="inputLastName" class="label">Role</label>
+                      <input  nbInput  fullWidth
+                        name="Role" type="text" required minlength="2" maxlength="50"
+                        value={{datauser?.idRole}}>
                     </div>
                   </div>
-              </div>
-            </form>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-success">Enregistrer</button>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label for="inputLastName" class="label">Téléphone</label>
+                      <input  nbInput  fullWidth
+                        name="Telephone" type="text" required minlength="2" maxlength="50"
+                        value={{datauser?.telephone}}>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-success" (click)="onSave(datauser?.id)">Enregistrer</button>
+                </div>
+              </form>
             </div>
-          </div>
+        </div>
       </div>
     </div>
 
+    <div class="modal fade" id="exampleMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Informations de l'utilisateur {{datauser?.prenom | uppercase}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <b> Nom :</b>  {{datauser?.nom | uppercase}}<br>
+          <b> Prenom :</b>  {{datauser?.prenom}}<br>
+          <b> Telephone :</b>  {{datauser?.telephone}}<br>
+          <b> Email :</b>  {{datauser?.email}}<br>
+          <b> Login :</b>  {{datauser?.login}}<br>
+          <b *ngIf="datauser?.statut===true"> Statut :</b> <span *ngIf="datauser?.statut===true" style="color: green;">  ACTIF</span>
+          <b *ngIf="datauser?.statut===false"> Statut :</b>  <span *ngIf="datauser?.statut===false" style="color: red;"> INACTIF</span>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

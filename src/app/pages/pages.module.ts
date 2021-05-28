@@ -6,7 +6,6 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 
 
-
 @NgModule({
   imports: [
     PagesRoutingModule,
