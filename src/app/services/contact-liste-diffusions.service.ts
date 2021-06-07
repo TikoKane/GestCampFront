@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {ContactListeDiffusions} from '../modele/contact-liste-diffusions';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ContactListeDiffusions } from '../modele/contact-liste-diffusions';
 
 
 @Injectable({
