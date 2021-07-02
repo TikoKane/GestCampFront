@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilisateursService } from "../../services/utilisateurs.service";
-import { UtilisateurModelServer, UserModel } from "../../modele/utilisateurs.model";
+import { UtilisateurModelServer} from "../../modele/utilisateurs.model";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

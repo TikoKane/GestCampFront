@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable} from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, tap} from 'rxjs/operators';
+import { catchError, map, tap} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { AddContact } from '../modele/contacts.model';
-import { AddUser, serverResponse, UtilisateurModelServer, UserModel } from '../modele/utilisateurs.model';
+import { AddUser, serverResponse, UtilisateurModelServer, UpdateUser } from '../modele/utilisateurs.model';
 
 
 
@@ -15,6 +15,7 @@ import { AddUser, serverResponse, UtilisateurModelServer, UserModel } from '../m
 export class UtilisateursService {
 
   private url = environment.serverURL;
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -53,17 +54,28 @@ export class UtilisateursService {
     });
   }
 
+  UpdateUtilisateur(id,utilisateur : UpdateUser){
+    return this.http.put(this.url + 'utilisateurs/put/' + id , utilisateur);
+  }
+
   /*
-  UpdateUtilisateur(id: number, userModel: UserModel):Observable<UserModel>{
-    return this.http.put<UserModel>(this.url + 'utilisateurs/put/' + id , userModel);
-  }
-  */
-
-  UpdateUtilisateur(userModel:UserModel): Observable<any>{
-    const httOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+  changePassword(userDetails : any){
+    const resetPasswordViewmodel = {
+      OldPassword: userDetails.oldPassword,
+      Password: userDetails.newPassword,
+      ConfirmPassword: userDetails.newPassword,
+      User: userDetails.user
     };
-    return this.http.put(`${this.url}/${userModel.id}`, userModel);
+    return this.http.post<any>(this.baseUrlChangePassword, resetPasswordViewmodel).pipe(
+      map(
+        (result) =>{
+          return result;
+        },
+        (error) =>{
+          return error;
+        }
+      )
+    );
   }
-
+*/
 }

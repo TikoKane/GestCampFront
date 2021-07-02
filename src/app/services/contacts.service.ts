@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Contacts } from '../modele/contacts';
+import { Contacts, UpdateContact } from  '../modele/contacts';
 import { AddContact, serverResponse } from '../modele/contacts.model';
 
 
@@ -12,25 +12,35 @@ import { AddContact, serverResponse } from '../modele/contacts.model';
 })
 export class ContactService {
 
-  private url = environment.serverURL;
+  private url = environment.serverURL + 'contacts/';
 
   constructor(private http: HttpClient) {
   }
 
 
-  getAllContact(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'contacts', {
-    });
+  getAllContact(): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url);
+  }
+  getContactById(id): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url+ id);
+  }
+
+  changerStatutContact(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'changestatut/'+id);
   }
 
     getAllRole(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'roles', {
-    });
+    return this.http.get<serverResponse>(this.url + 'roles');
   }
   
-  AddContact(contact :Contacts): Observable<serverResponse> {
-    return this.http.post<serverResponse>(this.url + 'contacts/add',contact, {
-    });
+  AddContact(contact :Contacts): Observable<Contacts> {
+    return this.http.post<Contacts>(this.url + 'add/',contact);
+  }
+  DeleteContact(id): Observable<Contacts> {
+    return this.http.delete<Contacts>(this.url + 'delete/' + id);
+  }
+  UpdateContact(id, contact: UpdateContact){
+    return this.http.put(this.url + 'put/' + id, contact);
   }
 
 }

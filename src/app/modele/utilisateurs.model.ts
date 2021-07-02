@@ -11,13 +11,24 @@ export interface UtilisateurModelServer {
   Telephone: String;
 }
 
-export class UserModel {
-  id: Number;
-  Nom: String;
-  Prenom : String;
-  Email: String;
-  IdRole: String;
-  Telephone: String;
+export class ChangePassword {
+  Amp: string;
+  Nmp: string;
+  Cnmp: string;
+}
+
+
+export interface UpdateUser {
+  nom: String;
+  prenom: String;
+  email: String;
+  telephone : String;
+  login: String;
+  idRole: number;
+  password:string;
+  etat:boolean;
+  statut:boolean;
+  confirmPassword:string;
 }
 
 

@@ -9,7 +9,6 @@
         <table class='table table-bordered'>
           <thead style='background-color: #2d8ac7'>
             <tr>
-              <th>#</th>
               <th style="text-align: center;">Nom Complet</th>
               <th style="text-align: center;">Email </th>
               <th style="text-align: center;">Téléphone</th>
@@ -18,38 +17,40 @@
               <th style="text-align: center;">Actions</th>
             </tr>
           </thead>
-          <tbody style='background-color:white'>
+          <tbody style='background-color:white; text-align: center;'>
             <tr *ngFor="let g of users;let i =index">
-              <th scope='row'>{{i+1}}</th>
-              <td>{{g.nom | uppercase}} {{g.prenom}}</td>
-              <td>{{g.email}}</td>
-              <td>{{g.telephone}}</td>
-              <td>{{ g.idRole === 1 ? "Administratateur" : g.idRole === 2 ? "Editeur" : "Djay"}}</td>
-              <td *ngIf="g.statut===true"><button type="button" (click)="open(g.id)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
-                  <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
+              <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.nom | uppercase}} {{g.prenom}}</td>
+              <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.email}}</td>
+              <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.telephone}}</td>
+              <td style="text-align: center;" *ngIf="g.id!=idUser">{{ g.idRole === 1 ? "Administratateur" : g.idRole === 2 ? "Editeur" :
+                "Responsable Campagne"}}</td>
+              <td *ngIf="g.statut===true && g.id!=idUser" style="text-align: center;"><button nbButton status="success" (click)="open(g.id)"
+                   data-bs-toggle="modal" data-bs-target="#changeetat">
+                  <span class="glyphicon glyphicon-search"></span><i class="fa fa-check" aria-hidden="true"></i>
                   Actif
                 </button></td>
-              <td *ngIf="g.statut===false"><button type="button" (click)="open(g.id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#changeetat">
-                  <span class="glyphicon glyphicon-search" ></span><i class="fa fa-ban" aria-hidden="true"></i>
+              <td *ngIf="g.statut===false && g.id!=idUser" style="text-align: center;"><button nbButton status="danger" (click)="open(g.id)"
+                 data-bs-toggle="modal" data-bs-target="#changeetat">
+                  <span class="glyphicon glyphicon-search"></span><i class="fa fa-ban" aria-hidden="true"></i>
                   Inactif
                 </button></td>
-              <td>
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                  <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
-                      class="fa fa-trash" aria-hidden="true"></i> </button>
+              <td *ngIf="g.id!=idUser">
+                <div class="btn-group mr-2" role="group" aria-label="First group" >
+                  <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal"
+                    data-bs-target="#delete"><i class="fa fa-trash" aria-hidden="true"></i> </button>
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                  <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                      class="fa fa-edit" aria-hidden="true"></i> </button>
+                  <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal"
+                    data-bs-target="#edit"><i class="fa fa-edit" aria-hidden="true"></i> </button>
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Third group">
-                  <button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal" data-bs-target="#exampleMod"><i
-                      class="fa fa-eye" aria-hidden="true"></i> </button>
+                  <button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal"
+                    data-bs-target="#detail"><i class="fa fa-eye" aria-hidden="true"></i> </button>
                 </div>
               </td>
-
+            
             </tr>
           <tbody>
         </table>
@@ -60,18 +61,22 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Bloquer / Débloquer utilisateur
+            <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Bloquer / Débloquer
+              utilisateur
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p class="text-center">
-              <strong>Voulez vous débloquer/bloquer l'utilisateur ? {{datauser?.nom | uppercase}} {{datauser?.prenom}}</strong>
+              <strong>Voulez vous débloquer/bloquer l'utilisateur ? {{datauser?.nom | uppercase}}
+                {{datauser?.prenom}}</strong>
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changestatut(datauser?.id)">Valider</button>
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+              (click)="changestatut(datauser?.id)"><i class="fas fa-save"></i>&nbsp;Valider</button>
           </div>
         </div>
       </div>
@@ -81,13 +86,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Suppression utilisateur
+            <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Suppression
+              utilisateur
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p class="text-center">
-              <strong>Vous voulez vraiment supprimer l'utilisateur {{datauser?.nom | uppercase}} {{datauser?.prenom}}</strong>
+              <strong>Vous voulez vraiment supprimer l'utilisateur {{datauser?.nom | uppercase}}
+                {{datauser?.prenom}}</strong>
             </p>
             <p>
               Toutes les informations associées à ce profil utilisateur seront supprimées définitivement.
@@ -95,92 +102,123 @@
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(datauser?.id)">Ok, Supprimer</button>
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+              (click)="supprimeruser(datauser?.id)"><i class="fas fa-trash"></i>&nbsp;Ok, Supprimer</button>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" >Modification</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form [formGroup]="editForm" novalidate>
-                <div class="row">
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="inputFirstName" class="label">Nom</label>
-                      <input  nbInput  fullWidth value={{datauser?.nom}}
-                        name="NomComplet" type="text" required minlength="2" maxlength="50">
-                    </div>
-                  </div>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="inputLastName" class="label">Prénom</label>
-                      <input  nbInput  fullWidth
-                        name="PreNom" type="text" required minlength="2" maxlength="50"
-                        value={{datauser?.prenom}}>
-                    </div>
-                  </div>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="inputLastName" class="label">Email</label>
-                      <input  nbInput  fullWidth
-                        name="Telephone" type="text" required minlength="2" maxlength="50"
-                        value={{datauser?.email}}>
-                    </div>
-                  </div>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="inputLastName" class="label">Role</label>
-                      <input  nbInput  fullWidth
-                        name="Role" type="text" required minlength="2" maxlength="50"
-                        value={{datauser?.idRole}}>
-                    </div>
-                  </div>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="inputLastName" class="label">Téléphone</label>
-                      <input  nbInput  fullWidth
-                        name="Telephone" type="text" required minlength="2" maxlength="50"
-                        value={{datauser?.telephone}}>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-                  <button type="button" class="btn btn-success" (click)="onSave(datauser?.id)">Enregistrer</button>
-                </div>
-              </form>
-            </div>
         </div>
       </div>
     </div>
 
-    <div class="modal fade" id="exampleMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Informations de l'utilisateur {{datauser?.prenom | uppercase}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations de l'utilisateur {{datauser?.prenom | uppercase}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+        
           <b> Nom :</b>  {{datauser?.nom | uppercase}}<br>
-          <b> Prenom :</b>  {{datauser?.prenom}}<br>
-          <b> Telephone :</b>  {{datauser?.telephone}}<br>
+          <b> Login :</b>  {{datauser?.login }}<br>
           <b> Email :</b>  {{datauser?.email}}<br>
-          <b> Login :</b>  {{datauser?.login}}<br>
+          <b> Téléphone :</b>  {{datauser?.telephone}}<br>
+          <b *ngIf="datauser?.idRole===1"> Role :</b> <span *ngIf="datauser?.idRole===1"> Administratateur <br> </span> 
+          <b *ngIf="datauser?.idRole===2"> Role :</b> <span *ngIf="datauser?.idRole===2"> Editeur <br> </span>  
+          <b *ngIf="datauser?.idRole===3"> Role :</b> <span *ngIf="datauser?.idRole===3"> Responsable campagne <br> </span>  
+  
+         
           <b *ngIf="datauser?.statut===true"> Statut :</b> <span *ngIf="datauser?.statut===true" style="color: green;">  ACTIF</span>
           <b *ngIf="datauser?.statut===false"> Statut :</b>  <span *ngIf="datauser?.statut===false" style="color: red;"> INACTIF</span>
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Fermer</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form #form="ngForm">
+          <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label">Nom</label>
+                    <input  nbInput fullWidth  [(ngModel)]="user.nom"  #nameInput="ngModel"
+                      name="nom" type="text" required minlength="2" maxlength="50" value="{{datauser?.nom}}">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Prénom</label>
+                    <input  nbInput placeholder="Entrer le titre" fullWidth [(ngModel)]="user.prenom"  #nameInput="ngModel"
+                      name="prenom" type="text" required minlength="2" maxlength="50" value="{{datauser?.prenom}}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label">Email</label>
+                    <input  nbInput placeholder="Entrer le nom " fullWidth [(ngModel)]="user.email"  #nameInput="ngModel"
+                      name="email" type="text" required minlength="2" maxlength="50" value="{{datauser?.email}}">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Téléphone</label>
+                    <input  nbInput placeholder="Entrer le titre" fullWidth [(ngModel)]="user.telephone"  #nameInput="ngModel"
+                      name="telephone" type="text" required minlength="2" maxlength="50" value="{{datauser?.telephone}}">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label">Login</label>
+                    <input  nbInput placeholder="Entrer le nom " fullWidth [(ngModel)]="user.login"  #nameInput="ngModel"
+                      name="login" type="text" required minlength="2" maxlength="50" value="{{datauser?.login}}">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                
+
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label">Role</label>
+                    <select name="idRole" id="IdRole" [(ngModel)]="user.idRole" class="col-sm-12 form-control" fullWidth
+                      required>
+                      <option *ngIf="user.idRole===1" value="{{user.idRole}}" disabled selected ngI>Administrateur</option>
+                      <option *ngIf="user.idRole===2" value="{{user.idRole}}" disabled selected ngI>Editeur</option>
+                      <option *ngIf="user.idRole===3" value="{{user.idRole}}" disabled selected ngI>Responsable campagne</option>
+                      <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">
+                        {{data.libelle}}</option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="saveModification(datauser?.id,form)"><i class="fas fa-save" ></i>&nbsp;Enregistrer</button>
+          </div>
+          </form>
         </div>
       </div>
     </div>

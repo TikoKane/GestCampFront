@@ -10,7 +10,7 @@ import {ContactCanals} from '../modele/contact-canals';
 })
 export class ContactCanalsService {
 
-  private url = environment.serverURL + 'contactCanals/';
+  private url = environment.serverURL + 'contactCanalEnvois/';
 
   constructor(private http: HttpClient) {
   }

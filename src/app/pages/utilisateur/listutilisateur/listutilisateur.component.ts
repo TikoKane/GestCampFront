@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, AbstractControlOptions, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
-
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UserModel } from '../../../modele/utilisateurs.model';
+import { AddUser, UpdateUser } from '../../../modele/utilisateurs.model';
 import { UtilisateursService } from '../../../services/utilisateurs.service';
-import { Location } from '@angular/common';
-import { environment } from '../../../../environments/environment';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
+
 
 
 @Component({
@@ -23,128 +21,180 @@ export class ListutilisateurComponent implements OnInit{
   datauser: any;
   closeResult:string;
   tiko :any;
+  roles: any;
+  idUser = localStorage.getItem("id");
+
+  config: NbToastrConfig;
+    
+  index = 1;
+  destroyByClick = true;
+  duration = 2000;
+  hasIcon = true;
+  position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+  preventDuplicates = false;
+  statusSupprim: NbComponentStatus = 'danger';
+  status: NbComponentStatus = 'success';
+  
+  titleSupprim = 'Supression d\'un utilisateur !';
+  contentSupprim = `Utilisateur supprimé avec succès!`;
+
+  title = 'Modification d\'un utilisateur !';
+  content = `Utilisateur modifié avec succès!`;
+
+
+ 
+  
+
+  user: UpdateUser = {
+    email: '',
+    telephone :'',
+    idRole: 0,
+    login:'',
+    nom :'',
+    prenom :'',
+    etat : true,
+    statut:true,
+    password :'passer',
+    confirmPassword:'passer'
+  };
 
   editForm: FormGroup;
-  userModel: UserModel;
-
-
   constructor(private UtilisateursService: UtilisateursService,
-              private route:Router,
+              private router:Router,
               private modalService: NgbModal,
               private fb : FormBuilder,
               private http: HttpClient,
-              private location: Location) {
+              private toastrService: NbToastrService) {
   }
 
   ngOnInit() {
     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
       this.users = data;
+      console.log(this.idUser)
       console.log(this.users)
     }, (err) => {
       console.log(err);
     });
 
-    this.editForm = this.fb.group({
-      Nom: [''],
-      Prenom: [''],
-      email: [''],
-      IdRole: [''],
-      Telephone: ['']
-    });
-
-}
-
-openEdit(userModel: UserModel){
-  this.editForm.patchValue( { 
-    id : userModel.id,
-    Nom: userModel.Nom,
-    Prenom: userModel.Prenom,
-    Email: userModel.Email,
-    IdRole: userModel.IdRole,
-    Telephone: userModel.Telephone
-  });
-}
-
-open(id, userModel: UserModel) {
-  console.log(id);
-  this.UtilisateursService.getUtilisateurById(id).subscribe((data) => {
-    this.datauser = data;
-  }, (err) => {
-    console.log(err);
-  });
-  this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.closeResult = `Closed with: ${result}`;
-    
-  }, (reason) => {
-    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  });
-
-  this.editForm.patchValue( { 
-    Nom: userModel.Nom,
-    Prenom: userModel.Prenom,
-    Email: userModel.Email,
-    IdRole: userModel.IdRole,
-    Telephone: userModel.Telephone
-  });
-  }
-  
-  private getDismissReason(reason: any): string {
-  if (reason === ModalDismissReasons.ESC) {
-    return 'by pressing ESC';
-  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-    return 'by clicking on a backdrop';
-  } else {
-    return `with: ${reason}`;
-  }
-  }
-  
-  changestatut(id){
-  this.UtilisateursService.changerStatutUtilisateur(id).subscribe((data) => {
-     console.log(data)
-     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
-      this.users = data;
-   //  console.log(this.users)
+    this.UtilisateursService.getAllRole().subscribe((data) => {
+      this.roles = data;
     }, (err) => {
       console.log(err);
     });
-  }, (err) => {
-    console.log(err);
-  });
-  
-  }
-  
-  supprimeruser(id){
-  this.UtilisateursService.deleteUtilisateur(id).subscribe((data1) => {
-     this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
-      this.users = data;
-    }, (err) => {
-      console.log(err);
-    });
-  }, (err) => {
-    console.log(err);
-  });
-  }
-  
-  onSave(id){
 
-   
-    //this.UtilisateursService.UpdateUtilisateur(this.userModel).subscribe(()=> this.goBack());
-
-    
-    const url = 'https://localhost:44332/api/utilisateurs/put/' + id 
-
-
-    this.http.put(url, this.editForm.value)
-    .subscribe((results) =>{
-      this.ngOnInit();
-      this.modalService.dismissAll();
-    })
-    
-
-  }
-  
-  goBack(): void{
-    this.location.back();
-  }
 }
 
+
+open(id) {
+console.log(id);
+this.UtilisateursService.getUtilisateurById(id).subscribe((data) => {
+  this.datauser = data;
+  this.user.email=data['email'];
+  this.user.idRole=data['idRole'];
+  this.user.nom=data['nom'];
+  this.user.prenom=data['prenom'];
+  this.user.login=data['login'];
+  this.user.telephone=data['telephone'];
+
+}, (err) => {
+  console.log(err);
+});
+this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  this.closeResult = `Closed with: ${result}`;
+  
+}, (reason) => {
+  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+});
+}
+
+private getDismissReason(reason: any): string {
+if (reason === ModalDismissReasons.ESC) {
+  return 'by pressing ESC';
+} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  return 'by clicking on a backdrop';
+} else {
+  return `with: ${reason}`;
+}
+}
+
+changestatut(id){
+this.UtilisateursService.changerStatutUtilisateur(id).subscribe((data) => {
+   console.log(data)
+   this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
+    this.users = data;
+ //  console.log(this.users)
+  }, (err) => {
+    console.log(err);
+  });
+}, (err) => {
+  console.log(err);
+});
+
+}
+
+supprimeruser(id){
+this.UtilisateursService.deleteUtilisateur(id).subscribe((data1) => {
+  this.ToastSuppression(this.statusSupprim, this.titleSupprim, this.contentSupprim);
+   this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
+    this.users = data;
+  }, (err) => {
+    console.log(err);
+  });
+}, (err) => {
+  console.log(err);
+});
+this.router.navigateByUrl('pages/utilisateur/list');
+}
+
+saveModification(id,form :NgForm){
+  
+  console.log(form);
+  console.log(this.user)
+  this.UtilisateursService.UpdateUtilisateur(id,this.user).subscribe((data1) => {
+    this.ToastValide(this.status, this.title, this.content);
+    console.log(data1);
+    this.UtilisateursService.getAllUtilisateur().subscribe((data) => {
+     this.users = data;
+   }, (err) => {
+     console.log(err);
+   });
+ }, (err) => {
+   console.log(err);
+ });
+}
+private ToastSuppression(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
+private ToastValide(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
+
+}

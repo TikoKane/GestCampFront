@@ -37,7 +37,7 @@ import { AddcontactComponent } from './addcontact/addcontact.component';
   ],
   declarations: [
     ...routedComponents,
-    AddcontactComponent,
+    AddcontactComponent
   ],
   providers: [
     NewsService,

@@ -1,7 +1,7 @@
 export class ContactCanals {
   Id: number;
-  CanalDuContact: string;
-  Etat: number;
+  CanalDuContatct: string;
+  Etat: boolean;
   DateDeDesabonnement: string;
   Raison: string;
   IdContact: number;
