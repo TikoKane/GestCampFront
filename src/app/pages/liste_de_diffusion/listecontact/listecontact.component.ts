@@ -98,7 +98,7 @@ export class ListecontactComponent implements OnInit {
   changestatut(id){
     this.contactService.changerStatutUtilisateur(id).subscribe((data) => {
        console.log(data)
-       this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+       this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
         this.contacts = data;
         console.log(this.contacts)
       }, (err) => {
@@ -113,7 +113,7 @@ export class ListecontactComponent implements OnInit {
   supprimeruser(id){
     this.contactService.DeleteContact(id).subscribe((data1) => {
       this.ToastSuppression(this.statusSupprim, this.titleSupprim, this.contentSupprim);
-       this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+       this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
         this.contacts = data;
       }, (err) => {
         console.log(err);

@@ -25,6 +25,10 @@ export class AddcampagneComponent implements OnInit {
   idListeDiffusion='';
   idModel='';
   modeles;
+  libelleModele;
+  libelleLDD;
+  libelleNDV;
+  libelleTDC;
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
   constructor(private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
@@ -75,9 +79,8 @@ export class AddcampagneComponent implements OnInit {
   });
 
 
-  this.typeCampagneService.getAllTypeDeCampagne().subscribe((data) => {
+  this.typeCampagneService.getAllTypeDeCampagne(localStorage.getItem('idEntite')).subscribe((data) => {
     this.typecampagnes = data;
-    console.log(this.typecampagnes)
   }, (err) => {
     console.log(err);
   });
@@ -85,17 +88,18 @@ export class AddcampagneComponent implements OnInit {
 
   this.listeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
     this.listeDiffusion = data;
-    console.log(this.listeDiffusion)
   }, (err) => {
     console.log(err);
   });
 
-  this.modelService.getAllModele().subscribe((data) => {
+  this.modelService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {
     this.modeles = data;
     console.log(this.modeles)
   }, (err) => {
     console.log(err);
   });
+
+
   
 }
 
@@ -103,5 +107,39 @@ valider(){
 
 
 }
+
+onChangeModel(deviceValue) {
+  this.modelService.getModele(deviceValue).subscribe((data) => {
+    this.libelleModele = data['libelle'];
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+onChangeNDV(deviceValue) {
+  this.niveauVisibiliteService.getNiveauDeVisibilite(deviceValue).subscribe((data) => {
+    this.libelleNDV = data['libelle'];
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+onChangeLDD(deviceValue) {
+  this.listeDiffusionService.getListeDeDiffusion(deviceValue).subscribe((data) => {
+    this.libelleLDD = data['titre'];
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+onChangeTDC(deviceValue) {
+  this.typeCampagneService.getTypeDeCampagne(deviceValue).subscribe((data) => {
+    this.libelleTDC = data['libelle'];
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+
 }
 

@@ -5,4 +5,6 @@ export class Modeles {
   Description: string;
   Contenu: string;
   Statut: boolean;
+  IdCanalEnvoi:string;
+  IdEntite:string;
 }

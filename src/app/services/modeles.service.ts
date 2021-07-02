@@ -19,8 +19,8 @@ export class ModelesService {
     return this.http.post<Modeles>(this.url + 'add', modele);
   }
 
-  getAllModele(): Observable<Modeles> {
-    return this.http.get<Modeles>(this.url);
+  getAllModele(id): Observable<Modeles> {
+    return this.http.get<Modeles>(this.url+'all/'+id);
   }
 
   getModele(id): Observable<Modeles> {

@@ -3,7 +3,7 @@
         <nb-stepper orientation="horizontal">
             <nb-step [label]="labelOne">
                 <ng-template #labelOne>Etape 1</ng-template>
-                <div class="col-lg-12" style="float:none;margin:auto;">
+                <div class="col-lg-8" style="float:none;margin:auto;">
                     <nb-card>
                         <nb-card-header style="text-align: center;">Lancement campagne</nb-card-header>
                         <nb-card-body>
@@ -29,7 +29,7 @@
                                     <div class="col-sm-6">
                                       <div class="form-group">
                                         <label for="inputFirstName" class="label">Type campagne</label>
-                                        <select name="IdTypeDeCampagne" id="IdTypeDeCampagne" [(ngModel)]="camp.IdTypeDeCampagne" class="col-sm-12 form-control" fullWidth
+                                        <select name="IdTypeDeCampagne" (change)="onChangeTDC($event.target.value)" id="IdTypeDeCampagne" [(ngModel)]="camp.IdTypeDeCampagne" class="col-sm-12 form-control" fullWidth
                                           required>
                                           <option value="" disabled selected>Veuillez choisir un type</option>
                                           <option *ngFor="let data of typecampagnes" [value]="data.id" [selected]="data.libelle == true">
@@ -43,7 +43,7 @@
                                     <div class="col-sm-6">
                                       <div class="form-group">
                                         <label for="inputFirstName" class="label">Niveau de visibilité</label>
-                                        <select name="IdNiveauVisibilite" id="IdNiveauVisibilite" [(ngModel)]="camp.IdNiveauVisibilite" class="col-sm-12 form-control" fullWidth
+                                        <select name="IdNiveauVisibilite" (change)="onChangeNDV($event.target.value)" id="IdNiveauVisibilite" [(ngModel)]="camp.IdNiveauVisibilite" class="col-sm-12 form-control" fullWidth
                                           required>
                                           <option value="" disabled selected>Veuillez choisir le niveau de visibilité</option>
                                           <option *ngFor="let data of niveaudevisbilite" [value]="data.id" [selected]="data.libelle == true">
@@ -83,29 +83,17 @@
                         aria-hidden="true"></i></button>
             </nb-step>
             <nb-step label="Etape 2" >
-                <div class="col-lg-12" style="float:none;margin:auto;">
+                <div class="col-lg-6" style="float:none;margin:auto;">
                     <nb-card>
                         <nb-card-header style="text-align: center;">Liste de diffusion</nb-card-header>
                         <nb-card-body>
                             <form #form2="ngForm">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                      <div class="form-group">
-                                        <label for="inputFirstName" class="label">Canal envoi</label>
-                                        <select  name="IdCanalEnvoi" id="IdCanalEnvoi" [(ngModel)]="camp.IdCanalEnvoi" class="col-sm-12 form-control" fullWidth
-                                          required>
-                                          <option value="" disabled selected>Veuillez choisir le canal</option>
-                                          <option *ngFor="let data of canalenvois" [value]="data.id" [selected]="data.titre == true">
-                                            {{data.titre}}</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
+                             
                                   <div class="row">
                                     <div class="col-sm-12">
                                       <div class="form-group">
                                         <label for="inputFirstName" class="label">Liste de diffusion</label>
-                                        <select name="idListeDiffusion" id="idListeDiffusion" [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control" fullWidth
+                                        <select name="idListeDiffusion" (change)="onChangeLDD($event.target.value)" id="idListeDiffusion" [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control" fullWidth
                                           required>
                                           <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
                                           <option *ngFor="let data of listeDiffusion" [value]="data.id" [selected]="data.titre == true">
@@ -120,7 +108,7 @@
                                         <div class="form-group">
                                           <label for="inputFirstName" class="label">Modèle</label>
                                           <select name="idModel" id="idModel" [(ngModel)]="idModel" class="col-sm-12 form-control" fullWidth
-                                            required>
+                                            required (change)="onChangeModel($event.target.value)">
                                             <option value="" disabled selected>Veuillez choisir le modèle</option>
                                             <option *ngFor="let data of modeles" [value]="data.id" [selected]="data.libelle == true">
                                               {{data.libelle}}</option>
@@ -171,7 +159,7 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="inputFirstName" class="label">Expéditeur</label>
-                          <input [(ngModel)]="regleEnvoi.Expediteur" nbInput placeholder="Entrer l'expéditeur' "
+                          <input [(ngModel)]="regleEnvoi.Expediteur" nbInput placeholder="Entrer l'expéditeur "
                           fullWidth #nameInput="ngModel" name="expediteur" type="text" required
                           minlength="2" maxlength="100">
                         </div>
@@ -210,14 +198,13 @@
                                 <b> Titre : </b> {{camp.Titre}}<br>
                                 <b> Date Début :</b> {{camp.DateDeDebut}}<br>
                                 <b> Date Fin : </b> {{camp.DateDeFin}}<br>
-                                <b> Niveau de visibilité :</b> {{camp.IdNiveauVisibilite}}<br>
-                                <b> Type de campagne :</b> {{camp.IdTypeDeCampagne}}<br>
-                                <b> Modèle :</b> {{idModel}} <br>
+                                <b> Niveau de visibilité :</b> {{libelleNDV}}<br>
+                                <b> Type de campagne :</b> {{libelleTDC}}<br>
+                                <b> Modèle :</b> {{libelleModele}} <br>
                                 <b> Créé par :</b> {{nomComplet}}<br>
                             </div>
                             <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
-                              <b> Canal : </b> {{camp.IdCanalEnvoi}}<br>
-                              <b> Liste de diffusion :</b> {{idListeDiffusion}}<br>
+                              <b> Liste de diffusion :</b> {{libelleLDD}}<br>
                               <b> Nombre de tentative : </b> {{regleEnvoi.NombreTentative}}<br>
                               <b> Fréquence :</b> {{regleEnvoi.Frequence}}<br>
                               <b> Expéditeur : </b> {{regleEnvoi.Expediteur}}<br>
