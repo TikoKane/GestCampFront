@@ -1,7 +1,9 @@
 export interface UtilisateurModelServer {
   Id: Number;
-  NomComplet: String;
+  Nom: String;
+  Prenom : String;
   Email: String;
+  Telephone : String;
   Login: String;
   Password: String;
   Etat: Number;
@@ -9,14 +11,28 @@ export interface UtilisateurModelServer {
   IdRole: String;
 }
 
-
-export interface ServerResponse  {
-  count: number;
-  users: UtilisateurModelServer[];
+export interface AddUser {
+  nom: String;
+  prenom: String;
+  email: String;
+  telephone : String;
+  login: String;
+  idRole: String;
+  idEntite : number;
 }
+export interface serverResponse  {
+  count: number;
+  users: UtilisateurModelServer[]
+};
 
 
 export class Authentification {
   login: string;
   password: string;
+}
+
+export class Changerpassword{
+  Amp : string;
+  Nmp : string;
+  Cnmp : string;
 }

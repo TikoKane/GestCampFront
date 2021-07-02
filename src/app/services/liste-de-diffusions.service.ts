@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
+import {Contacts} from '../modele/contacts';
 import {ListeDeDiffusions} from '../modele/liste-De-Diffusions';
+import { serverResponse } from '../modele/utilisateurs.model';
 
 
 @Injectable({
@@ -10,7 +12,7 @@ import {ListeDeDiffusions} from '../modele/liste-De-Diffusions';
 })
 export class ListeDeDiffusionsService {
 
-  private url = environment.serverURL + 'listeDeDiffusions/';
+  private url = environment.serverURL + 'listeDeDiffusion/';
 
   constructor(private http: HttpClient) {
   }
@@ -19,8 +21,11 @@ export class ListeDeDiffusionsService {
     return this.http.post<ListeDeDiffusions>(this.url + 'add', listeDeDiffusion);
   }
 
-  getAllListeDeDiffusion(): Observable<ListeDeDiffusions> {
-    return this.http.get<ListeDeDiffusions>(this.url);
+  GetAllListeDeDiffusions(idEntite): Observable<ListeDeDiffusions> {
+    return this.http.get<ListeDeDiffusions>(this.url + 'all/' + idEntite);
+  }
+  getAllContact(): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url + "listeContacts");
   }
 
   getListeDeDiffusion(id): Observable<ListeDeDiffusions> {
@@ -33,5 +38,13 @@ export class ListeDeDiffusionsService {
 
   DeleteListeDeDiffusion(id): Observable<ListeDeDiffusions> {
     return this.http.delete<ListeDeDiffusions>(this.url + 'delete/' + id);
+  }
+  changerStatutListediffusion(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'changes/'+id, {
+    });
+  }
+  GetDonneesContactByListeDiffusion(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'donneescontact/'+id, {
+    });
   }
 }

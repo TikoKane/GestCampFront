@@ -1,5 +1,4 @@
 export class ContactListeDiffusions {
-  Id: number;
   Code: string;
   Etat: number;
   DateDesa: string;
@@ -7,4 +6,5 @@ export class ContactListeDiffusions {
   IdContact: number;
   IdNiveauDeVisibilite: number;
   IdListeDiffusion: number;
+  IdEntite : number
 }

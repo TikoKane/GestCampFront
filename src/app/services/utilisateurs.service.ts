@@ -2,25 +2,51 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ServerResponse } from '../modele/utilisateurs.model';
+import { AddUser, serverResponse } from '../modele/utilisateurs.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UtilisateursService {
 
-  private url = environment.serverURL;
+  private url = environment.serverURL + 'utilisateurs/';
 
   constructor(private http: HttpClient) {
   }
 
-  getAllUtilisateur(): Observable<ServerResponse> {
-    return this.http.get<ServerResponse>(this.url + 'utilisateurs', {
+  GetAllUtilisateurs(idEntite): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'all/' + idEntite, {
     });
   }
 
-  getAllRole(): Observable<ServerResponse> {
-    return this.http.get<ServerResponse>(this.url + 'roles', {
+  getUtilisateurById(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url +id, {
     });
   }
+
+  
+  changerStatutUtilisateur(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'changestatut/'+id, {
+    });
+  }
+
+  deleteUtilisateur(id): Observable<serverResponse> {
+    return this.http.delete<serverResponse>(this.url + 'delete/'+id, {
+    });
+  }
+
+  AddUtilisateur(utilisateur : AddUser): Observable<serverResponse> {
+    return this.http.post<serverResponse>(this.url + 'add' , utilisateur, {
+    });
+  }
+  
+  EditUtilisateur(id, utilisateur: AddUser): Observable<serverResponse> {
+    return this.http.put<serverResponse>(this.url + 'put/' + id, utilisateur);
+  }
+
+  getAllRole(): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'roles', {
+    });
+  }
+
 }

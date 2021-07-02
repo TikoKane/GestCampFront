@@ -11,7 +11,7 @@ import { routedComponents, UtilisateurRoutingModule} from './utilisateur-routing
 import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AddutilisateurComponent } from './addutilisateur/addutilisateur.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -31,6 +31,7 @@ import { AddutilisateurComponent } from './addutilisateur/addutilisateur.compone
     Ng2SmartTableModule,
     NbIconModule,
     ngFormsModule,
+    NgbModule
   ],
   declarations: [
     ...routedComponents,

@@ -2,32 +2,43 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { UtilisateurComponent } from './utilisateur/utilisateur.component';
-
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-   /* {
-      path: 'utilisateur',
-      component: UtilisateurComponent,
-    },
-   {
-      path: 'iot-dashboard',
-      component: DashboardComponent,
-    },
+
     {
-      path: 'layout',
-      loadChildren: () => import('./layout/layout.module')
-        .then(m => m.LayoutModule),
-    },*/
+      path: 'canalenvoi',
+      loadChildren: () => import('./canalenvoi/canalenvoi.module')
+        .then(m => m.CanalenvoiModule),
+    },
     {
       path: 'utilisateur',
       loadChildren: () => import('./utilisateur/utlisateur.module')
         .then(m => m.UtilisateurModule),
     },
-   /* {
+    {
+      path: 'contact',
+      loadChildren: () => import('./contact/contact.module')
+        .then(m => m.ContactModule),
+    },
+    {
+      path: 'listediffusion',
+      loadChildren: () => import('./listediffusion/listediffusion.module')
+        .then(m => m.ListeDiffusionModule),
+    },
+    {
+      path: 'campagne',
+      loadChildren: () => import('./campagne/campagne.module')
+        .then(m => m.CampagneModule),
+    },
+    {
+      path: 'compte',
+      loadChildren: () => import('./parametrecompte/parametrecompte.module')
+        .then(m => m.ParametrcompteModule),
+    },/*
+    {
       path: 'ui-features',
       loadChildren: () => import('./ui-features/ui-features.module')
         .then(m => m.UiFeaturesModule),
@@ -66,16 +77,9 @@ const routes: Routes = [{
       path: 'miscellaneous',
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
-    },
-    {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
-    },
-    {
-      path: '**',
-      component: NotFoundComponent,
     },*/
+    { path: '', redirectTo: 'utilisateur', pathMatch: 'full' },
+    { path: '**', redirectTo: 'utilisateur' },
   ],
 }];
 

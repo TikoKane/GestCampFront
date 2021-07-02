@@ -1,6 +1,8 @@
 export class CanalEnvois {
   Id: number;
   Titre: string;
-  Code: string;
+  Description : string;
+  Code : string;
   Etat: number;
+  IdEntite : number;
 }

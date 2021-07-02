@@ -14,12 +14,13 @@ export class CanalEnvoisService {
   constructor(private http: HttpClient) {
   }
 
-  AddCanalEnvoi(canalEnvoi: CanalEnvois): Observable<CanalEnvois> {
-    return this.http.post<CanalEnvois>(this.url + 'add', canalEnvoi);
+  AddCanalEnvoi(canalEnvoi : CanalEnvois): Observable<CanalEnvois> {
+    return this.http.post<CanalEnvois>(this.url + 'add',canalEnvoi, {
+    });
   }
 
-  getAllCanalEnvoi(): Observable<CanalEnvois> {
-    return this.http.get<CanalEnvois>(this.url);
+  GetAllCanalEnvois( idEntite): Observable<CanalEnvois> {
+    return this.http.get<CanalEnvois>(this.url +'all/' + idEntite);
   }
 
   getCanalEnvoi(id): Observable<CanalEnvois> {
@@ -32,5 +33,10 @@ export class CanalEnvoisService {
 
   DeleteCanalEnvoi(id): Observable<CanalEnvois> {
     return this.http.delete<CanalEnvois>(this.url + 'delete/' + id);
+  }
+
+  
+  changeEtatCanalEnvoi(id): Observable<CanalEnvois> {
+    return this.http.get<CanalEnvois>(this.url + 'changeEtat/' + id);
   }
 }

@@ -1,8 +1,14 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
- {
-    title: 'Utilisateur',
+  {
+    title: 'Dashboard',
+    icon: 'home-outline',
+    link: '/pages/iot-dashboard',
+    home: true,
+  },
+  {
+    title: 'Fonctionnalités',
     group: true,
   },
   {
@@ -10,215 +16,90 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     children: [
       {
-        title: 'Add utilisateur',
+        title: 'Ajouter un utilisateur',
         link: '/pages/utilisateur/add',
       },
       {
-        title: 'List',
+        title: 'Liste des utilisateurs',
         link: '/pages/utilisateur/list',
-      },
-     
-    ],
-  }/*,
-  {
-    title: 'Forms',
-    icon: 'edit-2-outline',
-    children: [
-      {
-        title: 'Form Inputs',
-        link: '/pages/forms/inputs',
-      },
-      {
-        title: 'Form Layouts',
-        link: '/pages/forms/layouts',
-      },
-      {
-        title: 'Buttons',
-        link: '/pages/forms/buttons',
-      },
-      {
-        title: 'Datepicker',
-        link: '/pages/forms/datepicker',
       },
     ],
   },
   {
-    title: 'UI Features',
-    icon: 'keypad-outline',
+    title: 'Contact',
+    icon: 'people-outline',
     link: '/pages/ui-features',
     children: [
       {
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
+        title: 'Ajouter un contact',
+        link: '/pages/contact/add',
       },
       {
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
+        title: 'Importer des contacts',
+        link: '/pages/contact/add',
       },
       {
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
-      },
-      {
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
+        title: 'Liste des contact',
+        link: '/pages/contact/list',
       },
     ],
   },
   {
-    title: 'Modal & Overlays',
-    icon: 'browser-outline',
+    title: 'Liste de diffusion',
+    icon: 'file-text-outline',
+    link: '/pages/ui-features',
     children: [
       {
-        title: 'Dialog',
-        link: '/pages/modal-overlays/dialog',
+        title: 'Créer une liste de diffusion',
+        link: '/pages/listediffusion/add',
       },
       {
-        title: 'Window',
-        link: '/pages/modal-overlays/window',
-      },
-      {
-        title: 'Popover',
-        link: '/pages/modal-overlays/popover',
-      },
-      {
-        title: 'Toastr',
-        link: '/pages/modal-overlays/toastr',
-      },
-      {
-        title: 'Tooltip',
-        link: '/pages/modal-overlays/tooltip',
+        title: 'Liste des listes de diffusion',
+        link: '/pages/listediffusion/list',
       },
     ],
   },
   {
-    title: 'Extra Components',
+    title: 'Campagne',
     icon: 'message-circle-outline',
+    link: '/pages/ui-features',
     children: [
       {
-        title: 'Calendar',
-        link: '/pages/extra-components/calendar',
+        title: 'Créer une campagne',
+        link: '/pages/campagne/add',
       },
       {
-        title: 'Progress Bar',
-        link: '/pages/extra-components/progress-bar',
-      },
-      {
-        title: 'Spinner',
-        link: '/pages/extra-components/spinner',
-      },
-      {
-        title: 'Alert',
-        link: '/pages/extra-components/alert',
-      },
-      {
-        title: 'Calendar Kit',
-        link: '/pages/extra-components/calendar-kit',
-      },
-      {
-        title: 'Chat',
-        link: '/pages/extra-components/chat',
+        title: 'Liste des campagne',
+        link: '/pages/campagne/list',
       },
     ],
   },
   {
-    title: 'Maps',
-    icon: 'map-outline',
+    title: 'Canal Envoie',
+    icon: 'paper-plane-outline',
     children: [
       {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
+        title: 'Ajouter un canal',
+        link: '/pages/canalenvoi/add',
       },
       {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
+        title: 'Liste des canaux',
+        link: '/pages/canalenvoi/list',
       },
     ],
   },
   {
-    title: 'Charts',
-    icon: 'pie-chart-outline',
+    title: 'Paramètre du compte',
+    icon: 'settings-2-outline',
     children: [
       {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
+        title: 'Infos du compte',
+        link: '/pages/compte/infos',
       },
       {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
+        title: 'Changer mot de passe',
+        link: '/pages/compte/mod',
       },
     ],
   },
-  {
-    title: 'Editors',
-    icon: 'text-outline',
-    children: [
-      {
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
-  },
-  {
-    title: 'Tables & Data',
-    icon: 'grid-outline',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-      {
-        title: 'Tree Grid',
-        link: '/pages/tables/tree-grid',
-      },
-    ],
-  },
-  {
-    title: 'Miscellaneous',
-    icon: 'shuffle-2-outline',
-    children: [
-      {
-        title: '404',
-        link: '/pages/miscellaneous/404',
-      },
-    ],
-  },
-  {
-    title: 'Auth',
-    icon: 'lock-outline',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },*/
 ];
