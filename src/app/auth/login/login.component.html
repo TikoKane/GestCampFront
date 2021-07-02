@@ -1,0 +1,47 @@
+<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm,content)">
+    <div class="container-fluid">
+        <h2 class="form-signin-heading" style="text-align: center;">Connexion</h2>
+        <div *ngIf="invalidLogin" class="alert alert-danger">Login ou mot de passe invalide</div>
+        <br>
+        <label for="login" class="sr-only">Login</label>
+        <input type="text" required id="login" name="login" ngModel class="form-control" placeholder="Login">
+        <br>
+        <label for="password" class="sr-only">Mot de passe</label>
+        <input type="password" required id="password" name="password" ngModel class="form-control" placeholder="Mot de passe">
+        <br>
+        <br>
+        <div style="text-align: center;">
+        <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit" status="danger" ><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Se connecter</button>
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Changement de mot de passe</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-signin" #loginForm2="ngForm" >
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="password" class="sr-only">Ancien mot de passe</label>
+                <input type="password" id="amp" name="amp" ngModel class="form-control" placeholder="Ancien mot de passe">
+                <br>
+                <label for="login" class="sr-only">Nouveau mot de passe</label>
+                <input type="password" id="nmp" name="nmp" ngModel class="form-control" placeholder="Nouveau mot de passe">
+                <br>
+                <label for="password" class="sr-only">Confirmation du nouveau mot de passe</label>
+                <input type="password" id="cnmp" name="cnmp" ngModel class="form-control" placeholder="Confirmation">
+                <br>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success"   (click)="changeMdp(loginForm2);modal.dismiss('Cross click')"><i class="fa fa-save"
+            aria-hidden="true"></i>&nbsp;Enregistrer</button>
+        </div>
+    </form>
+
+      </ng-template>
+</form>

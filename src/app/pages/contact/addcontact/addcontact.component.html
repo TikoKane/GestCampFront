@@ -1,0 +1,345 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-body>
+        <nb-stepper orientation="horizontal">
+            <nb-step [label]="labelOne">
+                <ng-template #labelOne>Etape 1</ng-template>
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                    <nb-card>
+                        <nb-card-header style="text-align: center;">Ajout d'un nouveau contact</nb-card-header>
+                        <nb-card-body>
+                            <form #form="ngForm">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputFirstName" class="label">Nom </label>
+                                            <input [(ngModel)]="contact.Nom" nbInput placeholder="Entrer le nom "
+                                                fullWidth #nameInput="ngModel" name="Nom" type="text" required
+                                                minlength="2" maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Prénom</label>
+                                            <input [(ngModel)]="contact.Prenom" nbInput placeholder="Entrer le prénom "
+                                                fullWidth #nameInput="ngModel" name="Prenom" type="text" required
+                                                minlength="2" maxlength="50">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Date de naissance</label>
+                                            <input [(ngModel)]="contact.DateDeNaissance" nbInput
+                                                placeholder="02/05/2051" fullWidth #nameInput="ngModel" required
+                                                name="DateDeNaissance" type="date" max="{{maxdate | date:'2020-01-01'}}" min="{{mindate | date:'1900-01-01'}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Sexe</label>
+                                            <select class="form-control" id="sexe"
+                                                [(ngModel)]="contact.Sexe" name="Sexe" required>
+                                                <option value="" disabled selected>Veuillez choisir le sexe</option>
+                                                <option value="Homme">
+                                                   Homme
+                                                </option>
+                                                <option value="Femme">
+                                                    Femme
+                                                 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Niveau de visibilté</label>
+                                            <select class="form-control" name="pays" id="pays"
+                                                [(ngModel)]="contact.IdNiveauVisibilite" name="IdNiveauVisibilite">
+                                                <option value="" disabled selected>Veuillez choisir le niveau de visiblité</option>
+                                                <option *ngFor="let ndvl of ndv" [value]="ndvl.id">
+                                                    {{ndvl.libelle}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Adresse</label>
+                                            <input [(ngModel)]="contact.Adresse" nbInput placeholder="Entrer l'Adresse "
+                                                fullWidth #nameInput="ngModel" name="Adresse" type="text" required
+                                                minlength="2" maxlength="50">
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+
+                                <div class="row">
+                                  
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Situation matrimoniale</label>
+                                            <select class="form-control" id="sexe"
+                                                [(ngModel)]="contact.Situation" name="Situation" required>
+                                                <option value="" disabled selected>Veuillez choisir la Situation matrimoniale</option>
+                                                <option value="Célibataire">
+                                                    Célibataire
+                                                </option>
+                                                <option value="Marié">
+                                                    Marié(e)
+                                                 </option>
+                                                 <option value="Veuve">
+                                                    Veuve
+                                                </option>
+                                                <option value="Divorcé">
+                                                    Divorcé(e)
+                                                 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputLastName" class="label">Profession</label>
+                                            <input [(ngModel)]="contact.Profession" nbInput
+                                                placeholder="Entrer la profession " fullWidth #nameInput="ngModel"
+                                                name="Profession" type="text" required minlength="2" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+
+                <button nbButton disabled nbStepperNext status="warning"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form.valid"><i class="fa fa-arrow-right"
+                        aria-hidden="true"></i></button>
+            </nb-step>
+            <nb-step [label]="labelTwo">
+                <ng-template #labelTwo>Etape 2</ng-template>
+                <div class="row">
+                    <div class="col-4 ">
+                        <h3><img src="../../../../assets/images/icons8-téléphone-débranché-64.png"
+                                alt="Girl in a jacket" width="50" height="50"><button type="submit" nbButton
+                                status="warning" data-bs-toggle="modal" data-bs-target="#telephone"> Téléphone</button></h3>
+                    </div>
+                    <div class="col-4 "><button nbButton *ngIf="tel">{{con?.telephone}}</button>
+                    </div>
+                    <div class="col-4 "><button nbButton status="danger" *ngIf="tel" (click)="supTelephone()"><i
+                                class="fa fa-trash" aria-hidden="true"></i> </button>
+                        <button nbButton status="warning" *ngIf="tel" data-bs-toggle="modal"
+                            data-bs-target="#telephone"><i class="fa fa-edit" aria-hidden="true"></i> </button>
+                    </div>
+
+
+                    <!-- Force next columns to break to new line -->
+                    <div class="w-100"></div>
+
+                    <div class="col-4 ">
+                        <h3><img src="../../../../assets/images/icons8-facebook-64.png" alt="Girl in a jacket"
+                                width="50" height="50"><button type="submit" data-bs-toggle="modal"
+                                data-bs-target="#facebook" nbButton status="info"> Facebook</button></h3>
+                    </div>
+                    <div class="col-4 "><button nbButton *ngIf="face">{{con?.facebook}}</button>
+                    </div>
+                    <div class="col-4 "><button nbButton status="danger" *ngIf="face" (click)="supFacebook()"><i
+                                class="fa fa-trash" aria-hidden="true"></i> </button>
+                        <button nbButton status="warning" *ngIf="face" data-bs-toggle="modal"
+                            data-bs-target="#facebook"><i class="fa fa-edit" aria-hidden="true"></i> </button>
+                    </div>
+
+
+                    <!-- Force next columns to break to new line -->
+                    <div class="w-100"></div>
+
+                    <div class="col-4 ">
+                        <h3><img src="../../../../assets/images/icons8-whatsapp-64.png" alt="Girl in a jacket"
+                                width="50" height="50"><button type="submit" data-bs-toggle="modal"
+                                data-bs-target="#whatsapp" nbButton status="success"> Whatsapp</button></h3>
+                    </div>
+                    <div class="col-4 "><button nbButton *ngIf="wha">{{con?.whatsapp}}</button>
+                    </div>
+                    <div class="col-4 "><button nbButton status="danger" *ngIf="wha" (click)="supWhatsapp()"><i
+                                class="fa fa-trash" aria-hidden="true"></i> </button>
+                        <button nbButton status="warning" *ngIf="wha" data-bs-toggle="modal"
+                            data-bs-target="#whatsapp"><i class="fa fa-edit" aria-hidden="true"></i> </button>
+                    </div>
+                    <!-- Force next columns to break to new line -->
+                    <div class="w-100"></div>
+
+
+                    <div class="col-4 ">
+                        <h3><img src="../../../../assets/images/icons8-mail-50.png" alt="Girl in a jacket" width="50"
+                                height="50"><button type="submit" data-bs-toggle="modal" data-bs-target="#mail" nbButton
+                                status="danger"> E-mail</button></h3>
+                    </div>
+                    <div class="col-4 "><button nbButton *ngIf="mail">{{con?.mail}}</button>
+                    </div>
+                    <div class="col-4 "><button nbButton status="danger" *ngIf="mail" (click)="supMail()"><i
+                                class="fa fa-trash" aria-hidden="true"></i> </button>
+                        <button nbButton status="warning" *ngIf="mail" data-bs-toggle="modal" data-bs-target="#mail"><i
+                                class="fa fa-edit" aria-hidden="true"></i> </button>
+                    </div>
+
+                </div>
+
+                <!-- Force next columns to break to new line -->
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success"><i class="fa fa-arrow-right"
+                        aria-hidden="true"></i></button>
+            </nb-step>
+            <nb-step label="Etape 3">
+                <nb-card>
+                    <nb-card-header style="text-align: center;">Informations du contact</nb-card-header>
+                    <nb-card-body>
+                        <form #form="ngForm">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+                                        <b> Nom : </b> {{contact.Nom}}<br>
+                                        <b> Prenom :</b> {{contact.Prenom}}<br>
+                                        <b> Date de naissance : </b> {{contact.DateDeNaissance}}<br>
+                                        <b> Sexe :</b> {{contact.Sexe}}<br>
+                                        <b> Pays :</b> {{contact.Pays}}<br>
+                                        <b> Adresse :</b> {{contact.Adresse}}<br>
+                                        <b> Situaion matrimoniale : </b> {{contact.Situation}}<br>
+                                        <b> Profession :</b> {{contact.Profession}}<br>
+                                    </div>
+                                    <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+                                        <b> Numéro Téléphone :</b> {{con?.telephone}} <br>
+                                        <b> Numéro Whatsapp :</b> {{con?.whatsapp}} <br>
+                                        <b> Lien Facebook :</b> {{con?.facebook}} <br>
+                                        <b> Adresse Email :</b> {{con?.mail}} <br>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-3 col-sm-9">
+                                    <br>
+                                    <button type="submit" nbButton status="success"
+                                        style="float: right;" (click)="valider()">Valider</button>
+                                </div>
+                            </div>
+                        </form>
+                    </nb-card-body>
+                </nb-card>
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i></button>
+                <button nbButton disabled nbStepperNext status="success"><i class="fa fa-arrow-right"
+                        aria-hidden="true"></i></button>
+            </nb-step>
+
+        </nb-stepper>
+    </nb-card-body>
+    <div class="modal modal-danger fade" id="telephone" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Numéro de
+                        téléphone
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <input [(ngModel)]="con.telephone" nbInput placeholder="Veuillez entrer un numéro de téléphone"
+                            fullWidth #nameInput="ngModel" name="telephone" type="text">
+                    </p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"
+                        (click)="addTelephone()">Enregistrer</button>
+
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="addTelephoneAndWhatsapp()">Définir comme numéro whatsapp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-danger fade" id="facebook" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Lien Facebook
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <input [(ngModel)]="con.facebook" nbInput placeholder="Veuillez entrer un lien facebook"
+                            fullWidth #nameInput="ngModel" name="facebook" type="text">
+                    </p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="addFacebook()">Enregistrer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal-danger fade" id="whatsapp" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Numéro de
+                        téléphone Whatsapp
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <input [(ngModel)]="con.whatsapp" nbInput placeholder="Veuillez entrer un numéro whatsapp"
+                            fullWidth #nameInput="ngModel" name="whatsapp" type="text">
+                    </p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="addWhatsapp()">Enregistrer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal-danger fade" id="mail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Adresse Email
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <input [(ngModel)]="con.mail" nbInput placeholder="Veuillez entrer une adresse email" fullWidth
+                            #nameInput="ngModel" name="mail" type="email">
+                    </p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="addMail()">Enregistrer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nb-card>

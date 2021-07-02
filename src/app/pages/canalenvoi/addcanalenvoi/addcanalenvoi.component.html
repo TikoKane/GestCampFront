@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-12" style="float:none;margin:auto;">
+    <nb-card>
+      <nb-card-header style="text-align: center;">Ajout d'un nouveau canal</nb-card-header>
+      <nb-card-body>
+        <form #form="ngForm" (ngSubmit)="Ajout(form)">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="inputFirstName" class="label">Libellé du canal</label>
+                <input [(ngModel)]="canal.Titre" nbInput placeholder="Entrer le libellé du canal " fullWidth #nameInput="ngModel"
+                  name="Titre" type="text" required minlength="2" maxlength="50">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="inputLastName" class="label">Description du canal</label>
+
+                  <textarea [(ngModel)]="canal.Description" name="Description" #nameInput="ngModel" nbInput fullWidth placeholder="Entrer la description" required minlength="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+         
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <br>
+              <button type="submit" nbButton status="success" style="float: right;"
+                [disabled]="!form.valid">Ajouter</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+</div>
