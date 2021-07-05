@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+<<<<<<< HEAD
 import { Observable } from 'rxjs/observable';
+=======
+import { Observable } from 'rxjs';
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 import { delay, map } from 'rxjs/operators';
 
 const TOTAL_PAGES = 7;

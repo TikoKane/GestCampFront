@@ -9,18 +9,18 @@ import {Observable} from 'rxjs';
 })
 export class CanalEnvoisService {
 
-  private url = environment.serverURL + 'canalEnvois/';
+  private url = environment.serverURL + 'canalenvois/';
 
   constructor(private http: HttpClient) {
   }
 
   AddCanalEnvoi(canalEnvoi : CanalEnvois): Observable<CanalEnvois> {
-    return this.http.post<CanalEnvois>(this.url + 'add',canalEnvoi, {
+    return this.http.post<CanalEnvois>(this.url + 'add/',canalEnvoi, {
     });
   }
 
-  GetAllCanalEnvois( idEntite): Observable<CanalEnvois> {
-    return this.http.get<CanalEnvois>(this.url +'all/' + idEntite);
+  getAllCanalEnvoi(): Observable<CanalEnvois> {
+    return this.http.get<CanalEnvois>(this.url);
   }
 
   getCanalEnvoi(id): Observable<CanalEnvois> {

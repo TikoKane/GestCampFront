@@ -1,52 +1,60 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { AddUser, serverResponse } from '../modele/utilisateurs.model';
+import { AddContact } from '../modele/contacts.model';
+import { AddUser, serverResponse, UtilisateurModelServer, UserModel, UpdateUser } from '../modele/utilisateurs.model';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateursService {
 
-  private url = environment.serverURL + 'utilisateurs/';
+  private url = environment.serverURL;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
+  };
 
   constructor(private http: HttpClient) {
   }
 
-  GetAllUtilisateurs(idEntite): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'all/' + idEntite, {
+  getAllUtilisateur(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/all/'+id, {
     });
   }
 
   getUtilisateurById(id): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url +id, {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/'+id, {
     });
   }
 
   
   changerStatutUtilisateur(id): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'changestatut/'+id, {
+    return this.http.get<serverResponse>(this.url + 'utilisateurs/changestatut/'+id, {
     });
   }
 
   deleteUtilisateur(id): Observable<serverResponse> {
-    return this.http.delete<serverResponse>(this.url + 'delete/'+id, {
+    return this.http.delete<serverResponse>(this.url + 'utilisateurs/delete/'+id, {
     });
   }
 
   AddUtilisateur(utilisateur : AddUser): Observable<serverResponse> {
-    return this.http.post<serverResponse>(this.url + 'add' , utilisateur, {
+    return this.http.post<serverResponse>(this.url + 'utilisateurs/add',utilisateur, {
     });
   }
-  
-  EditUtilisateur(id, utilisateur: AddUser): Observable<serverResponse> {
-    return this.http.put<serverResponse>(this.url + 'put/' + id, utilisateur);
-  }
-
   getAllRole(): Observable<serverResponse> {
     return this.http.get<serverResponse>(this.url + 'roles', {
     });
+  }
+
+  
+  UpdateUtilisateur(id,utilisateur : UpdateUser){
+    return this.http.put(this.url + 'utilisateurs/put/' + id , utilisateur);
   }
 
 }

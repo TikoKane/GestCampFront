@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+<<<<<<< HEAD
 @import "~@ng-select/ng-select/themes/material.theme.css";
 
+=======
+@import "~@ng-select/ng-select/themes/default.theme.css";
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 // themes - our custom or/and out of the box themes
 @import 'themes';
@@ -45,3 +49,12 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+<<<<<<< HEAD
+=======
+
+.nb-theme-default nb-menu .menu-item a {
+  color: black;
+  border-radius: 0;
+}
+
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af

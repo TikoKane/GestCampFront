@@ -7,6 +7,10 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
     {
       path: 'canalenvoi',
@@ -24,16 +28,20 @@ const routes: Routes = [{
         .then(m => m.ContactModule),
     },
     {
+<<<<<<< HEAD
       path: 'listediffusion',
       loadChildren: () => import('./listediffusion/listediffusion.module')
         .then(m => m.ListeDiffusionModule),
     },
     {
+=======
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
       path: 'campagne',
       loadChildren: () => import('./campagne/campagne.module')
         .then(m => m.CampagneModule),
     },
     {
+<<<<<<< HEAD
       path: 'compte',
       loadChildren: () => import('./parametrecompte/parametrecompte.module')
         .then(m => m.ParametrcompteModule),
@@ -78,6 +86,27 @@ const routes: Routes = [{
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
     },*/
+=======
+      path: 'liste_de_diffusion',
+      loadChildren: () => import('./liste_de_diffusion/liste-de-diffusion.module')
+        .then(m => m.ListeDeDiffusionModule),
+    },
+    {
+      path: 'compte',
+      loadChildren: () => import('./parametrecompte/parametrecompte.module')
+        .then(m => m.ParametrcompteModule),
+    },
+    {
+      path: 'modele',
+      loadChildren: () => import('./modele/modele.module')
+        .then(m => m.ModeleModule),
+    },
+    {
+      path: 'regledenvoi',
+      loadChildren: () => import('./regledenvoi/regleenvoi.module')
+        .then(m => m.RegledenvoiModule),
+    },
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     { path: '', redirectTo: 'utilisateur', pathMatch: 'full' },
     { path: '**', redirectTo: 'utilisateur' },
   ],

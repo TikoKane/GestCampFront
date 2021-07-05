@@ -8,7 +8,11 @@ export class UserService extends UserData {
   private time: Date = new Date;
 
   private users = {
+<<<<<<< HEAD
     nick: { name: 'Thierno Ibrahim Kane', picture: 'assets/images/nick.png' },
+=======
+    nick: { name: localStorage.getItem('prenom')+ " " +localStorage.getItem("nom"), picture: 'assets/images/nick.png' },
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     eva: { name: 'Eva Moor', picture: 'assets/images/eva.png' },
     jack: { name: 'Jack Williams', picture: 'assets/images/jack.png' },
     lee: { name: 'Lee Wong', picture: 'assets/images/lee.png' },

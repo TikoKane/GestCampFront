@@ -19,6 +19,7 @@
           </thead>
           <tbody style='background-color:white'>
             <tr *ngFor="let g of canals;let i =index">
+<<<<<<< HEAD
               <th scope='row'>{{i+1}}</th>
               <td>{{g.titre}}</td>
               <td>{{g.code}}</td>
@@ -35,11 +36,33 @@
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                   <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
                       class="fa fa-trash" aria-hidden="true"></i> </button>
+=======
+              <th scope='row' style="text-align: center;">{{i+1}}</th>
+              <td style="text-align: center;">{{g.titre}}</td>
+              <td style="text-align: center;">{{g.code}}</td>
+              <td style="text-align: center;">{{g.description}}</td>
+              <td style="text-align: center;" *ngIf="g.etat===true"><button type="button" (click)="open(g.id)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
+                  <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
+                  Actif
+                </button></td>
+              <td style="text-align: center;" *ngIf="g.etat===false"><button type="button" (click)="open(g.id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#changeetat">
+                  <span class="glyphicon glyphicon-search" ></span><i class="fa fa-ban" aria-hidden="true"></i>
+                  Inactif
+                </button></td>
+              <td style="text-align: center;">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                  <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
+                      class="fa fa-trash" aria-hidden="true"></i> </button>&nbsp;
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                   <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+<<<<<<< HEAD
                       class="fa fa-edit" aria-hidden="true"></i> </button>
+=======
+                      class="fa fa-edit" aria-hidden="true"></i> </button>&nbsp;
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                 </div>
 
                 <div class="btn-group mr-2" role="group" aria-label="Third group">
@@ -93,8 +116,13 @@
             </p>
           </div>
           <div class="modal-footer">
+<<<<<<< HEAD
             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(datacanal?.id)">Ok, Supprimer</button>
+=======
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(datacanal?.id)"><i class="fas fa-trash"></i>&nbsp;Ok, Supprimer</button>
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
           </div>
         </div>
       </div>
@@ -106,6 +134,7 @@
             <h5 class="modal-title" id="exampleModalLabel">Modification du canal {{datacanal?.titre}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+<<<<<<< HEAD
           <form #form ="ngForm" >
           <div class="modal-body">
             <div class="row">
@@ -132,6 +161,15 @@
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="editCanalEnvoi(datacanal?.id,form)" >Enregistrer</button>
             </div>
           </form>
+=======
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="button" class="btn btn-success"><i class="fas fa-save"></i>&nbsp;Enregistrer</button>
+          </div>
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
         </div>
       </div>
     </div>
@@ -151,7 +189,11 @@
 
           </div>
           <div class="modal-footer">
+<<<<<<< HEAD
             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+=======
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Fermer</button>
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
           </div>
         </div>
       </div>

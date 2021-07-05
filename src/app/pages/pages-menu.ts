@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+<<<<<<< HEAD
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -103,3 +104,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
 ];
+=======
+export const MENU_ITEMS: NbMenuItem[] = [];
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af

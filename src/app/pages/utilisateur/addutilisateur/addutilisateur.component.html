@@ -9,14 +9,14 @@
               <div class="form-group">
                 <label for="inputFirstName" class="label">Nom</label>
                 <input [(ngModel)]="user.nom" nbInput placeholder="Entrer le nom " fullWidth #nameInput="ngModel"
-                  name="Nom" type="text" required minlength="2" maxlength="50">
+                  name="NomComplet" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="inputLastName" class="label">Prénom</label>
-                <input [(ngModel)]="user.prenom" nbInput placeholder="Entrer le prenom" fullWidth #nameInput="ngModel"
-                  name="Prenom" type="text" required minlength="2" maxlength="50">
+                <input [(ngModel)]="user.prenom" nbInput placeholder="Entrer le titre" fullWidth #nameInput="ngModel"
+                  name="PreNom" type="text" required minlength="2" maxlength="50">
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             <div class="offset-sm-3 col-sm-9">
               <br>
               <button type="submit" nbButton status="success" style="float: right;"
-                [disabled]="!form.valid">Ajouter</button>
+                [disabled]="!form.valid"><i class="fas fa-save"></i>&nbsp; Enregistrer</button>
             </div>
           </div>
         </form>

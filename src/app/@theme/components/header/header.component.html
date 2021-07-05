@@ -3,7 +3,11 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
+<<<<<<< HEAD
     <a class="logo" href="#" (click)="navigateHome()">ngx-<span>admin</span></a>
+=======
+    <a class="logo" href="#" (click)="navigateHome()">Ges-<span>camp</span></a>
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
   </div>
   <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
     <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
@@ -23,6 +27,10 @@
                [picture]="user?.picture">
       </nb-user>
     </nb-action>
+<<<<<<< HEAD
     <nb-action class="control-item" icon="power-outline"></nb-action>
+=======
+    <nb-action class="control-item" (click)="logout()" icon="power-outline"></nb-action>
+>>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
   </nb-actions>
 </div>

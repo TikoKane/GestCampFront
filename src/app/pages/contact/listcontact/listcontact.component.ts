@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ContactsService } from '../../../services/contacts.service';
-import { countries } from '../../../services/country-data-store';
-import { contactCanalInfo, Contacts,  } from '../../../modele/contacts';
 import { NgForm } from '@angular/forms';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContactsUpdate } from '../../../modele/contacts';
+import {  ContactsService } from '../../../services/contacts.service';
+import { UtilisateursService } from '../../../services/utilisateurs.service';
 
 @Component({
   selector: 'ngx-listcontact',
@@ -12,75 +12,71 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./listcontact.component.scss']
 })
 export class ListcontactComponent implements OnInit {
-  Contacts: any;
-  datacontact: any;
-  closedResult:string;
-  public countries:any = countries;
-  metzo : any;
-  idUser;
- 
+contacts;
+datacontact;
+closeResult:string;
+donneesUser;
+contact;
+tiko :'1995-01-0555';
 
-  contact : Contacts ={
-    Id: 0,
-    Nom: '',
-    Prenom:'',
-    Adresse: '',
-    Etat: 1,
-    Statut: 1,
-    Pays: '',
-    DateDeNaissance: null,
-    Sexe: true,
-    Situation: '',
-    Profession: '',
-    IdNiveauVisibilite: 1,
-    IdUser : +localStorage.getItem('id'),
-  }
 
-  con : contactCanalInfo = {
-    whatsapp :'',
-    telephone :'',
-    facebook : '',
-    mail : ''
-  }
-  
+con : any;
+  constructor(private contactService : ContactsService,
+    private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
+    }
+    
+    config: NbToastrConfig;
+    
+    index = 1;
+    destroyByClick = true;
+    duration = 2000;
+    hasIcon = true;
+    position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+    preventDuplicates = false;
+    status: NbComponentStatus = 'success';
+    statusSupprim: NbComponentStatus = 'danger';
+    
+    titleSupprim = 'Supression d\'un contact !';
+    contentSupprim = `Contact supprimé avec suucès!`;
 
-  constructor (private ContactsService: ContactsService,
-  private router:Router,
-  private modalService: NgbModal) { }
-
-  ngOnInit(): void { 
-      this.ContactsService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
-      this.Contacts = data;
-    console.log(this.Contacts)
-  }, (err) => {
-    console.log(this.Contacts)
-    console.log(err);
-
-});
+    title = 'Ajout d\'un nouveau contact !';
+    content = `Contact ajouté avec suucès!`;
+    
+    
+    
+  ngOnInit() {
+    this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+      this.contacts = data;
+      console.log(this.contacts)
+    }, (err) => {
+      console.log(err);
+    });
 
 }
+
+
+cont : ContactsUpdate={
+DateDeNaissance: ''
+}
 open(id) {
-  console.log(id);
-  this.ContactsService.getContactById(id).subscribe((data) => {
+  this.contactService.getContact(id).subscribe((data) => {
     this.datacontact = data;
-    this.contact.Nom = data["nom"];
-    this.contact.Prenom = data["prenom"];
-    this.contact.DateDeNaissance = data["dateDeNaissance"];
-    this.contact.Sexe = data["sexe"];
-    this.contact.Pays = data["pays"];
-    this.contact.Adresse = data["adresse"];
-    this.contact.Situation = data["situation"];
-    this.contact.Profession = data["profession"];
-    console.log(data["dateDeNaissance"])
-    console.log(this.datacontact)
+    this.cont.DateDeNaissance = data['dateDeNaissance']
+    this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
+
+  }, (err) => {
+    console.log(err);
+  });
+
+
   }, (err) => {
     console.log(err);
   });
   this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.closedResult = `Closed with: ${result}`;
+    this.closeResult = `Closed with: ${result}`;
     
   }, (reason) => {
-    this.closedResult = `Dismissed ${this.getDismissReason(reason)}`;
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
   });
 }
 
@@ -94,46 +90,56 @@ private getDismissReason(reason: any): string {
   }
 }
 
-changes(id){
-  this.ContactsService.changerStatutContact(id).subscribe((data) => {
-     console.log(id)
-     this.ContactsService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
-      this.Contacts = data;
-    }, (err) => {
-      console.log(err);
-    });
-  }, (err) => {
-    console.log(err);
-  });
-
-}
-editcontact(id, form: NgForm){
-  console.log(this.contact) 
-  console.log(form)
-  this.ContactsService.EditContact(id, this.contact).subscribe((data) => {
+changestatut(id){
+  this.contactService.changerStatutUtilisateur(id).subscribe((data) => {
      console.log(data)
-     this.ContactsService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
-      this.Contacts = data;
-    console.log(this.Contacts)
-  }, (err) => {
-    console.log(this.Contacts)
-    console.log(err);
-
-});
-  }, (err) => {
-    console.log(err);
-  });
-
-}
-
-supprimercontact(id){
-  this.ContactsService.DeleteContact(id).subscribe((data1) => {
-     this.ContactsService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
-      this.Contacts = data;
+     this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+      this.contacts = data;
+      console.log(this.contacts)
     }, (err) => {
       console.log(err);
     });
   }, (err) => {
     console.log(err);
   });
-}}
+
+}
+
+supprimeruser(id){
+  this.contactService.DeleteContact(id).subscribe((data1) => {
+    this.ToastSuppression(this.statusSupprim, this.titleSupprim, this.contentSupprim);
+     this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+      this.contacts = data;
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+private ToastSuppression(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
+
+save(form :NgForm){
+console.log(form)
+  console.log(this.con)
+}
+}
+
+

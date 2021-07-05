@@ -1,0 +1,13 @@
+<a href="../../../../assets/document/Fiche_Contact.xlsx" download="formulairecontact.xlsx">Download File</a>
+
+<input type="file" (change)="onFileChange($event)" multiple="false" />
+
+<table class="sjs-table">
+    <tbody>
+  <tr *ngFor="let row of data">
+        <td *ngFor="let val of row">
+            {{val}}
+        </td>
+    </tr>
+</tbody>
+</table>

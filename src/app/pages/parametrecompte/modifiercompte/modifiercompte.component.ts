@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'ngx-modifiercompte',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modifiercompte.component.scss']
 })
 export class ModifiercompteComponent implements OnInit {
-
-  constructor() { }
+  invalidLogin: Boolean;
+  constructor(private authService: AuthService,) { }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn = false;
   }
 
+
+  login(form: NgForm) {
+
+   
+  }
 }

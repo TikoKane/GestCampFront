@@ -19,8 +19,8 @@ export class TypeDeCampagnesService {
     return this.http.post<TypeDeCampagnes>(this.url + 'add', typeDeCampagne);
   }
 
-  getAllTypeDeCampagne(): Observable<TypeDeCampagnes> {
-    return this.http.get<TypeDeCampagnes>(this.url);
+  getAllTypeDeCampagne(id): Observable<TypeDeCampagnes> {
+    return this.http.get<TypeDeCampagnes>(this.url+'all/'+id);
   }
 
   getTypeDeCampagne(id): Observable<TypeDeCampagnes> {
