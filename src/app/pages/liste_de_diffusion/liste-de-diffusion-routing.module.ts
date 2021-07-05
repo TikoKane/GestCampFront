@@ -4,10 +4,7 @@ import { AdddiffusionComponent } from "./adddiffusion/adddiffusion.component";
 
 import { ListeDeDiffusionComponent } from "./liste-de-diffusion.component";
 import { ListdiffusionComponent } from "./listdiffusion/listdiffusion.component";
-<<<<<<< HEAD
 import { ListecontactComponent } from './listecontact/listecontact.component';
-=======
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 
 
 const routes: Routes = [{
@@ -19,13 +16,10 @@ const routes: Routes = [{
       component: ListdiffusionComponent,
     },
     {
-<<<<<<< HEAD
       path: 'listcontact/:id',
       component: ListecontactComponent,
     },
     {
-=======
->>>>>>> 883326b75956340257501077c3438bd45baad99d
       path: 'add',
       component: AdddiffusionComponent,
     },/*
@@ -66,9 +60,6 @@ export class ListeDeDiffusionRoutingModule {
 
 export const routedComponents = [
   ListdiffusionComponent,
-<<<<<<< HEAD
   ListecontactComponent,
-=======
->>>>>>> 883326b75956340257501077c3438bd45baad99d
   ListeDeDiffusionComponent
 ];

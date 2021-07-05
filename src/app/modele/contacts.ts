@@ -5,41 +5,20 @@ export class Contacts {
   Etat: boolean;
   Statut: boolean;
   Pays: string;
-  DateDeNaissance: string;
-  Sexe: string;
-  Adresse:string;
-  Situation: string;
-  Profession: string;
-  IdNiveauVisibilite: number;
-  IdUser : string;
-}
-
-export interface UpdateContact{
-  Nom: string;
-  Prenom:string;
-  Etat: boolean;
-  Statut: boolean;
-  Pays: string;
-  DateDeNaissance: string;
+  DateDeNaissance: Date;
   Sexe: string;
   Adresse:string
   Situation: string;
-  Profession: string;
-  IdNiveauVisibilite: number;
+  Profession: string; 
+  IdNiveauVisibilite: string;
   IdUser : string;
 }
 
-export interface AddContact{
-  Nom: string;
-  Prenom:string;
-  Etat: boolean;
-  Statut: boolean;
-  Pays: string;
+
+export class ContactsUpdate {
+  
   DateDeNaissance: string;
-  Sexe: string;
-  Adresse:string
-  Situation: string;
-  Profession: string;
+
 }
 
 export interface Countries {
@@ -47,19 +26,6 @@ export interface Countries {
   code3: string
   name: string
   number: string
-}
-
-export interface contactCanalInfo{
-  facebook : string;
-  whatsapp : string;
-  telephone : string;
-  mail:string;
-}
-
-
-export interface serverResponse  {
-  count: number;
-  users: Contacts[];
 }
 
 export interface contactCanalInfo{

@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-=======
 import { UserService } from './../../../@core/mock/users.service';
 import { Component, OnInit } from '@angular/core';
 import { UtilisateursService } from "../../../services/utilisateurs.service";
@@ -8,7 +5,6 @@ import { UpdateUser} from '../../../modele/utilisateurs.model';
 
 
 
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 
 @Component({
   selector: 'ngx-infoscompte',
@@ -17,11 +13,6 @@ import { UpdateUser} from '../../../modele/utilisateurs.model';
 })
 export class InfoscompteComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-
-  ngOnInit(): void {
-=======
   constructor(private UtilisateurService: UtilisateursService ) { }
   users: any;
   
@@ -31,7 +22,6 @@ export class InfoscompteComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
->>>>>>> 883326b75956340257501077c3438bd45baad99d
   }
 
 }

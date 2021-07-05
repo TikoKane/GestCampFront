@@ -1,56 +1,60 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Contacts, UpdateContact } from  '../modele/contacts';
-import { AddContact, serverResponse } from '../modele/contacts.model';
-
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Contacts} from '../modele/contacts';
+import {ContactCanals} from '../modele/contact-canals';
+import { serverResponse } from '../modele/utilisateurs.model';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ContactService {
+export class ContactsService {
 
   private url = environment.serverURL + 'contacts/';
 
   constructor(private http: HttpClient) {
   }
 
+  AddContact(contact: Contacts): Observable<Contacts> {
+    return this.http.post<Contacts>(this.url + 'add', contact);
+  }
 
-  changerStatutUtilisateur(id): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url + 'changestatut/'+id, {
+  GetContacts( idUser): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url+ 'all/' + idUser);
+  }
+ 
+  getAllContactCanal(): Observable<ContactCanals> {
+    return this.http.get<ContactCanals>(this.url + 'CanalEnvoi');
+  }
+
+  getContactCanal(id): Observable<ContactCanals> {
+    return this.http.get<ContactCanals>(this.url + 'contactcanal' + id);
+  }
+
+  EditContactCanal(id, contactCanal: ContactCanals): Observable<ContactCanals> {
+    return this.http.put<ContactCanals>(this.url + 'contactcanal/put/' + id, contactCanal);
+  }
+
+  DeleteContactCanal(id): Observable<ContactCanals> {
+    return this.http.delete<ContactCanals>(this.url + 'contactcanal/delete/' + id);
+  }
+
+  getContactById(id): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url + id);
+  }
+  changerStatutContact(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'changes/'+id, {
     });
   }
 
 
-  getAllContact(id): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url+'allwithcanal/'+id);
-  }  
-
-  getAllContactByListeDiffusion(id,idliste): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url+'contactsByListeDiff/'+id+'/'+idliste);
-  }
-  getContactById(id): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url+ id);
+  EditContact(id, contact: Contacts): Observable<Contacts> {
+    return this.http.put<Contacts>(this.url + 'put/' + id, contact);
   }
 
-  changerStatutContact(id): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'changestatut/'+id);
-  }
-
-    getAllRole(): Observable<serverResponse> {
-    return this.http.get<serverResponse>(this.url + 'roles');
-  }
-  
-  AddContact(contact :Contacts): Observable<Contacts> {
-    return this.http.post<Contacts>(this.url + 'add/',contact);
-  }
   DeleteContact(id): Observable<Contacts> {
     return this.http.delete<Contacts>(this.url + 'delete/' + id);
   }
-  UpdateContact(id, contact: UpdateContact){
-    return this.http.put(this.url + 'put/' + id, contact);
-  }
-
 }

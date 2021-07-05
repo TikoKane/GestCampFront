@@ -49,10 +49,7 @@
     "@nebular/security": "7.0.0",
     "@nebular/theme": "^7.0.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
-<<<<<<< HEAD
     "@ng-select/ng-select": "^6.1.0",
-=======
->>>>>>> 883326b75956340257501077c3438bd45baad99d
     "@swimlane/ngx-charts": "^14.0.0",
     "angular2-chartjs": "0.4.1",
     "bootstrap": "^5.0.0-beta3",

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddcontactComponent } from './addcontact/addcontact.component';
 
 import { ContactComponent } from './contact.component';
+import { ImportcontactComponent } from './importcontact/importcontact.component';
 import { ListcontactComponent } from './listcontact/listcontact.component';
 
 
@@ -17,11 +18,11 @@ const routes: Routes = [{
     {
       path: 'add',
       component: AddcontactComponent,
-    },/*
-    {
-      path: 'accordion',
-      component: AccordionComponent,
     },
+    {
+      path: 'import',
+      component: ImportcontactComponent,
+    },/*
     {
       path: 'tabs',
       component: TabsComponent,

@@ -67,7 +67,7 @@ export class AddlistediffusionComponent implements OnInit {
      private contactListeDiffusionService : ContactListeDiffusionsService) { }
 
   ngOnInit(): void {
-    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data)=> {
+    this.contactService.GetContacts(localStorage.getItem('idUser')).subscribe((data)=> {
       this.contacts = data;
       console.log(this.contacts)
     }, (err) => {

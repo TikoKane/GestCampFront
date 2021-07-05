@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import { Authentification, ChangePassword } from '../modele/utilisateurs.model';
+import { Authentification, Changerpassword } from '../modele/utilisateurs.model';
 import { environment } from '../../environments/environment';
 
 
@@ -23,8 +23,8 @@ export class AuthService {
     return this.http.post(this.url + 'utilisateurs/auth',value);
     }
 
-    changeMotDepass(value:  ChangePassword,id){
-      return this.http.put(this.url+'utilisateurs/changepassword/'+id,value);
+    changeMdp(value : Changerpassword,id){
+      return this.http.put(this.url+'utilisateurs/changepassword/'+id,value)
     }
     
   
@@ -39,12 +39,12 @@ export class AuthService {
       localStorage.removeItem('etat');
       localStorage.removeItem('statut');
       localStorage.removeItem('idRole');
+      localStorage.removeItem('idEntite');
       this.isLoggedIn = false;
       this.router.navigate(['']);
     }
-
     saveToken(token: string, id :number,idRole: number,
-            nom: string, prenom: string,email: string, telephone: string,login: string,etat: number,statut: number) {
+            nom: string, prenom: string,email: string, telephone: string,login: string,idEntite :number, etat: number,statut: number) {
     localStorage.setItem('token', token);
     localStorage.setItem('id', String(id));
     localStorage.setItem("idRole",String(idRole));
@@ -53,6 +53,7 @@ export class AuthService {
     localStorage.setItem('email', email);
     localStorage.setItem('telephone', telephone);
     localStorage.setItem('login', login);
+    localStorage.setItem('idEntite',String(idEntite))
     localStorage.setItem('etat', String(etat));
     localStorage.setItem('statut', String(statut));
   

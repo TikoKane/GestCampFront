@@ -15,11 +15,7 @@ export class CanalEnvoisService {
   }
 
   AddCanalEnvoi(canalEnvoi : CanalEnvois): Observable<CanalEnvois> {
-<<<<<<< HEAD
     return this.http.post<CanalEnvois>(this.url + 'add/',canalEnvoi, {
-=======
-    return this.http.post<CanalEnvois>(this.url + 'add',canalEnvoi, {
->>>>>>> 883326b75956340257501077c3438bd45baad99d
     });
   }
 

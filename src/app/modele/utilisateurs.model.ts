@@ -9,6 +9,27 @@ export interface UtilisateurModelServer {
   Statut: Number;
   IdRole: String;
   Telephone: String;
+  idEntite : String;
+}
+
+export class UserModel {
+  id: Number;
+  Nom: String;
+  Prenom : String;
+  Email: String;
+  IdRole: String;
+  Telephone: String;
+}
+
+
+export interface AddUser {
+  nom: String;
+  prenom: String;
+  email: String;
+  telephone : String;
+  login: String;
+  idRole: String;
+  idEntite: String;
 }
 
 export class ChangePassword {
@@ -29,6 +50,7 @@ export interface UpdateUser {
   etat:boolean;
   statut:boolean;
   confirmPassword:string;
+  idEntite : number;
 }
 
 

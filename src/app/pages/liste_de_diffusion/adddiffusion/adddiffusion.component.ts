@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ContactListeDiffusions } from '../../../modele/contact-liste-diffusions';
@@ -10,10 +9,6 @@ import { ContactsService } from '../../../services/contacts.service';
 import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.service";
 import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 
-=======
-import { ListeDeDiffusions } from "../../../modele/liste-de-diffusions";
-import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.service";
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 
 @Component({
   selector: 'ngx-adddiffusion',
@@ -21,7 +16,6 @@ import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.
   styleUrls: ['./adddiffusion.component.scss']
 })
 export class AdddiffusionComponent implements OnInit {
-<<<<<<< HEAD
 contacts;
 players;
 nv;
@@ -51,16 +45,11 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
  
 
   constructor(private router : Router,private toastrService: NbToastrService,private niveauDeVisibilite : NiveauDeVisibilitesService,private contactListeDiffService : ContactListeDiffusionsService,private listeDeDiffusionService: ListeDeDiffusionsService, private contactService : ContactsService) { 
-=======
-
-  constructor(private listeDeDiffusionService: ListeDeDiffusionsService) { 
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 
   }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-    this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+    this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
       this.contacts=data;
      console.log(this.contacts)
     }, (err) => {
@@ -82,18 +71,11 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
     NiveauDeVisibilite: '',
     Id: 0,
     IdEntite : localStorage.getItem('idEntite'),
-=======
-  }
-
-  liste: ListeDeDiffusions = {
-    Id: 0,
->>>>>>> 883326b75956340257501077c3438bd45baad99d
     Titre: '',
     Reference: 'RE',
     Etat: 1,
     Statut: 1
   };
-<<<<<<< HEAD
 
   contactlistdiff: ContactListeDiffusions = {
     Id: 0,
@@ -165,18 +147,4 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
       `${titleContent}`,
       config);
   }
-=======
-  
-  Ajout(form :NgForm){
-    console.log(this.liste)
-    this.listeDeDiffusionService.AddListeDeDiffusion(this.liste).subscribe((data) => {
-    
-      console.log(data)
-      form.reset();
-    }, (err) => {
-      console.log(this.liste)
-      console.log(err);
-    });
-  }
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 }

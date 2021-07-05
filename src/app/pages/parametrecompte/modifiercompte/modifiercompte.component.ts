@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from '../../../auth/auth.service';
-=======
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ValidatorService } from '../../../shared/password.validator';
@@ -35,7 +30,6 @@ export class JwtInterceptor implements HttpInterceptor {
     });
   }
 }
->>>>>>> 883326b75956340257501077c3438bd45baad99d
 
 @Component({
   selector: 'ngx-modifiercompte',
@@ -43,21 +37,6 @@ export class JwtInterceptor implements HttpInterceptor {
   styleUrls: ['./modifiercompte.component.scss']
 })
 export class ModifiercompteComponent implements OnInit {
-<<<<<<< HEAD
-  invalidLogin: Boolean;
-  constructor(private authService: AuthService,) { }
-
-  ngOnInit(): void {
-    this.authService.isLoggedIn = false;
-  }
-
-
-  login(form: NgForm) {
-
-   
-  }
-}
-=======
 
   invalidLogin: Boolean;
   config: NbToastrConfig;
@@ -116,7 +95,7 @@ login(form: NgForm){
     if(this.users.user.ischange == true){
       console.log(this.users);
       this.authService.saveToken(this.users.token, this.users.user.id, this.users.user.idRole, this.users.user.nom, this.users.user.prenom, this.users.user.email,
-        this.users.user.telephone, this.users.user.login, this.users.user.etat, this.users.user.statut)
+        this.users.user.telephone, this.users.user.login, this.users.user.etat, this.users.user.statut ,  this.users.user.idEntite)
     }
   }, (err)=>{
     console.log(err);
@@ -132,7 +111,7 @@ ChangerMotDepasse(form: NgForm) {
     Cnmp : form.value.cnmp
   }
  
-  this.authService.changeMotDepass(userModel, localStorage.getItem("id")).subscribe((data) =>{
+  this.authService.changeMdp(userModel, localStorage.getItem("id")).subscribe((data) =>{
    
     this.ToastValide(this.status, this.title, this.content);
   },(err) =>{
@@ -208,4 +187,3 @@ onSubmit(){
 }
 */
 }
->>>>>>> 883326b75956340257501077c3438bd45baad99d
