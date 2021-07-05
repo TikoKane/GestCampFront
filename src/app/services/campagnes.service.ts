@@ -19,8 +19,20 @@ export class CampagnesService {
     return this.http.post<Campagnes>(this.url + 'add', campagne);
   }
 
-  getAllCampagne(): Observable<Campagnes> {
-    return this.http.get<Campagnes>(this.url);
+  SendEmail(campagne: Campagnes,idEntite,idModel): Observable<Campagnes> {
+    return this.http.post<Campagnes>(this.url + 'sendEmail/'+idEntite+'/'+idModel, campagne);
+  }
+
+  
+
+
+  getAllCampagne(id): Observable<Campagnes> {
+    return this.http.get<Campagnes>(this.url+'all/'+id);
+  }
+
+
+  changeEtatCampagne(id): Observable<Campagnes> {
+    return this.http.get<Campagnes>(this.url + 'changeEtat/' + id);
   }
 
   getCampagne(id): Observable<Campagnes> {

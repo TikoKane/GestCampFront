@@ -10,7 +10,7 @@ export class Campagnes {
   IdUtilisateur: string;
   IdRegleEnvoi: string;
   IdNiveauVisibilite: string;
-  IdTypeDeCampagne: string;
-  IdCategorie: string;
+  IdTypeCampagne: string;
+  IdEntite: string;
   IdCanalEnvoi: string;
 }

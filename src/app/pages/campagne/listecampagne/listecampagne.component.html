@@ -1,1 +1,146 @@
-<p>listecampagne works!</p>
+<div class="row">
+    <div class="col-lg-12" style="float:none;margin:auto;">
+      <nb-card>
+        <nb-card-header style="text-align: center;">
+          <b> Liste des Diffusions</b>
+        </nb-card-header>
+  
+        <nb-card-body>
+          <table class='table table-bordered'>
+            <thead style='background-color: #2d8ac7'>
+              <tr>
+                <th>#</th>
+                <th style="text-align: center;">Titre</th>
+                <th style="text-align: center;">Date Debut </th>
+                <th style="text-align: center;">Date Fin</th>
+                <th style="text-align: center;">Statut</th>
+                <th style="text-align: center;">Detail</th>
+                <th style="text-align: center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody style='background-color:white'>
+              <tr *ngFor="let g of listes;let i =index">
+                <th scope='row'>{{i+1}}</th>
+                <td style="text-align: center;">{{g.titre}}</td>
+                <td style="text-align: center;">{{g.dateDeDebut | date:'dd-MM-yyyy'}}</td>
+                <td style="text-align: center;">{{g.dateDeFin | date:'dd-MM-yyyy'}}</td>
+                <td style="text-align: center;" *ngIf="g.etat===true"><button type="button" (click)="open(g.id)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#changeetat">
+                    <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
+                    Actif
+                  </button></td>
+                <td style="text-align: center;" *ngIf="g.etat===false"><button type="button" (click)="open(g.id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#changeetat">
+                    <span class="glyphicon glyphicon-search" ></span><i class="fa fa-ban" aria-hidden="true"></i>
+                    Inactif
+                  </button></td>
+                  <td  style="text-align: center;"><button nbButton status="success" (click)="listCampagne(g.id)" data-bs-toggle="modal" data-bs-target="#canaux">
+                    <span class="glyphicon glyphicon-search" ></span><i class="fa fa-users" aria-hidden="true"></i>&nbsp;
+                    Détails
+                  </button></td>
+                <td style="text-align: center;">
+                  <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
+                        class="fa fa-trash" aria-hidden="true"></i> </button>&nbsp;
+                  </div>
+  
+                  <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        class="fa fa-edit" aria-hidden="true"></i> </button>&nbsp;
+                  </div>
+  
+                  <div class="btn-group mr-2" role="group" aria-label="Third group">
+                    <button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal" data-bs-target="#exampleMod"><i
+                      class="fa fa-eye" aria-hidden="true"></i> </button>
+                  </div>
+                </td>
+  
+              </tr>
+            <tbody>
+          </table>
+        </nb-card-body>
+      </nb-card>
+      <div class="modal modal-danger fade" id="changeetat" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Bloquer / Débloquer utilisateur
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">
+                <strong>Voulez vous débloquer/bloquer la liste de  ? {{dataliste?.titre}}</strong>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeEtat(dataliste?.id)">Valider</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal modal-danger fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Suppression utilisateur
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">
+                <strong>Vous voulez vraiment supprimer la liste de diffusion {{dataliste?.titre}}</strong>
+              </p>
+              <p>
+                Toutes les informations associées à cette liste de diffusion seront supprimées définitivement.
+                <span class="text-danger">Cette opération ne peut pas être annulée.</span>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(dataliste?.id)">Ok, Supprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modification de la liste  {{dataliste?.titre}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-success">Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Informations de la liste de Diffusion {{dataliste?.titre}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <b> Titre :</b>  {{dataliste?.titre | uppercase}}<br>
+            <b> Code :</b>  {{dataliste?.reference}}<br>
+            <b *ngIf="dataliste?.etat===true"> Statut :</b> <span *ngIf="dataliste?.etat===true" style="color: green;">  ACTIF</span>
+            <b *ngIf="dataliste?.etat===false"> Statut :</b>  <span *ngIf="dataliste?.etat===false" style="color: red;"> INACTIF</span>
+  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

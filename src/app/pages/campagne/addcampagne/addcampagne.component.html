@@ -29,7 +29,7 @@
                                     <div class="col-sm-6">
                                       <div class="form-group">
                                         <label for="inputFirstName" class="label">Type campagne</label>
-                                        <select name="IdTypeDeCampagne" (change)="onChangeTDC($event.target.value)" id="IdTypeDeCampagne" [(ngModel)]="camp.IdTypeDeCampagne" class="col-sm-12 form-control" fullWidth
+                                        <select name="IdTypeCampagne" (change)="onChangeTDC($event.target.value)" id="IdTypeCampagne" [(ngModel)]="camp.IdTypeCampagne" class="col-sm-12 form-control" fullWidth
                                           required>
                                           <option value="" disabled selected>Veuillez choisir un type</option>
                                           <option *ngFor="let data of typecampagnes" [value]="data.id" [selected]="data.libelle == true">

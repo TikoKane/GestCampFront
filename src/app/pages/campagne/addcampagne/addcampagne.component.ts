@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { Campagnes } from '../../../modele/campagnes';
 import { RegleDEnvois } from '../../../modele/regle-D-Envois';
+import { CampagnesService } from '../../../services/campagnes.service';
 import { CanalEnvoisService } from '../../../services/canal-envois.service';
 import { CategoriesService } from '../../../services/categories.service';
 import { ListeDeDiffusionsService } from '../../../services/liste-de-diffusions.service';
@@ -31,8 +34,20 @@ export class AddcampagneComponent implements OnInit {
   libelleTDC;
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
-  constructor(private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
-    private regleDenvoiService : RegleDEnvoisService,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
+config: NbToastrConfig;
+index = 1;
+destroyByClick = true;
+duration = 2000;
+hasIcon = true;
+position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+preventDuplicates = false;
+status: NbComponentStatus = 'success';
+
+title = 'Ajout d\'une nouvelle campagne !';
+content = `Campagne ajoutée avec succès!`;
+
+  constructor(private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
+    private regleDenvoiService : RegleDEnvoisService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
   camp : Campagnes = {
     Code :'Codeeeee',
     DateDeDebut:'',
@@ -42,25 +57,23 @@ export class AddcampagneComponent implements OnInit {
     Statut : true,
     Id:0,
     IdCanalEnvoi:'',
-    IdCategorie:'',
+    IdEntite:localStorage.getItem('idEntite'),
     IdNiveauVisibilite:'',
     IdRegleEnvoi:'',
-    IdTypeDeCampagne:'',
+    IdTypeCampagne:'',
     IdUtilisateur:localStorage.getItem('id'),
     Titre:''
   }
 
   regleEnvoi : RegleDEnvois = {
-       DateExecution:'',
+       DateExecution:new Date(),
        Expediteur:'',
        Frequence:null,
        Id : 0,
        FuseauHoraire :'',
        NombreTentative :null,
-       Recepteur:''
-
-
-
+       Recepteur:'',
+       IdEntite:localStorage.getItem('idEntite'),
   }
   ngOnInit(): void {
     this.niveauVisibiliteService.getAllNiveauDeVisibilite().subscribe((data) => {
@@ -103,10 +116,7 @@ export class AddcampagneComponent implements OnInit {
   
 }
 
-valider(){
 
-
-}
 
 onChangeModel(deviceValue) {
   this.modelService.getModele(deviceValue).subscribe((data) => {
@@ -141,5 +151,42 @@ onChangeTDC(deviceValue) {
 }
 
 
+valider(){
+  this.regleDenvoiService.AddRegleDEnvoi(this.regleEnvoi).subscribe((data) => {
+    this.camp.IdRegleEnvoi=data['id'];
+    this.campagneService.AddCampagne(this.camp).subscribe((data) => {
+      this.campagneService.SendEmail(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
+        this.ToastValide(this.status,this.title,this.content);
+        this.router.navigate(['/pages/campagne/list']);
+      }, (err) => {
+        console.log(err);
+      });
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+  
+}
+
+
+private ToastValide(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
 }
 

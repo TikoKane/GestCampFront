@@ -12,6 +12,7 @@ export class Contacts {
   Profession: string; 
   IdNiveauVisibilite: string;
   IdUser : string;
+  IdEntite:string;
 }
 
 

@@ -26,7 +26,7 @@ export class ContactsService {
 
 
   getAllContact(id): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url+'allwithcanal/'+id);
+    return this.http.get<Contacts>(this.url+'all/'+id);
   }  
 
   getAllContactByListeDiffusion(id,idliste): Observable<Contacts> {
