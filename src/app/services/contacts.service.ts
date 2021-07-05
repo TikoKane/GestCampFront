@@ -1,23 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Contacts} from '../modele/contacts';
+import { Contacts, UpdateContact } from  '../modele/contacts';
+import { AddContact, serverResponse } from '../modele/contacts.model';
+
 
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class ContactsService {
+export class ContactService {
 
   private url = environment.serverURL + 'contacts/';
 
   constructor(private http: HttpClient) {
   }
 
-  AddContact(contact: Contacts): Observable<Contacts> {
-    return this.http.post<Contacts>(this.url + 'add', contact);
-  }
 
   changerStatutUtilisateur(id): Observable<Contacts> {
     return this.http.get<Contacts>(this.url + 'changestatut/'+id, {
@@ -32,16 +31,26 @@ export class ContactsService {
   getAllContactByListeDiffusion(id,idliste): Observable<Contacts> {
     return this.http.get<Contacts>(this.url+'contactsByListeDiff/'+id+'/'+idliste);
   }
-
-  getContact(id): Observable<Contacts> {
-    return this.http.get<Contacts>(this.url + id);
+  getContactById(id): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url+ id);
   }
 
-  EditContact(id, contact: Contacts): Observable<Contacts> {
-    return this.http.put<Contacts>(this.url + 'put/' + id, contact);
+  changerStatutContact(id): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'changestatut/'+id);
   }
 
+    getAllRole(): Observable<serverResponse> {
+    return this.http.get<serverResponse>(this.url + 'roles');
+  }
+  
+  AddContact(contact :Contacts): Observable<Contacts> {
+    return this.http.post<Contacts>(this.url + 'add/',contact);
+  }
   DeleteContact(id): Observable<Contacts> {
     return this.http.delete<Contacts>(this.url + 'delete/' + id);
   }
+  UpdateContact(id, contact: UpdateContact){
+    return this.http.put(this.url + 'put/' + id, contact);
+  }
+
 }

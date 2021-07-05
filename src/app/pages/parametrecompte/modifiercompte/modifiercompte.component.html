@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row">
     <div class="col-lg-6" style="float:none;margin:auto;">
       <nb-card>
@@ -29,4 +30,28 @@
         </nb-card-body>
       </nb-card>
     </div>
+=======
+<div class="col-md-8" style="float: none; margin: auto;">
+    <form class="form-signin" #loginForm="ngForm">
+        <div class="container-fluid">
+            <h2 class="form-signin-heading" style="text-align: center;">Changer le mot de passe</h2>
+            <br>
+            <div *ngIf="invalidLogin" class="alert alert-danger">Mot de passe invalide</div>
+            <br>
+            <label for="password" class="sr-only">Ancien mot de passe </label>
+            <input type="password" id="amp" name="amp"  class="form-control" ngModel  placeholder="Ancien mot de passe" required>
+
+            <br>
+            <label for="login" class="sr-only">Nouveau mot de passe</label>
+            <input type="password" id="nmp" name="nmp"  class="form-control" ngModel  placeholder="Nouveau mot de passe" required>
+            <br>
+
+            <label for="password" class="sr-only">Confirmation mot de passe</label>
+            <input type="password" id="cnmp" name="cnmp"  class="form-control"  placeholder="Confirmation mot de passe" ngModel required>
+            <br>
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="ChangerMotDepasse(loginForm)"> Sauvegarder </button>
+        </div>
+    </form>
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
 </div>

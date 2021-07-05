@@ -27,7 +27,11 @@ export class ListdiffusionComponent implements OnInit {
    }
 
   ngOnInit() {
+<<<<<<< HEAD
     this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+=======
+    this.ListeDeDiffusionService.getAllListeDeDiffusion().subscribe((data) => {
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
       this.listes = data;
       console.log(this.listes)
     }, (err) => {
@@ -64,7 +68,11 @@ export class ListdiffusionComponent implements OnInit {
   changeEtat(id){
     this.ListeDeDiffusionService.changeEtatListeDeDiffusion(id).subscribe((data) => {
        console.log(data)
+<<<<<<< HEAD
        this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+=======
+       this.ListeDeDiffusionService.getAllListeDeDiffusion().subscribe((data) => {
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
         this.listes = data;
      //  console.log(this.users)
       }, (err) => {
@@ -78,7 +86,11 @@ export class ListdiffusionComponent implements OnInit {
 
   supprimeruser(id){
     this.ListeDeDiffusionService.DeleteListeDeDiffusion(id).subscribe((data1) => {
+<<<<<<< HEAD
        this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+=======
+       this.ListeDeDiffusionService.getAllListeDeDiffusion().subscribe((data) => {
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
         this.listes = data;
       }, (err) => {
         console.log(err);
@@ -88,8 +100,11 @@ export class ListdiffusionComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   listContact(id){
 
     this.router.navigate(['/pages/liste_de_diffusion/listcontact', id]);
   }
+=======
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
 }

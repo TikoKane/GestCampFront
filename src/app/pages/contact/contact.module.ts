@@ -12,7 +12,6 @@ import { ContactRoutingModule, routedComponents} from './contact-routing.module'
 import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AddcontactComponent } from './addcontact/addcontact.component';
-import { ImportcontactComponent } from './importcontact/importcontact.component';
 
 
 @NgModule({
@@ -38,8 +37,7 @@ import { ImportcontactComponent } from './importcontact/importcontact.component'
   ],
   declarations: [
     ...routedComponents,
-    AddcontactComponent,
-    ImportcontactComponent,
+    AddcontactComponent
   ],
   providers: [
     NewsService,

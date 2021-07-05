@@ -1,1 +1,10 @@
 @import '../../../@theme/styles/themes';
+<<<<<<< HEAD
+=======
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+}
+>>>>>>> 883326b75956340257501077c3438bd45baad99d

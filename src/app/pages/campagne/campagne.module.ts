@@ -4,8 +4,7 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbDatepickerModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule,
-  NbStepperModule, } from '@nebular/theme';
+  NbUserModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ContactRoutingModule, routedComponents} from './campagne-routing.module';
@@ -16,7 +15,6 @@ import { AddcampagneComponent } from './addcampagne/addcampagne.component';
 
 @NgModule({
   imports: [
-    NbStepperModule,
     ReactiveFormsModule,
     ContactRoutingModule,
     ThemeModule,

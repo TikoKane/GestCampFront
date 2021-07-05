@@ -17,7 +17,11 @@
               <th style="text-align: center;">Actions</th>
             </tr>
           </thead>
+<<<<<<< HEAD
           <tbody style='background-color:white'>
+=======
+          <tbody style='background-color:white; text-align: center;'>
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
             <tr *ngFor="let g of users;let i =index">
               <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.nom | uppercase}} {{g.prenom}}</td>
               <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.email}}</td>
@@ -116,7 +120,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
+<<<<<<< HEAD
             <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations du contact {{datauser?.prenom | uppercase}}</h5>
+=======
+            <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations de l'utilisateur {{datauser?.prenom | uppercase}}</h5>
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -223,4 +231,8 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
