@@ -33,9 +33,9 @@ export class ContactsService {
     return this.http.get<ContactCanals>(this.url + 'contactcanal' + id);
   }
 
-  EditContactCanal(id, contactCanal: ContactCanals): Observable<ContactCanals> {
-    return this.http.put<ContactCanals>(this.url + 'contactcanal/put/' + id, contactCanal);
-  }
+  getAllContact(id): Observable<Contacts> {
+    return this.http.get<Contacts>(this.url+'all/'+id);
+  }  
 
   DeleteContactCanal(id): Observable<ContactCanals> {
     return this.http.delete<ContactCanals>(this.url + 'contactcanal/delete/' + id);

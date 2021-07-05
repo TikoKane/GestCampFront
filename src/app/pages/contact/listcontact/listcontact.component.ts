@@ -45,7 +45,7 @@ con : any;
     
     
   ngOnInit() {
-    this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
+    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
       console.log(this.contacts)
     }, (err) => {

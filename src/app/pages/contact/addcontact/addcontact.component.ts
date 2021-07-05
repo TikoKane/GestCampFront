@@ -62,8 +62,8 @@ contact : Contacts ={
   Situation: '',
   Profession: '',
   IdNiveauVisibilite: '',
-  IdUser :localStorage.getItem('id')
-  
+  IdUser :localStorage.getItem('id'),
+  IdEntite :localStorage.getItem('idEntite')
 }
 
 
