@@ -56,11 +56,7 @@ export class LoginComponent implements OnInit {
         this.authService.saveToken(this.users.token, this.users.user.id, this.users.user.idRole, this.users.user.nom, this.users.user.prenom, this.users.user.email,
           this.users.user.telephone, this.users.user.login, this.users.user.idEntite, this.users.user.etat, this.users.user.statut)
 
-<<<<<<< HEAD
-        this.router.navigate(['pages']);
-=======
         this.router.navigate(['pages/utilisateur/list']);
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
       }
 
       else {
@@ -94,11 +90,7 @@ export class LoginComponent implements OnInit {
       this.authService.saveToken(this.users.token, this.users.user.id, this.users.user.idRole, this.users.user.nom, this.users.user.prenom, this.users.user.email,
         this.users.user.telephone, this.users.user.login, this.users.user.idEntite,this.users.user.etat, this.users.user.statut)
 
-<<<<<<< HEAD
-      this.router.navigate(['pages']);
-=======
       this.router.navigate(['pages/utilisateur/list']);
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     }, (err) => {
       console.log(err)
       console.log(err.error)

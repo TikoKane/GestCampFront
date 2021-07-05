@@ -24,8 +24,8 @@ export class ListelistediffusionComponent implements OnInit {
     Reference : "",
     Etat : 1,
     Statut : 1,
-    IdNiveauVisibilite: 1,
-    IdEntite : +localStorage.getItem('idEntite'),
+    NiveauDeVisibilite : '',
+    IdEntite : localStorage.getItem('idEntite'),
   }
 
   ListeContact : Contacts = {
@@ -33,15 +33,15 @@ export class ListelistediffusionComponent implements OnInit {
     Nom: '',
     Prenom:'',
     Adresse: '',
-    Etat: 1,
-    Statut: 1,
-    Pays: '',
+    Etat: true,
+    Statut: true,
+    Pays: 'Senegal',
     DateDeNaissance: null,
-    Sexe: true,
+    Sexe: '',
     Situation: '',
     Profession: '',
-    IdNiveauVisibilite: 1,
-    IdUser: +localStorage.getItem('iduser'),
+    IdNiveauVisibilite: '',
+    IdUser :localStorage.getItem('id')
   }
 
   constructor(private listediffusionService :  ListeDeDiffusionsService ,
@@ -49,7 +49,7 @@ export class ListelistediffusionComponent implements OnInit {
                              private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.listediffusionService.GetAllListeDeDiffusions(localStorage.getItem('idEntite')).subscribe((data) => {
+    this.listediffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
       this.ListeDeDiffusions = data;
     console.log(this.ListeDeDiffusions)
   }, (err) => {
@@ -84,9 +84,9 @@ export class ListelistediffusionComponent implements OnInit {
   }
 
   changes(id){
-    this.listediffusionService.changerStatutListediffusion(id).subscribe((data) => {
+    this.listediffusionService.changeEtatListeDeDiffusion(id).subscribe((data) => {
        console.log(id)
-       this.listediffusionService.GetAllListeDeDiffusions(localStorage.getItem('idEntite')).subscribe((data) => {
+       this.listediffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
         this.ListeDeDiffusions = data;
       }, (err) => {
         console.log(err);
@@ -102,7 +102,7 @@ export class ListelistediffusionComponent implements OnInit {
     this.listediffusionService.EditListeDeDiffusion(id ,  this.listediffusion ).subscribe((data) => {
       this.listediffusion.Reference = data['reference'];
        console.log(data)
-       this.listediffusionService.GetAllListeDeDiffusions(localStorage.getItem('idEntite')).subscribe((data) => {
+       this.listediffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
         this.ListeDeDiffusions = data;
       console.log(this.ListeDeDiffusions)
     }, (err) => {
@@ -118,7 +118,7 @@ export class ListelistediffusionComponent implements OnInit {
   
 supprimerlistediffusion(id){
   this.listediffusionService.DeleteListeDeDiffusion(id).subscribe((data1) => {
-     this.listediffusionService.GetAllListeDeDiffusions(localStorage.getItem('idEntite')).subscribe((data) => {
+     this.listediffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
       this.ListeDeDiffusions = data;
     }, (err) => {
       console.log(err);

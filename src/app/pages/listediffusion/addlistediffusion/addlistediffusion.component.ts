@@ -29,37 +29,37 @@ export class AddlistediffusionComponent implements OnInit {
     Reference : "",
     Etat : 1,
     Statut : 1,
-    IdNiveauVisibilite: 1,
-    IdEntite : 1,
+    NiveauDeVisibilite: '',
+    IdEntite :  localStorage.getItem('idEntite'),
 
   }
 
   contactListeDiffusion :ContactListeDiffusions={
-    
+    Id : 0,
     Code : 'Cd0000',
     DateDesa : null,
     Etat : 1,
     Raison : '',
-    IdContact : 1,
+    IdContact : '',
     IdListeDiffusion : 1,
-    IdNiveauDeVisibilite : 1,
-    IdEntite : +localStorage.getItem('idEntite'),
+    idNiveauVisibilite : 1,
+    IdEntite : localStorage.getItem('idEntite'),
 
   }
   listeContact : Contacts = {
-    Id: 0,
-    Nom: '',
-    Prenom:'',
-    Adresse: '',
-    Etat: 1,
-    Statut: 1,
-    Pays: '',
-    DateDeNaissance: null,
-    Sexe: true,
-    Situation: '',
-    Profession: '',
-    IdNiveauVisibilite: 1,
-    IdUser: +localStorage.getItem('id'),
+  Id: 0,
+  Nom: '',
+  Prenom:'',
+  Adresse: '',
+  Etat: true,
+  Statut: true,
+  Pays: 'Senegal',
+  DateDeNaissance: null,
+  Sexe: '',
+  Situation: '',
+  Profession: '',
+  IdNiveauVisibilite: '',
+  IdUser :localStorage.getItem('id')
   }
   
 
@@ -67,7 +67,7 @@ export class AddlistediffusionComponent implements OnInit {
      private contactListeDiffusionService : ContactListeDiffusionsService) { }
 
   ngOnInit(): void {
-    this.contactService.GetContacts(localStorage.getItem('idEntite')).subscribe((data)=> {
+    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data)=> {
       this.contacts = data;
       console.log(this.contacts)
     }, (err) => {

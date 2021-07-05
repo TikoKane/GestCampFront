@@ -4,16 +4,6 @@
         <div *ngIf="invalidLogin" class="alert alert-danger">Login ou mot de passe invalide</div>
         <br>
         <label for="login" class="sr-only">Login</label>
-<<<<<<< HEAD
-        <input type="text" id="login" name="login" ngModel class="form-control" placeholder="Login">
-        <br>
-        <label for="password" class="sr-only">Mot de passe</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Mot de passe">
-        <br>
-        <br>
-        <div style="text-align: center;">
-        <button class="btn btn-lg btn-success btn-block" type="submit" status="danger" >Se connecter</button>
-=======
         <input type="text" required id="login" name="login" ngModel class="form-control" placeholder="Login">
         <br>
         <label for="password" class="sr-only">Mot de passe</label>
@@ -22,7 +12,6 @@
         <br>
         <div style="text-align: center;">
         <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit" status="danger" ><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Se connecter</button>
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
         </div>
     </div>
 
@@ -49,12 +38,8 @@
             </div>
         </div>
         <div class="modal-footer">
-<<<<<<< HEAD
-          <button type="button" class="btn btn-outline-success"  (click)="changeMdp(loginForm2);modal.dismiss('Cross click')">Enregistrer</button>
-=======
           <button type="button" class="btn btn-outline-success"   (click)="changeMdp(loginForm2);modal.dismiss('Cross click')"><i class="fa fa-save"
             aria-hidden="true"></i>&nbsp;Enregistrer</button>
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
         </div>
     </form>
 

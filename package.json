@@ -12,11 +12,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-<<<<<<< HEAD
-    "start": "ng serve",
-=======
     "start": "ng serve -o",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
@@ -35,35 +31,18 @@
   },
   "dependencies": {
     "@akveo/ng2-completer": "^9.0.1",
-<<<<<<< HEAD
-    "@angular/animations": "^11.0.9",
-    "@angular/cdk": "11.0.4",
-=======
     "@angular/animations": "^11.2.12",
     "@angular/cdk": "^11.0.4",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "@angular/common": "^11.0.9",
     "@angular/compiler": "^11.0.9",
     "@angular/core": "^11.0.9",
     "@angular/forms": "^11.0.9",
     "@angular/google-maps": "^11.0.4",
-<<<<<<< HEAD
-=======
     "@angular/localize": "^11.0.9",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "@angular/platform-browser": "^11.0.9",
     "@angular/platform-browser-dynamic": "^11.0.9",
     "@angular/router": "^11.0.9",
     "@asymmetrik/ngx-leaflet": "3.0.1",
-<<<<<<< HEAD
-    "@nebular/auth": "7.0.0",
-    "@nebular/eva-icons": "7.0.0",
-    "@nebular/security": "7.0.0",
-    "@nebular/theme": "7.0.0",
-    "@swimlane/ngx-charts": "^14.0.0",
-    "angular2-chartjs": "0.4.1",
-    "bootstrap": "4.3.1",
-=======
     "@auth0/angular-jwt": "^5.0.2",
     "@nebular/auth": "7.0.0",
     "@nebular/eva-icons": "^7.0.0",
@@ -74,29 +53,20 @@
     "@swimlane/ngx-charts": "^14.0.0",
     "angular2-chartjs": "0.4.1",
     "bootstrap": "^5.0.0-beta3",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "chart.js": "2.7.1",
     "ckeditor": "4.7.3",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
-<<<<<<< HEAD
-    "echarts": "^4.0.2",
-    "eva-icons": "^1.1.3",
-=======
     "devextreme-angular": "20.2.7",
     "devextreme-schematics": "^1.2.14",
     "echarts": "^4.0.2",
     "eva-icons": "^1.1.3",
     "font-awesome": "^4.7.0",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "intl": "1.2.5",
     "ionicons": "2.0.1",
     "leaflet": "1.2.0",
     "nebular-icons": "1.1.0",
-<<<<<<< HEAD
-=======
     "ng-bootstrap": "^1.6.3",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "ng2-ckeditor": "^1.2.9",
     "ng2-smart-table": "^1.6.0",
     "ngx-echarts": "^4.2.2",
@@ -112,10 +82,7 @@
     "tslib": "^2.0.0",
     "typeface-exo": "0.0.22",
     "web-animations-js": "^2.3.2",
-<<<<<<< HEAD
-=======
     "xlsx": "*",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
@@ -127,11 +94,7 @@
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@types/d3-color": "1.0.5",
     "@types/googlemaps": "^3.39.3",
-<<<<<<< HEAD
-    "@types/jasmine": "^3.3.0",
-=======
     "@types/jasmine": "^3.7.1",
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     "@types/jasminewd2": "2.0.3",
     "@types/leaflet": "1.2.3",
     "@types/node": "^12.11.1",

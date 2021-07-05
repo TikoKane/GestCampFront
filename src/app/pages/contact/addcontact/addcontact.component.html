@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-=======
 <nb-card class="col-md-12 col-lg-12 col-xxxl-6" style="float:none;margin:auto;">
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     <nb-card-body>
         <nb-stepper orientation="horizontal">
             <nb-step [label]="labelOne">
                 <ng-template #labelOne>Etape 1</ng-template>
-<<<<<<< HEAD
-                <div class="col-lg-8" style="float:none;margin:auto;">
-=======
                 <div class="col-lg-12" style="float:none;margin:auto;">
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                     <nb-card>
                         <nb-card-header style="text-align: center;">Ajout d'un nouveau contact</nb-card-header>
                         <nb-card-body>
@@ -41,43 +33,13 @@
                                         <div class="form-group">
                                             <label for="inputLastName" class="label">Date de naissance</label>
                                             <input [(ngModel)]="contact.DateDeNaissance" nbInput
-<<<<<<< HEAD
-                                                placeholder="02/05/2051" fullWidth #nameInput="ngModel"
-                                                name="DateDeNaissance" type="date">
-=======
                                                 placeholder="02/05/2051" fullWidth #nameInput="ngModel" required
                                                 name="DateDeNaissance" type="date" max="{{maxdate | date:'2020-01-01'}}" min="{{mindate | date:'1900-01-01'}}">
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="inputLastName" class="label">Sexe</label>
-<<<<<<< HEAD
-                                            <nb-radio-group _ngcontent-tph-c356="">
-                                                <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183=""
-                                                    class="status-basic"><label _ngcontent-tph-c183=""><input
-                                                            _ngcontent-tph-c183="" type="radio"
-                                                            class="native-input visually-hidden" name="Sexe"
-                                                            [(ngModel)]="contact.Sexe" value="Feminin"><span
-                                                            _ngcontent-tph-c183="" class="outer-circle"></span><span
-                                                            _ngcontent-tph-c183="" class="inner-circle"></span><span
-                                                            _ngcontent-tph-c183="" class="text">
-                                                            Féminin
-                                                        </span></label></nb-radio>
-                                                <nb-radio _ngcontent-tph-c356="" _nghost-tph-c183=""
-                                                    class="status-basic"><label _ngcontent-tph-c183=""><input
-                                                            _ngcontent-tph-c183="" type="radio"
-                                                            class="native-input visually-hidden" name="Sexe"
-                                                            [(ngModel)]="contact.Sexe" value="Masculin"><span
-                                                            _ngcontent-tph-c183="" class="outer-circle"></span><span
-                                                            _ngcontent-tph-c183="" class="inner-circle"></span><span
-                                                            _ngcontent-tph-c183="" class="text">
-                                                            Masculin
-                                                        </span></label></nb-radio>
-
-                                            </nb-radio-group>
-=======
                                             <select class="form-control" id="sexe"
                                                 [(ngModel)]="contact.Sexe" name="Sexe" required>
                                                 <option value="" disabled selected>Veuillez choisir le sexe</option>
@@ -88,23 +50,12 @@
                                                     Femme
                                                  </option>
                                             </select>
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                         </div>
                                     </div>
 
 
                                 </div>
                                 <div class="row">
-<<<<<<< HEAD
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="inputLastName" class="label">Pays</label>
-                                            <select class="form-control" name="pays" id="pays"
-                                                [(ngModel)]="contact.Pays" name="Pays">
-                                                <option value="" disabled selected>Veuillez choisir un pays</option>
-                                                <option *ngFor="let country of countries" [value]="country.name">
-                                                    {{country.name}} ({{country.code}})
-=======
                                      <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="inputLastName" class="label">Niveau de visibilté</label>
@@ -113,7 +64,6 @@
                                                 <option value="" disabled selected>Veuillez choisir le niveau de visiblité</option>
                                                 <option *ngFor="let ndvl of ndv" [value]="ndvl.id">
                                                     {{ndvl.libelle}}
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                                 </option>
                                             </select>
                                         </div>
@@ -126,18 +76,6 @@
                                                 minlength="2" maxlength="50">
                                         </div>
                                     </div>
-<<<<<<< HEAD
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="inputFirstName" class="label">Situaion matrimoniale</label>
-                                            <input [(ngModel)]="contact.Situation" nbInput
-                                                placeholder="Entrer la situation matrimoniale" fullWidth
-                                                #nameInput="ngModel" name="Situation" type="text" required minlength="2"
-                                                maxlength="50">
-=======
                                  
                                 </div>
 
@@ -162,7 +100,6 @@
                                                     Divorcé(e)
                                                  </option>
                                             </select>
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -264,13 +201,8 @@
                     <nb-card-body>
                         <form #form="ngForm">
                             <div class="row">
-<<<<<<< HEAD
-                                <div class="col-sm-6" style="text-align: left;">
-                                    <div class="form-group">
-=======
                                 <div class="row">
                                     <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                         <b> Nom : </b> {{contact.Nom}}<br>
                                         <b> Prenom :</b> {{contact.Prenom}}<br>
                                         <b> Date de naissance : </b> {{contact.DateDeNaissance}}<br>
@@ -279,27 +211,14 @@
                                         <b> Adresse :</b> {{contact.Adresse}}<br>
                                         <b> Situaion matrimoniale : </b> {{contact.Situation}}<br>
                                         <b> Profession :</b> {{contact.Profession}}<br>
-<<<<<<< HEAD
-                                        <b> IdNiveauVisibilite:</b> {{contact.IdNiveauVisibilite}}<br>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6" style="text-align: left;">
-                                    <div class="form-group">
-=======
                                     </div>
                                     <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                                         <b> Numéro Téléphone :</b> {{con?.telephone}} <br>
                                         <b> Numéro Whatsapp :</b> {{con?.whatsapp}} <br>
                                         <b> Lien Facebook :</b> {{con?.facebook}} <br>
                                         <b> Adresse Email :</b> {{con?.mail}} <br>
                                     </div>
-<<<<<<< HEAD
-                                </div>
-=======
                                   </div>
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
                             </div>
                             <div class="form-group row">
                                 <div class="offset-sm-3 col-sm-9">

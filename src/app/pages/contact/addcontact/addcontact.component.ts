@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-<<<<<<< HEAD
-import { contactCanalInfo, Contacts, Countries } from '../../../modele/contacts';
-import { ContactsService } from '../../../services/contacts.service';
-import { countries } from '../../../services/country-data-store';
-=======
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ContactCanals } from '../../../modele/contact-canals';
@@ -13,7 +8,6 @@ import { ContactCanalsService } from '../../../services/contact-canals.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { countries } from '../../../services/country-data-store';
 import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 @Component({
   selector: 'ngx-addcontact',
@@ -26,10 +20,7 @@ tel = false;
 face = false;
 wha = false;
 mail = false;
-<<<<<<< HEAD
-=======
 ndv;
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 
 firstForm: FormGroup;
@@ -44,8 +35,6 @@ con : contactCanalInfo = {
   mail : ''
 }
 
-<<<<<<< HEAD
-=======
 contactCanal : ContactCanals ={
   Id:0,
   CanalDuContatct: '',
@@ -58,40 +47,11 @@ contactCanal : ContactCanals ={
   IdEntite : localStorage.getItem("idEntite")
 }
 
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 contact : Contacts ={
   Id: 0,
   Nom: '',
   Prenom:'',
   Adresse: '',
-<<<<<<< HEAD
-  Etat: 1,
-  Statut: 1,
-  Pays: '',
-  DateDeNaissance: null,
-  Sexe: true,
-  Situation: '',
-  Profession: '',
-  IdNiveauVisibilite: 1,
-  IdUser:  +localStorage.getItem('id'),
-}
-
-constructor(private fb: FormBuilder, private contactService : ContactsService) {
-}
-
-ngOnInit() {
-  this.firstForm = this.fb.group({
-    firstCtrl: ['', Validators.required],
-  });
-
-  this.secondForm = this.fb.group({
-    secondCtrl: ['', Validators.required],
-  });
-
-  this.thirdForm = this.fb.group({
-    thirdCtrl: ['', Validators.required],
-  });
-=======
   Etat: true,
   Statut: true,
   Pays: 'Senegal',
@@ -133,7 +93,6 @@ ngOnInit() {
     console.log(err);
   });
  
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }
 
 onFirstSubmit() {
@@ -175,30 +134,6 @@ supTelephone(){
   this.con.telephone='';
   this.tel = false;
   }
-<<<<<<< HEAD
-  
-
-supFacebook(){
-  this.con.facebook='';
-  this.face = false;
-  }
-
-  supWhatsapp(){
-    this.con.whatsapp='';
-    this.wha = false;
-    }
-
-    supMail(){
-      this.con.mail='';
-      this.mail = false;
-      }
-
-    valider(){
-this.contactService.AddContact(this.contact).subscribe((data) => {
-    
-  console.log(data)
- 
-=======
  
   valider(){
     this.contactService.AddContact(this.contact).subscribe((data) => {
@@ -270,7 +205,6 @@ this.contactService.AddContact(this.contact).subscribe((data) => {
   }
   this.router.navigateByUrl('pages/contact/list')
 
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }, (err) => {
  // console.log(this.user)
   console.log(err);
@@ -278,9 +212,6 @@ this.contactService.AddContact(this.contact).subscribe((data) => {
 
 }
 
-<<<<<<< HEAD
-
-=======
 private ToastValide(type: NbComponentStatus, title: string, body: string) {
   const config = {
     status: type,
@@ -298,5 +229,4 @@ private ToastValide(type: NbComponentStatus, title: string, body: string) {
     `${titleContent}`,
     config);
 }
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }

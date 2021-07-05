@@ -4,12 +4,8 @@
   ],
   "rules": {
     "deprecation": {
-<<<<<<< HEAD
-      "severity": "warning"
-=======
       "severity": "warning",
       "quotemark": [ false ]
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     },
     "trailing-comma": [
       true,

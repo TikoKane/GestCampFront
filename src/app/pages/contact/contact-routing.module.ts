@@ -3,10 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddcontactComponent } from './addcontact/addcontact.component';
 
 import { ContactComponent } from './contact.component';
-<<<<<<< HEAD
-=======
 import { ImportcontactComponent } from './importcontact/importcontact.component';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 import { ListcontactComponent } from './listcontact/listcontact.component';
 
 
@@ -21,21 +18,12 @@ const routes: Routes = [{
     {
       path: 'add',
       component: AddcontactComponent,
-<<<<<<< HEAD
-    },/*
-    {
-      path: 'accordion',
-      component: AccordionComponent,
-    },
-    {
-=======
     },
     {
       path: 'import',
       component: ImportcontactComponent,
     },/*
     {
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
       path: 'tabs',
       component: TabsComponent,
       children: [

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { Campagnes } from '../../../modele/campagnes';
 import { RegleDEnvois } from '../../../modele/regle-D-Envois';
 import { CanalEnvoisService } from '../../../services/canal-envois.service';
@@ -10,7 +8,6 @@ import { ModelesService } from '../../../services/modeles.service';
 import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 import { RegleDEnvoisService } from '../../../services/regle-denvois.service';
 import { TypeDeCampagnesService } from '../../../services/type-de-campagnes.service';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 @Component({
   selector: 'ngx-addcampagne',
@@ -19,14 +16,6 @@ import { TypeDeCampagnesService } from '../../../services/type-de-campagnes.serv
 })
 export class AddcampagneComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
-=======
   niveaudevisbilite: any;
   typecampagnes;
   niveaudevisibilites;
@@ -154,4 +143,3 @@ onChangeTDC(deviceValue) {
 
 }
 
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af

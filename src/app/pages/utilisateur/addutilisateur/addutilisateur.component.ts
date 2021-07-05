@@ -60,7 +60,7 @@ roles: any;
     login:'',
     nom :'',
     prenom :'',
-    idEntite:localStorage.getItem('idEntite')
+    idEntite: localStorage.getItem('idEntite')
   };
 
   Ajout(form :NgForm){

@@ -26,16 +26,10 @@ import { ChangerpasswordComponent } from './auth/changerpassword/changerpassword
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
-<<<<<<< HEAD
-
-export function tokenGetter (){
-  return localStorage.getItem("jwt");
-=======
 import { NgSelectModule } from '@ng-select/ng-select';
 
 export function tokenGetter (){
   return localStorage.getItem("token");
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }
 
 
@@ -43,10 +37,7 @@ export function tokenGetter (){
   declarations: [AppComponent, LoginComponent, ChangerpasswordComponent],
   imports: [
     BrowserModule,
-<<<<<<< HEAD
-=======
     NgSelectModule,
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,

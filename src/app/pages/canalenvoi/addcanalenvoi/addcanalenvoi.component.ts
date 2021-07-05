@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-<<<<<<< HEAD
-=======
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 import {  CanalEnvois } from '../../../modele/canal-envois';
 import { CanalEnvoisService } from '../../../services/canal-envois.service';
 
@@ -13,20 +10,6 @@ import { CanalEnvoisService } from '../../../services/canal-envois.service';
   styleUrls: ['./addcanalenvoi.component.scss']
 })
 export class AddcanalenvoiComponent implements OnInit {
-<<<<<<< HEAD
-  constructor(private canalEnvoiService : CanalEnvoisService) { }
-
-  ngOnInit(): void {
-  }
-
-  canal: CanalEnvois = {
-    Titre: '',
-    Description :'',
-    Code : "",
-    Etat :1,
-    Id : 0,
-    IdEntite : +localStorage.getItem('idEntite'),
-=======
   constructor(private canalEnvoiService : CanalEnvoisService, 
    private toastrService: NbToastrService) {
   }
@@ -58,22 +41,11 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
     Code : '',
     Etat :1,
     Id : 0
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
   };
   Ajout(form :NgForm){
     console.log(this.canal)
     this.canalEnvoiService.AddCanalEnvoi(this.canal).subscribe((data) => {
-<<<<<<< HEAD
-    
-      console.log(data)
-      form.reset();
-    }, (err) => {
-      console.log(this.canal)
-      console.log(err);
-    });
-  }
-=======
       this.ToastValide(this.status, this.title, this.content);
       form.reset();
     }, (err) => {
@@ -119,5 +91,4 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
       `${titleContent}`,
       config);
   }
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }

@@ -5,10 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-<<<<<<< HEAD
-=======
 import { AuthService } from '../../../auth/auth.service';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 @Component({
   selector: 'ngx-header',
@@ -49,11 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-<<<<<<< HEAD
-              private breakpointService: NbMediaBreakpointsService) {
-=======
               private breakpointService: NbMediaBreakpointsService, private authService : AuthService) {
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
   }
 
   ngOnInit() {
@@ -99,11 +92,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
-<<<<<<< HEAD
-=======
 
   logout(){
     this.authService.logout();
   }
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }

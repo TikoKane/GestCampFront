@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-=======
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -11,17 +7,6 @@ import { MENU_ITEMS } from './pages-menu';
   selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
   template: `
-<<<<<<< HEAD
-    <ngx-one-column-layout>
-      <nb-menu [items]="menu"></nb-menu>
-      <router-outlet></router-outlet>
-    </ngx-one-column-layout>
-  `,
-})
-export class PagesComponent {
-
-  menu = MENU_ITEMS;
-=======
   <ngx-one-column-layout>
   <nb-menu [items]="MENU_ITEMS"></nb-menu>
   <router-outlet></router-outlet>
@@ -180,5 +165,4 @@ export class PagesComponent implements OnInit{
     },]
   }
 
->>>>>>> 7c99457fcc21780c95ee36928f9e73464084d1af
 }
