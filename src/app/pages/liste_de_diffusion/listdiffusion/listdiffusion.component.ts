@@ -16,7 +16,7 @@ export class ListdiffusionComponent implements OnInit {
   listes: any;
   dataliste: any;
   closeResult:string;
-  thierno :any;
+
 
 
   constructor(
