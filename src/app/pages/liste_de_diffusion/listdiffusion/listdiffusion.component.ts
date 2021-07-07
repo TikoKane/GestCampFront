@@ -21,7 +21,7 @@ export class ListdiffusionComponent implements OnInit {
   ndv;
 
   liste: UpdateListeDeDiffusions = {
-    IdNiveauDeVisibilite: '1',
+    IdNiveauVisibilite: '',
     IdEntite : localStorage.getItem('idEntite'),
     Titre: '',
     Reference: '',
@@ -55,7 +55,7 @@ export class ListdiffusionComponent implements OnInit {
     console.log(id);
     this.ListeDeDiffusionService.getListeDeDiffusion(id).subscribe((data) => {
       this.dataliste = data;
-      this.liste.IdNiveauDeVisibilite = data["idNiveauDeVisibilite"]
+      this.liste.IdNiveauVisibilite = data["idNiveauVisibilite"]
       this.liste.Titre = data["titre"]
       this.liste.Reference = data["reference"]
       this.liste.IdEntite = data["idEntite"]

@@ -124,7 +124,7 @@
                           <div class="form-group">
                             <label for="inputLastName" class="label">Niveau de visibilté</label>
                             <select class="form-control" name="NivVis" id="pays"
-                                [(ngModel)]="liste.IdNiveauDeVisibilite" name="IdNiveauVisibilite">
+                                [(ngModel)]="liste.IdNiveauVisibilite" name="IdNiveauVisibilite">
                                 <option value="" disabled selected>{{dataliste?.idNiveauVisibilite}}</option>
                                 <option *ngFor="let ndvl of ndv" [value]="ndvl.id">
                                     {{ndvl.libelle}}

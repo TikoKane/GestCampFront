@@ -4,7 +4,7 @@ export interface ListeDeDiffusions {
   Reference: string;
   Etat: number;
   IdEntite : string;
-  IdNiveauDeVisibilite: string;
+  IdNiveauVisibilite: string;
   Statut: number;
 }
 
@@ -14,6 +14,6 @@ export class UpdateListeDeDiffusions {
   Reference: string;
   Etat: number;
   IdEntite : string;
-  IdNiveauDeVisibilite: string;
+  IdNiveauVisibilite: string;
   Statut: number;
 }

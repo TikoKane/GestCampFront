@@ -68,7 +68,7 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   
 
   liste: ListeDeDiffusions = {
-    IdNiveauDeVisibilite: '',
+    IdNiveauVisibilite: '',
     Id: 0,
     IdEntite : localStorage.getItem('idEntite'),
     Titre: '',

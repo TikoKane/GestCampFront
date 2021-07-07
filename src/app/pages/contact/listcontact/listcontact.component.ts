@@ -80,7 +80,17 @@ cont : ContactsUpdate={
 open(id) {
   this.contactService.getContactById(id).subscribe((data) => {
     this.datacontact = data;
-    this.cont.DateDeNaissance = data['dateDeNaissance']
+    this.cont.Nom = data["nom"];
+    this.cont.Prenom = data["prenom"];
+    this.cont.DateDeNaissance = data["dateDeNaissance"];
+    this.cont.Sexe = data["sexe"];
+    this.cont.Pays = data["pays"];
+    this.cont.Adresse = data["adresse"];
+    this.cont.Situation = data["situation"];
+    this.cont.Profession = data["profession"];
+    this.cont.IdNiveauVisibilite = data["idNiveauVisibilite"];
+    this.cont.IdUser = data["idUser"];
+    console.log(this.datacontact)
     this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
 
   }, (err) => {
@@ -125,9 +135,9 @@ changestatut(id){
 }
 
 editcontact(id, form: NgForm){
-  console.log(this.contact) 
+  console.log(this.cont) 
   console.log(form)
-  this.contactService.EditContact(id, this.contact).subscribe((data) => {
+  this.contactService.EditContact(id, this.cont).subscribe((data) => {
      console.log(data)
      this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
       this.contacts = data;

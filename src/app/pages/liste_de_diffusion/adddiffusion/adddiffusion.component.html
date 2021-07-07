@@ -17,7 +17,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="inputLastName" class="label">Niveau de visibilté</label>
-                <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.IdNiveauDeVisibilite"
+                <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.IdNiveauVisibilite"
                   name="NiveauDeVisibilite">
                   <option value="" disabled selected>Veuillez choisir le niveau de visiblité</option>
                   <option *ngFor="let ndvl of nv" [value]="ndvl.id">

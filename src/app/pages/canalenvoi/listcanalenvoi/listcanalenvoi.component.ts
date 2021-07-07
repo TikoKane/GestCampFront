@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../../@core/data/smart-table';
+import { CanalEnvois } from '../../../modele/canal-envois';
 import { CanalEnvoisService } from '../../../services/canal-envois.service';
 @Component({
   selector: 'ngx-listcanalenvoi',
@@ -16,6 +18,14 @@ export class ListcanalenvoiComponent  {
   closeResult:string;
   tiko :any;
 
+  canal: CanalEnvois = {
+    Titre: '',
+    Description :'',
+    Code : '',
+    Etat :1,
+    Id : 0
+
+  };
   constructor(private CanalEnvoisService: CanalEnvoisService,
               private router:Router,
               private modalService: NgbModal) {
@@ -65,6 +75,24 @@ changeEtat(id){
     }, (err) => {
       console.log(err);
     });
+  }, (err) => {
+    console.log(err);
+  });
+
+}
+editCanalEnvoi(id ,form : NgForm){
+  console.log(this.canal) 
+  this.CanalEnvoisService.EditCanalEnvoi(id, this.canal).subscribe((data) => {
+    this.datacanal.Code = data["code"];
+     console.log(data)
+     this.CanalEnvoisService.getAllCanalEnvoi().subscribe((data) => {
+      this.canals = data;
+    console.log(this.canals)
+  }, (err) => {
+    console.log(this.canals)
+    console.log(err);
+
+});
   }, (err) => {
     console.log(err);
   });

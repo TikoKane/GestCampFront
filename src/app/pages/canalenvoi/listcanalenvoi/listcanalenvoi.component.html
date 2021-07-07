@@ -106,13 +106,32 @@
             <h5 class="modal-title" id="exampleModalLabel">Modification du canal {{datacanal?.titre}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <form #form ="ngForm" >
           <div class="modal-body">
-            ...
+            <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="inputLastName" class="label">Titre</label>
+                      <input [(ngModel)]="canal.Titre" nbInput value="{{datacanal?.titre}}"
+                          fullWidth #nameInput="ngModel" name="Titre" type="text" 
+                          minlength="2" maxlength="50">
+                  </div>
+              </div>
+               <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="inputLastName" class="label">Description</label>
+                      <input [(ngModel)]="canal.Description " nbInput value="{{datacanal?.description}}" 
+                          fullWidth #nameInput="ngModel" name="Description" type="text"
+                          minlength="2" maxlength="50">
+                  </div>
+              </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Annuler</button>
-            <button type="button" class="btn btn-success"><i class="fas fa-save"></i>&nbsp;Enregistrer</button>
           </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="editCanalEnvoi(datacanal?.id,form)" >Enregistrer</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

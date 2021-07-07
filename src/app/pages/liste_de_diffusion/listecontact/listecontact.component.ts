@@ -5,6 +5,8 @@ import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastr
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsUpdate } from '../../../modele/contacts';
 import {  ContactsService } from '../../../services/contacts.service';
+import { countries } from '../../../services/country-data-store';
+import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 import { UtilisateursService } from '../../../services/utilisateurs.service';
 
 
@@ -20,11 +22,14 @@ export class ListecontactComponent implements OnInit {
   donneesUser;
   contact;
   tiko :'1995-01-0555';
+  public countries:any = countries;
+  ndv;
 
   
   
   con : any;
     constructor(private  route:ActivatedRoute,private contactService : ContactsService,
+      private niveauDeVisibliteService : NiveauDeVisibilitesService,
       private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
       }
       
@@ -50,6 +55,13 @@ export class ListecontactComponent implements OnInit {
       
       
     ngOnInit() {
+
+      this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
+        this.ndv = data;
+        
+      }, (err) => {
+        console.log(err);
+      });
       this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
         this.contacts = data;
         console.log(this.contacts)
@@ -76,7 +88,17 @@ export class ListecontactComponent implements OnInit {
   open(id) {
     this.contactService.getContactById(id).subscribe((data) => {
       this.datacontact = data;
-      this.cont.DateDeNaissance = data['dateDeNaissance']
+      this.cont.Nom = data["nom"];
+      this.cont.Prenom = data["prenom"];
+      this.cont.DateDeNaissance = data["dateDeNaissance"];
+      this.cont.Sexe = data["sexe"];
+      this.cont.Pays = data["pays"];
+      this.cont.Adresse = data["adresse"];
+      this.cont.Situation = data["situation"];
+      this.cont.Profession = data["profession"];
+      this.cont.IdNiveauVisibilite = data["idNiveauVisibilite"];
+      this.cont.IdUser = data["idUser"];
+      console.log(this.datacontact)
       this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
   
     }, (err) => {
@@ -114,6 +136,25 @@ export class ListecontactComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
+    }, (err) => {
+      console.log(err);
+    });
+  
+  }
+
+  editcontact(id, form: NgForm){
+    console.log(this.cont) 
+    console.log(form)
+    this.contactService.EditContact(id, this.cont).subscribe((data) => {
+       console.log(data)
+       this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
+        this.contacts = data;
+      console.log(this.contacts)
+    }, (err) => {
+      console.log(this.contacts)
+      console.log(err);
+  
+  });
     }, (err) => {
       console.log(err);
     });
