@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Contacts} from '../modele/contacts';
+import {Contacts, ContactsUpdate} from '../modele/contacts';
 import {ContactCanals} from '../modele/contact-canals';
 import { serverResponse } from '../modele/utilisateurs.model';
 
@@ -50,7 +50,7 @@ export class ContactsService {
   }
 
 
-  EditContact(id, contact: Contacts): Observable<Contacts> {
+  EditContact(id, contact: ContactsUpdate): Observable<Contacts> {
     return this.http.put<Contacts>(this.url + 'put/' + id, contact);
   }
 

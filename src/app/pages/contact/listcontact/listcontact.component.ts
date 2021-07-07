@@ -4,8 +4,9 @@ import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastr
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsUpdate } from '../../../modele/contacts';
 import {  ContactsService } from '../../../services/contacts.service';
+import { countries } from '../../../services/country-data-store';
 import { UtilisateursService } from '../../../services/utilisateurs.service';
-
+import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 @Component({
   selector: 'ngx-listcontact',
   templateUrl: './listcontact.component.html',
@@ -17,11 +18,12 @@ datacontact;
 closeResult:string;
 donneesUser;
 contact;
+public countries:any = countries;
 tiko :'1995-01-0555';
-
+ndv;
 
 con : any;
-  constructor(private contactService : ContactsService,
+  constructor(private contactService : ContactsService,private niveauDeVisibliteService : NiveauDeVisibilitesService,
     private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
     }
     
@@ -45,7 +47,13 @@ con : any;
     
     
   ngOnInit() {
-    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
+    this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
+      this.ndv = data;
+      
+    }, (err) => {
+      console.log(err);
+    });
+    this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
       this.contacts = data;
       console.log(this.contacts)
     }, (err) => {
@@ -56,7 +64,18 @@ con : any;
 
 
 cont : ContactsUpdate={
-DateDeNaissance: ''
+  Nom: '',
+  Prenom:'',
+  Etat: true,
+  Statut: true,
+  Pays: '',
+  DateDeNaissance: '',
+  Sexe: '',
+  Adresse:'',
+  Situation: '',
+  Profession: '',
+  IdNiveauVisibilite: '',
+  IdUser : ''
 }
 open(id) {
   this.contactService.getContactById(id).subscribe((data) => {
@@ -105,6 +124,24 @@ changestatut(id){
 
 }
 
+editcontact(id, form: NgForm){
+  console.log(this.contact) 
+  console.log(form)
+  this.contactService.EditContact(id, this.contact).subscribe((data) => {
+     console.log(data)
+     this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
+      this.contacts = data;
+    console.log(this.contacts)
+  }, (err) => {
+    console.log(this.contacts)
+    console.log(err);
+
+});
+  }, (err) => {
+    console.log(err);
+  });
+
+}
 supprimeruser(id){
   this.contactService.DeleteContact(id).subscribe((data1) => {
     this.ToastSuppression(this.statusSupprim, this.titleSupprim, this.contentSupprim);

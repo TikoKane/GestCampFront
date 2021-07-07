@@ -59,9 +59,19 @@ export class ListecontactComponent implements OnInit {
   
   }
   
-  
   cont : ContactsUpdate={
-  DateDeNaissance: ''
+    Nom: '',
+    Prenom:'',
+    Etat: true,
+    Statut: true,
+    Pays: '',
+    DateDeNaissance: '',
+    Sexe: '',
+    Adresse:'',
+    Situation: '',
+    Profession: '',
+    IdNiveauVisibilite: '',
+    IdUser : ''
   }
   open(id) {
     this.contactService.getContactById(id).subscribe((data) => {

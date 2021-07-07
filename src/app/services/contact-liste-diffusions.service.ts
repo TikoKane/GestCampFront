@@ -19,8 +19,8 @@ export class ContactListeDiffusionsService {
     return this.http.post<ContactListeDiffusions>(this.url + 'add', contactListeDiffusion);
   }
 
-  getAllContactListeDiffusion(): Observable<ContactListeDiffusions> {
-    return this.http.get<ContactListeDiffusions>(this.url);
+  getAllContactListeDiffusion( id): Observable<ContactListeDiffusions> {
+    return this.http.get<ContactListeDiffusions>(this.url +'all/' + id);
   }
 
   getContactListeDiffusion(id): Observable<ContactListeDiffusions> {

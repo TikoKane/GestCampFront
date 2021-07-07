@@ -49,7 +49,7 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   }
 
   ngOnInit(): void {
-    this.contactService.GetContacts(localStorage.getItem('id')).subscribe((data) => {
+    this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
       this.contacts=data;
      console.log(this.contacts)
     }, (err) => {
@@ -68,7 +68,7 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   
 
   liste: ListeDeDiffusions = {
-    NiveauDeVisibilite: '',
+    IdNiveauDeVisibilite: '',
     Id: 0,
     IdEntite : localStorage.getItem('idEntite'),
     Titre: '',

@@ -17,7 +17,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="inputLastName" class="label">Niveau de visibilté</label>
-                <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.NiveauDeVisibilite"
+                <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.IdNiveauDeVisibilite"
                   name="NiveauDeVisibilite">
                   <option value="" disabled selected>Veuillez choisir le niveau de visiblité</option>
                   <option *ngFor="let ndvl of nv" [value]="ndvl.id">
@@ -34,13 +34,14 @@
                 <label for="inputFirstName" class="label">Liste des contacts</label>
                 <ng-select bindLabel="name" placeholder="Séléctionner les contacts" appendTo="body" multiple="true"
                   [searchable]="true" [clearable]="true" required [(ngModel)]="selected" name="selected">
-                  <ng-option [value]="contacts.idContact" *ngFor="let contacts of contacts">
-                    {{contacts.nomComplet}}
+                  <ng-option [value]="contacts.idContact" *ngFor="let conta of contacts">
+                    {{conta.nom}}   {{conta.prenom}} 
                   </ng-option>
                 </ng-select>
               </div>
             </div>
           </div>
+          
 
           <div class="form-group row">
             <div class="offset-sm-3 col-sm-9">

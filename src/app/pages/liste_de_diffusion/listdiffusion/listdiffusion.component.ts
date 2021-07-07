@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup }   from '@angular/forms';
+import { FormGroup, NgForm }   from '@angular/forms';
 
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../../@core/data/smart-table';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.service";
-import { ListeDeDiffusions } from "../../../modele/liste-de-diffusions";
+import { ListeDeDiffusions, UpdateListeDeDiffusions } from "../../../modele/liste-de-diffusions";
+import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 @Component({
   selector: 'ngx-listdiffusion',
   templateUrl: './listdiffusion.component.html',
@@ -17,16 +18,30 @@ export class ListdiffusionComponent implements OnInit {
   dataliste: any;
   closeResult:string;
   thierno :any;
+  ndv;
 
-
+  liste: UpdateListeDeDiffusions = {
+    IdNiveauDeVisibilite: '1',
+    IdEntite : localStorage.getItem('idEntite'),
+    Titre: '',
+    Reference: '',
+    Etat: 1,
+    Statut: 1
+  };
   constructor(
     private ListeDeDiffusionService: ListeDeDiffusionsService,
-    private router: Router,
+    private router: Router, private niveauDeVisibliteService : NiveauDeVisibilitesService,
     private modalService: NgbModal) {
     
    }
 
   ngOnInit() {
+    this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
+      this.ndv = data;
+      
+    }, (err) => {
+      console.log(err);
+    });
     this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
       this.listes = data;
       console.log(this.listes)
@@ -40,6 +55,13 @@ export class ListdiffusionComponent implements OnInit {
     console.log(id);
     this.ListeDeDiffusionService.getListeDeDiffusion(id).subscribe((data) => {
       this.dataliste = data;
+      this.liste.IdNiveauDeVisibilite = data["idNiveauDeVisibilite"]
+      this.liste.Titre = data["titre"]
+      this.liste.Reference = data["reference"]
+      this.liste.IdEntite = data["idEntite"]
+      this.liste.Statut = data["statut"]
+      this.liste.Etat = data["etat"]
+
     }, (err) => {
       console.log(err);
     });
@@ -76,6 +98,26 @@ export class ListdiffusionComponent implements OnInit {
   
   }
 
+  
+  editlisediffusion(id , form: NgForm){
+    console.log(this.liste) 
+    console.log(form)
+    this.ListeDeDiffusionService.EditListeDeDiffusion(id ,  this.liste ).subscribe((data) => {
+      this.liste.Reference = data['reference'];
+       console.log(data)
+       this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+        this.listes = data;
+      console.log(this.listes)
+    }, (err) => {
+      console.log(this.listes)
+      console.log(err);
+  
+  });
+    }, (err) => {
+      console.log(err);
+    });
+  
+  }
   supprimeruser(id){
     this.ListeDeDiffusionService.DeleteListeDeDiffusion(id).subscribe((data1) => {
        this.ListeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {

@@ -109,12 +109,35 @@
               <h5 class="modal-title" id="exampleModalLabel">Modification de la liste  {{dataliste?.titre}}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-success">Enregistrer</button>
+            <form #form ="ngForm" >
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="inputLastName" class="label">Titre</label>
+                              <input [(ngModel)]="liste.Titre" nbInput value="{{dataliste?.titre}}"
+                                  fullWidth #nameInput="ngModel" name="Titre" type="text" 
+                                  minlength="2" maxlength="50">
+                          </div>
+                      </div>
+                       <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="inputLastName" class="label">Niveau de visibilté</label>
+                            <select class="form-control" name="NivVis" id="pays"
+                                [(ngModel)]="liste.IdNiveauDeVisibilite" name="IdNiveauVisibilite">
+                                <option value="" disabled selected>{{dataliste?.idNiveauVisibilite}}</option>
+                                <option *ngFor="let ndvl of ndv" [value]="ndvl.id">
+                                    {{ndvl.libelle}}
+                                </option>
+                            </select>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+                  </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="editlisediffusion(dataliste?.id,form)" >Enregistrer</button>
             </div>
           </div>
         </div>
