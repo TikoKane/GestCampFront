@@ -34,4 +34,9 @@ export class ModelesService {
   DeleteModele(id): Observable<Modeles> {
     return this.http.delete<Modeles>(this.url + 'delete/' + id);
   }
+
+  
+  changeEtatModele(id): Observable<Modeles> {
+    return this.http.get<Modeles>(this.url + 'changeEtat/' + id);
+  }
 }

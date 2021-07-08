@@ -155,7 +155,7 @@ valider(){
   this.regleDenvoiService.AddRegleDEnvoi(this.regleEnvoi).subscribe((data) => {
     this.camp.IdRegleEnvoi=data['id'];
     this.campagneService.AddCampagne(this.camp).subscribe((data) => {
-      this.campagneService.SendEmail(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
+      this.campagneService.SendSms(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
         this.ToastValide(this.status,this.title,this.content);
         this.router.navigate(['/pages/campagne/list']);
       }, (err) => {

@@ -34,8 +34,8 @@
                 <label for="inputFirstName" class="label">Liste des contacts</label>
                 <ng-select bindLabel="name" placeholder="Séléctionner les contacts" appendTo="body" multiple="true"
                   [searchable]="true" [clearable]="true" required [(ngModel)]="selected" name="selected">
-                  <ng-option [value]="contacts.idContact" *ngFor="let contacts of contacts">
-                    {{contacts.nomComplet}}
+                  <ng-option [value]="contacts.id" *ngFor="let contacts of contacts">
+                    {{contacts.nom}}{{contacts.prenom}}
                   </ng-option>
                 </ng-select>
               </div>

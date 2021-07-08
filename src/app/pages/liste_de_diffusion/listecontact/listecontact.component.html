@@ -21,20 +21,20 @@
             <tbody style='background-color:white'>
               <tr *ngFor="let g of contacts;let i =index">
                 <th scope='row'>{{i+1}}</th>
-                <td style="text-align: center;">{{g.nom | uppercase}} {{g.prenom}}</td>
+                <td style="text-align: center;">{{g.nomComplet | uppercase}}</td>
                 <td style="text-align: center;">{{g.sexe}}</td>
-                <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===1">Public</td>
-                <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===2">Privé</td>
-                <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===3">Protégé</td>
-                <td *ngIf="g.statut===true" style="text-align: center;"><button nbButton status="success" (click)="open(g.id)" data-bs-toggle="modal" data-bs-target="#changeetat">
+                <td style="text-align: center;" *ngIf="g.niveauDeVisibilite===1">Public</td>
+                <td style="text-align: center;" *ngIf="g.niveauDeVisibilite===2">Privé</td>
+                <td style="text-align: center;" *ngIf="g.niveauDeVisibilite===3">Protégé</td>
+                <td *ngIf="g.statut===true" style="text-align: center;"><button nbButton status="success" (click)="open(g.idContactContact)" data-bs-toggle="modal" data-bs-target="#changeetat">
                     <span class="glyphicon glyphicon-search" ></span><i class="fa fa-check" aria-hidden="true"></i>
                     Actif
                   </button></td>
-                <td *ngIf="g.statut===false" style="text-align: center;"><button nbButton status="danger" (click)="open(g.id)"  data-bs-toggle="modal" data-bs-target="#changeetat">
+                <td *ngIf="g.statut===false" style="text-align: center;"><button nbButton status="danger" (click)="open(g.idContact)"  data-bs-toggle="modal" data-bs-target="#changeetat">
                     <span class="glyphicon glyphicon-search" ></span><i class="fa fa-ban" aria-hidden="true"></i>
                     Inactif
                   </button></td>
-                  <td  style="text-align: center;"><button nbButton status="success" (click)="open(g.id)" data-bs-toggle="modal" data-bs-target="#canaux">
+                  <td  style="text-align: center;"><button nbButton status="success" (click)="open(g.idContact)" data-bs-toggle="modal" data-bs-target="#canaux">
                     <span class="glyphicon glyphicon-search" ></span><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;
                     Voir les canaux
                   </button></td>
@@ -42,17 +42,17 @@
             
                 <td>
                   <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
+                    <button (click)="open(g.idContact)" nbButton status="danger" data-bs-toggle="modal" data-bs-target="#delete"><i
                         class="fa fa-trash" aria-hidden="true"></i> </button>&nbsp;
                   </div>
   
                   <div class="btn-group mr-2" role="group" aria-label="Second group">
-                    <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                    <button nbButton (click)="open(g.idContact)" status="warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                         class="fa fa-edit" aria-hidden="true"></i> </button>&nbsp;
                   </div>
   
                   <div class="btn-group mr-2" role="group" aria-label="Third group">
-                    <button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal" data-bs-target="#exampleMod"><i
+                    <button nbButton (click)="open(g.idContact)" status="success" data-bs-toggle="modal" data-bs-target="#exampleMod"><i
                         class="fa fa-eye" aria-hidden="true"></i> </button>
                   </div>
                 </td>
@@ -78,7 +78,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changestatut(datacontact?.id)">Valider</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changestatut(datacontact?.idContact)">Valider</button>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Annuler</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(datacontact?.id)"><i class="fas fa-trash"></i>&nbsp;Ok, Supprimer</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="supprimeruser(datacontact?.idContact)"><i class="fas fa-trash"></i>&nbsp;Ok, Supprimer</button>
           </div>
         </div>
       </div>

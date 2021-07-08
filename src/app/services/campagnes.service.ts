@@ -24,7 +24,9 @@ export class CampagnesService {
   }
 
   
-
+  SendSms(campagne: Campagnes,idEntite,idModel): Observable<Campagnes> {
+    return this.http.post<Campagnes>(this.url + 'SendSms/'+idEntite+'/'+idModel, campagne);
+  }
 
   getAllCampagne(id): Observable<Campagnes> {
     return this.http.get<Campagnes>(this.url+'all/'+id);

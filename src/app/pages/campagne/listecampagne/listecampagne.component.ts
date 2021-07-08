@@ -16,8 +16,7 @@ export class ListecampagneComponent implements OnInit {
   closeResult:string;
   thierno :any;
 
-  config: NbToastrConfig;
-
+config: NbToastrConfig;
 index = 1;
 destroyByClick = true;
 duration = 2000;
