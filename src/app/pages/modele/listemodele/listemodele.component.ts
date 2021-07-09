@@ -11,6 +11,8 @@ export class ListemodeleComponent implements OnInit {
 listes;
 dataliste;
 closeResult:string;
+searchedKeyword: string;
+p:number=1;
   constructor(private ModeleService : ModelesService,  private modalService: NgbModal) { }
   ngOnInit() {
     this.ModeleService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {

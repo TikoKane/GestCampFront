@@ -23,6 +23,10 @@ export class ModelesService {
     return this.http.get<Modeles>(this.url+'all/'+id);
   }
 
+  getModeleByCanal(id,idCanal): Observable<Modeles> {
+    return this.http.get<Modeles>(this.url+'all/'+id+'/'+idCanal);
+  }
+
   getModele(id): Observable<Modeles> {
     return this.http.get<Modeles>(this.url + id);
   }

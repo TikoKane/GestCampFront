@@ -2,7 +2,14 @@
     <div class="col-lg-12" style="float:none;margin:auto;">
       <nb-card>
         <nb-card-header style="text-align: center;">
-          <b> Liste des campagnes</b>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <input type="text" class="form-control" placeholder="Filtrer votre recherche" [(ngModel)]="searchedKeyword">
+            </div>
+            <div class="form-group col col-lg-6">
+              <b> Liste des campagnes</b>
+            </div>
+          </div>
         </nb-card-header>
   
         <nb-card-body>
@@ -19,7 +26,7 @@
               </tr>
             </thead>
             <tbody style='background-color:white'>
-              <tr *ngFor="let g of listes;let i =index">
+              <tr *ngFor="let g of listes | filter:searchedKeyword | paginate:{ itemsPerPage:10,currentPage:p};let i =index">
                 <th scope='row'>{{i+1}}</th>
                 <td style="text-align: center;">{{g.titre}}</td>
                 <td style="text-align: center;">{{g.dateDeDebut | date:'dd-MM-yyyy'}}</td>
@@ -56,6 +63,7 @@
               </tr>
             <tbody>
           </table>
+          <pagination-controls (pageChange)="p= $event"></pagination-controls>
         </nb-card-body>
       </nb-card>
       <div class="modal modal-danger fade" id="changeetat" tabindex="-1" aria-labelledby="exampleModalLabel"

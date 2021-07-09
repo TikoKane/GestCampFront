@@ -15,10 +15,13 @@ import { TypeDeCampagnesService } from '../../../services/type-de-campagnes.serv
 @Component({
   selector: 'ngx-addcampagne',
   templateUrl: './addcampagne.component.html',
-  styleUrls: ['./addcampagne.component.scss']
+  styleUrls: ['./addcampagne.component.scss'],
+  
 })
 export class AddcampagneComponent implements OnInit {
 
+  dateExecutionCampagne = new Date;
+  dateExecutionFin = new Date;
   niveaudevisbilite: any;
   typecampagnes;
   niveaudevisibilites;
@@ -26,12 +29,14 @@ export class AddcampagneComponent implements OnInit {
   regledenvois;
   listeDiffusion;
   idListeDiffusion='';
+  idCanalEnvoi='';
   idModel='';
   modeles;
   libelleModele;
   libelleLDD;
   libelleNDV;
   libelleTDC;
+  libelleCDE;
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
 config: NbToastrConfig;
@@ -104,16 +109,6 @@ content = `Campagne ajoutée avec succès!`;
   }, (err) => {
     console.log(err);
   });
-
-  this.modelService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {
-    this.modeles = data;
-    console.log(this.modeles)
-  }, (err) => {
-    console.log(err);
-  });
-
-
-  
 }
 
 
@@ -150,20 +145,54 @@ onChangeTDC(deviceValue) {
   });
 }
 
+onChangeCDE(deviceValue) {
+  this.canalEnvoiService.getCanalEnvoi(deviceValue).subscribe((data) => {
+    this.libelleCDE = data['titre'];
+    this.modelService.getModeleByCanal(localStorage.getItem('idEntite'),data['id']).subscribe((data) => {
+      this.modeles = data;
+      console.log(this.modeles)
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+}
+
+onChangeDF(deviceValue) {
+
+}
+
 
 valider(){
   this.regleDenvoiService.AddRegleDEnvoi(this.regleEnvoi).subscribe((data) => {
     this.camp.IdRegleEnvoi=data['id'];
     this.campagneService.AddCampagne(this.camp).subscribe((data) => {
+
+      //Send SMS
+      if(this.idCanalEnvoi=='1'){
       this.campagneService.SendSms(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
         this.ToastValide(this.status,this.title,this.content);
         this.router.navigate(['/pages/campagne/list']);
       }, (err) => {
         console.log(err);
       });
+    }
+
+         //Send Email
+         if(this.idCanalEnvoi=='2'){
+          this.campagneService.SendSms(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
+            this.ToastValide(this.status,this.title,this.content);
+            this.router.navigate(['/pages/campagne/list']);
+          }, (err) => {
+            console.log(err);
+          });
+        }
+
     }, (err) => {
       console.log(err);
     });
+    
   }, (err) => {
     console.log(err);
   });

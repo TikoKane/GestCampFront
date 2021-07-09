@@ -20,7 +20,9 @@ export class ListutilisateurComponent implements OnInit{
   closeResult:string;
   tiko :any;
   roles: any;
-  idUser = localStorage.getItem("id")
+  idUser = localStorage.getItem("id");
+  searchedKeyword: string;
+  p:number=1;
 
   user: UpdateUser = {
     email: '',

@@ -37,6 +37,7 @@ export class ContactsService {
     return this.http.get<Contacts>(this.url + id);
   }
 
+
   EditContact(id, contact: Contacts): Observable<Contacts> {
     return this.http.put<Contacts>(this.url + 'put/' + id, contact);
   }

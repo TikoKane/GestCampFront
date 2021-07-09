@@ -27,6 +27,10 @@ export class ContactCanalsService {
     return this.http.get<ContactCanals>(this.url + id);
   }
 
+  getCanauxByContact(id): Observable<ContactCanals> {
+    return this.http.get<ContactCanals>(this.url + "canauxcontact/"+id);
+  }
+
   EditContactCanal(id, contactCanal: ContactCanals): Observable<ContactCanals> {
     return this.http.put<ContactCanals>(this.url + 'put/' + id, contactCanal);
   }

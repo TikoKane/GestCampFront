@@ -1,4 +1,4 @@
 export class TypeDeCampagnes {
-  Id: number;
+  idEntite: string;
   Libelle: string;
 }

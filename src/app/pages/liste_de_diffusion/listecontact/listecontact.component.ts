@@ -20,6 +20,8 @@ export class ListecontactComponent implements OnInit {
   donneesUser;
   contact;
   tiko :'1995-01-0555';
+  searchedKeyword: string;
+  p:number=1;
 
   
   

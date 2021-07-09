@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ContactsUpdate } from '../../../modele/contacts';
+import { ContactCanalsService } from '../../../services/contact-canals.service';
 import {  ContactsService } from '../../../services/contacts.service';
 import { UtilisateursService } from '../../../services/utilisateurs.service';
 
@@ -17,12 +17,15 @@ datacontact;
 closeResult:string;
 donneesUser;
 contact;
+canauxContact;
 tiko :'1995-01-0555';
+searchedKeyword: string;
+p:number=1;
 
 
 con : any;
   constructor(private contactService : ContactsService,
-    private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
+    private modalService: NgbModal,private contactCanalService : ContactCanalsService,private toastrService: NbToastrService) {
     }
     
     config: NbToastrConfig;
@@ -53,22 +56,16 @@ con : any;
     });
 
 }
-
-
-cont : ContactsUpdate={
-DateDeNaissance: ''
-}
 open(id) {
   this.contactService.getContact(id).subscribe((data) => {
     this.datacontact = data;
-    this.cont.DateDeNaissance = data['dateDeNaissance']
-    this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
 
   }, (err) => {
     console.log(err);
   });
-
-
+  this.contactCanalService.getCanauxByContact(id).subscribe((data) => {
+     this.canauxContact =data;
+     console.log(data);
   }, (err) => {
     console.log(err);
   });

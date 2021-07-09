@@ -44,6 +44,10 @@ contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
     });
   }
 
+  onChangeModel(deviceValue) {
+   console.log(deviceValue)
+  }
+
   model: Modeles = {
     Libelle: '',
     Contenu :'',
@@ -54,14 +58,15 @@ contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
     IdCanalEnvoi:'',
     IdEntite:localStorage.getItem('idEntite')
   };
-  Ajout(form :NgForm){
+  Ajout(form :NgForm){/*
     this.modeleService.AddModele(this.model).subscribe((data) => {
       this.ToastValide(this.status,this.title,this.content)
       this.router.navigate(['pages/modele/list']);
     }, (err) => {
       this.ToastValideDanger(this.statusDanger,this.titleDanger,this.contentDanger)
       console.log(err);
-    });
+    });*/
+    console.log(this.model.Contenu);
   }
 
 
