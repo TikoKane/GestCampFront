@@ -44,11 +44,12 @@
                   <span class="glyphicon glyphicon-search"></span><i class="fa fa-ban" aria-hidden="true"></i>
                   Inactif
                 </button></td>
-              <td style="text-align: center;"><button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal"
-                data-bs-target="#canaux"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; voir les canaux</button> </td>
+              <td style="text-align: center;"><button nbButton (click)="open(g.id)" status="success"
+                  data-bs-toggle="modal" data-bs-target="#canaux"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;
+                  voir les canaux</button> </td>
 
 
-              <td>
+              <td style="text-align: center;">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                   <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal"
                     data-bs-target="#delete"><i class="fa fa-trash" aria-hidden="true"></i> </button>&nbsp;
@@ -126,33 +127,113 @@
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <form #form="ngForm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Modification</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Modification du contact {{datacontact?.nom | uppercase}} {{datacontact?.prenom}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form #form="ngForm">
             <div class="modal-body">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="inputLastName" class="label">Date de naissanceeeeee</label>
-                    <input nbInput fullWidth name="tiko" [(ngModel)]="tiko"
-                      value="" type="date" min="2019-02-06"
-                      max="2020-03-05">
+                    <label for="inputLastName" class="label">Nom</label>
+                    <input nbInput fullWidth name="nom" [(ngModel)]="cont.Nom" value="{{datacontact?.nom}}" type="text"
+                      min="2" max="100">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Prenom</label>
+                    <input nbInput fullWidth name="prenom" [(ngModel)]="cont.Prenom" value="{{datacontact?.prenom}}"
+                      type="text" min="2" max="100">
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Date de naissanceeeeee</label>
+                    <input nbInput fullWidth name="dateDeNaissance" [(ngModel)]="tiko"
+                      value="{{cont.DateDeNaissance | date : 'yyyy-MM-dd'}}" type="date" min="2019-02-06"
+                      max="2020-03-05">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Adresse</label>
+                    <input nbInput fullWidth name="adresse" [(ngModel)]="cont.Adresse" value="{{datacontact?.adresse}}"
+                      type="text" min="2" max="100">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Sexe</label>
+                    <select class="form-control" id="sexe" [(ngModel)]="cont.Sexe" name="Sexe">
+                      <option value="" disabled selected>{{datacontact?.sexe}}</option>
+                      <option value="Homme">
+                        Homme
+                      </option>
+                      <option value="Femme">
+                        Femme
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Niveau de visibilté</label>
+                    <select class="form-control" name="NivVis" id="pays" [(ngModel)]="cont.IdNiveauVisibilite"
+                      name="IdNiveauVisibilite">
+                      <option *ngIf="cont.IdNiveauVisibilite==='1'" value="{{cont.IdNiveauVisibilite}}" disabled selected ngI>Public</option>
+                      <option *ngIf="cont.IdNiveauVisibilite==='2'" value="{{cont.IdNiveauVisibilite}}" disabled selected ngI>Privé</option>
+                      <option *ngIf="cont.IdNiveauVisibilite==='3'" value="{{cont.IdNiveauVisibilite}}" disabled selected ngI>Protégé</option>
+                      <option *ngFor="let data of ndv" [value]="data.id" [selected]="data.libelle == true">
+                        {{data.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Situation matrimoniale</label>
+                    <select class="form-control" id="sexe" [(ngModel)]="cont.Situation" name="Situation">
+                      <option value="" disabled selected>{{datacontact?.situation}}</option>
+                      <option value="Célibataire">
+                        Célibataire
+                      </option>
+                      <option value="Marié">
+                        Marié(e)
+                      </option>
+                      <option value="Veuve">
+                        Veuf(ve)
+                      </option>
+                      <option value="Divorcé">
+                        Divorcé(e)
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputLastName" class="label">Proféssion</label>
+                    <input nbInput fullWidth name="profession" [(ngModel)]="cont.Profession"
+                      value="{{datacontact?.profession}}" type="text" min="2" max="100">
+                  </div>
+                </div>
+              </div>
+              
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
-                  class="fas fa-undo"></i>&nbsp;Annuler</button>
-              <button type="button" class="btn btn-success" (click)="save(form)"><i
-                  class="fas fa-save"></i>&nbsp;Enregistrer</button>
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal"
+                (click)="editcontact(datacontact?.id,form)">Enregistrer</button>
             </div>
-          </div>
-        </form>
-
+          </form>
+        </div>
       </div>
     </div>
     <div class="modal fade" id="exampleMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,7 +277,7 @@
               {{datacontact?.prenom | uppercase}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body"  *ngFor="let g of canauxContact">
+          <div class="modal-body" *ngFor="let g of canauxContact">
             <b> {{g.canal}} :</b> {{g?.lienounumero}}<br>
           </div>
           <div class="modal-footer">

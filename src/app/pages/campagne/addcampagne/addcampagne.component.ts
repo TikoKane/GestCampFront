@@ -181,7 +181,7 @@ valider(){
 
          //Send Email
          if(this.idCanalEnvoi=='2'){
-          this.campagneService.SendSms(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
+          this.campagneService.SendEmail(this.camp,localStorage.getItem('idEntite'),this.idModel).subscribe((data) => {
             this.ToastValide(this.status,this.title,this.content);
             this.router.navigate(['/pages/campagne/list']);
           }, (err) => {

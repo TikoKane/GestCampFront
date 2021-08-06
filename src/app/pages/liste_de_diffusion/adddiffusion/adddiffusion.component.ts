@@ -49,7 +49,7 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   }
 
   ngOnInit(): void {
-    this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts=data;
      console.log(this.contacts)
     }, (err) => {
