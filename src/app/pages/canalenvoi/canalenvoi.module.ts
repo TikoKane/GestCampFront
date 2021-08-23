@@ -11,6 +11,8 @@ import { CanalenvoiRoutingModule,routedComponents} from './canalenvoi-routing.mo
 import { NewsService } from './news.service';
 import { AddcanalenvoiComponent } from './addcanalenvoi/addcanalenvoi.component';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/form
     Ng2SmartTableModule,
     NbIconModule,
     ngFormsModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     ...routedComponents,

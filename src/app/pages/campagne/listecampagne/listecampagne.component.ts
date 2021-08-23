@@ -15,9 +15,10 @@ export class ListecampagneComponent implements OnInit {
   dataliste: any;
   closeResult:string;
   thierno :any;
-
-  config: NbToastrConfig;
-
+  searchedKeyword: string;
+  p:number=1;
+  
+config: NbToastrConfig;
 index = 1;
 destroyByClick = true;
 duration = 2000;

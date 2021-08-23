@@ -19,12 +19,10 @@ export class PagesComponent implements OnInit{
   hiResponsable : boolean;
   
   ngOnInit(): void {
-  console.log(localStorage.getItem("idRole")) ;
     if (parseInt(localStorage.getItem("idRole"))==2) {
         this.hiEditeur =true;
     }
 
-    console.log(localStorage.getItem("idRole")) ;
     if (parseInt(localStorage.getItem("idRole"))==3) {
         this.hiResponsable =true;
     }
@@ -35,7 +33,7 @@ export class PagesComponent implements OnInit{
       icon: 'home-outline',
       link: '/pages/iot-dashboard',
       home: true,
-      hidden : this.hiEditeur
+      hidden : this.hiEditeur 
     },
     {
       title: 'Fonctionnalités',
@@ -92,7 +90,7 @@ export class PagesComponent implements OnInit{
     },
     {
       title: 'Modèle',
-      icon: 'message-circle-outline',
+      icon: 'clipboard-outline',
       link: '/pages/ui-features',
       children: [
         {
@@ -105,21 +103,21 @@ export class PagesComponent implements OnInit{
         },
       ],
     },
-   /* {
-      title: 'Règle d\'envoi',
-      icon: 'message-circle-outline',
+    {
+      title: 'Type de campagne',
+      icon: 'options-2-outline',
       link: '/pages/ui-features',
       children: [
         {
-          title: 'Créer une règle',
-          link: '/pages/regledenvoi/add',
+          title: 'Créer un type campagne',
+          link: '/pages/typecampagne/add',
         },
         {
-          title: 'Liste des règles',
-          link: '/pages/regledenvoi/list',
+          title: 'Liste des types de campagne',
+          link: '/pages/typecampagne/list',
         },
       ],
-    },*/
+    },
     {
       title: 'Campagne',
       icon: 'message-circle-outline',

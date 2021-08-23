@@ -13,6 +13,8 @@ import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AddcontactComponent } from './addcontact/addcontact.component';
 import { ImportcontactComponent } from './importcontact/importcontact.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ImportcontactComponent } from './importcontact/importcontact.component'
     Ng2SmartTableModule,
     NbIconModule,
     NbStepperModule,
-    ngFormsModule
+    ngFormsModule ,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     ...routedComponents,

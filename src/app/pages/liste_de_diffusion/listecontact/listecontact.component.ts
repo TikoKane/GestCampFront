@@ -3,9 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Console } from 'console';
 import { ContactsUpdate } from '../../../modele/contacts';
+import { ContactCanalsService } from '../../../services/contact-canals.service';
 import {  ContactsService } from '../../../services/contacts.service';
-import { UtilisateursService } from '../../../services/utilisateurs.service';
+import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 
 
 @Component({
@@ -20,60 +22,85 @@ export class ListecontactComponent implements OnInit {
   donneesUser;
   contact;
   tiko :'1995-01-0555';
-
+  searchedKeyword: string;
+  p:number=1;
+  ndv;
   
-  
+  canauxContact;
   con : any;
-    constructor(private  route:ActivatedRoute,private contactService : ContactsService,
-      private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
-      }
       
+      constructor(private  route:ActivatedRoute,private contactService : ContactsService,
+        private modalService: NgbModal,private niveauDeVisibliteService : NiveauDeVisibilitesService,private contactCanalService : ContactCanalsService,private toastrService: NbToastrService) {
+        }
   id = this.route.snapshot.params.id;
 
-      config: NbToastrConfig;
-      
-      index = 1;
-      destroyByClick = true;
-      duration = 2000;
-      hasIcon = true;
-      position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
-      preventDuplicates = false;
-      status: NbComponentStatus = 'success';
-      statusSupprim: NbComponentStatus = 'danger';
-      
-      titleSupprim = 'Supression d\'un contact !';
-      contentSupprim = `Contact supprimé avec suucès!`;
+  config: NbToastrConfig;
+    
+  index = 1;
+  destroyByClick = true;
+  duration = 2000;
+  hasIcon = true;
+  position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+  preventDuplicates = false;
+  status: NbComponentStatus = 'success';
+  statusSupprim: NbComponentStatus = 'danger';
   
-      title = 'Ajout d\'un nouveau contact !';
-      content = `Contact ajouté avec suucès!`;
-      
-      
+  titleSupprim = 'Supression d\'un contact !';
+  contentSupprim = `Contact supprimé avec suucès!`;
+
+  title = 'Modification d\'un nouveau contact !';
+  content = `Contact modifié avec suucès!`;
+  
+  
+  cont : ContactsUpdate={
+    Nom: '',
+    Prenom:'',
+    Etat: true,
+    Statut: true,
+    DateDeNaissance: '',
+    Sexe: '',
+    Adresse:'',
+    Situation: '',
+    Profession: '',
+    IdNiveauVisibilite: '',
+    IdUser : '',
+    Matricule:'',
+    IdEntite:localStorage.getItem('idEntite')
+  }
       
     ngOnInit() {
-      this.contactService.getAllContactByListeDiffusion(localStorage.getItem('id'),this.id).subscribe((data) => {
+      this.contactService.getAllContactByListeDiffusion(localStorage.getItem('idEntite'),this.id).subscribe((data) => {
         this.contacts = data;
         console.log(this.contacts)
       }, (err) => {
         console.log(err);
       });
-  
+      this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
+        this.ndv = data;
+        
+      }, (err) => {
+        console.log(err);
+      });
   }
   
-  
-  cont : ContactsUpdate={
-  DateDeNaissance: ''
-  }
   open(id) {
     this.contactService.getContact(id).subscribe((data) => {
       this.datacontact = data;
-      this.cont.DateDeNaissance = data['dateDeNaissance']
-      this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
-  
+      this.cont.Nom = data["nom"];
+      this.cont.Prenom = data["prenom"];
+      this.cont.DateDeNaissance = data["dateDeNaissance"];
+      this.cont.Sexe = data["sexe"];
+      this.cont.Adresse = data["adresse"];
+      this.cont.Situation = data["situation"];
+      this.cont.Profession = data["profession"];
+      this.cont.IdNiveauVisibilite = data["idNiveauVisibilite"];
+      this.cont.IdUser = data["idUser"];
+      this.cont.Matricule = data["matricule"];
     }, (err) => {
       console.log(err);
     });
-  
-  
+    this.contactCanalService.getCanauxByContact(id).subscribe((data) => {
+       this.canauxContact =data;
     }, (err) => {
       console.log(err);
     });
@@ -95,10 +122,10 @@ export class ListecontactComponent implements OnInit {
     }
   }
   
-  changestatut(id){
-    this.contactService.changerStatutUtilisateur(id).subscribe((data) => {
-       console.log(data)
-       this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
+  changestatut(IdContact){
+    console.log(IdContact)
+    this.contactService.changerStatutContactt(IdContact).subscribe((data) => {
+      this.contactService.getAllContactByListeDiffusion(localStorage.getItem('idEntite'),this.id).subscribe((data) => {
         this.contacts = data;
         console.log(this.contacts)
       }, (err) => {
@@ -141,10 +168,20 @@ export class ListecontactComponent implements OnInit {
       config);
   }
   
-  save(form :NgForm){
-  console.log(form)
-    console.log(this.con)
-  }
+
+editcontact(id, form: NgForm){
+  this.contactService.EditContact(id, this.cont).subscribe((data) => {
+    this.contactService.getAllContactByListeDiffusion(localStorage.getItem('idEntite'),this.id).subscribe((data) => {
+      this.contacts = data;
+      console.log(this.contacts)
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+
+}
   }
   
   

@@ -45,10 +45,11 @@ const routes: Routes = [{
         .then(m => m.ModeleModule),
     },
     {
-      path: 'regledenvoi',
-      loadChildren: () => import('./regledenvoi/regleenvoi.module')
-        .then(m => m.RegledenvoiModule),
+      path: 'typecampagne',
+      loadChildren: () => import('./typecampagne/typecampagne.module')
+        .then(m => m.TypeCampagneModule),
     },
+
     { path: '', redirectTo: 'utilisateur', pathMatch: 'full' },
     { path: '**', redirectTo: 'utilisateur' },
   ],

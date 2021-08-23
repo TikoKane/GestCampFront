@@ -13,6 +13,8 @@ import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/form
 import { ModeleRoutingModule, routedComponents } from './modele-routing.module';
 import { AddmodeleComponent } from './addmodele/addmodele.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CKEditorModule } from 'ng2-ckeditor';
     NbIconModule,
     ngFormsModule,
     CKEditorModule,
-    NbStepperModule
+    NbStepperModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     ...routedComponents,

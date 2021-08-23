@@ -12,6 +12,8 @@ import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AddutilisateurComponent } from './addutilisateur/addutilisateur.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -19,10 +21,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UtilisateurRoutingModule,
     ThemeModule,
     NbInputModule,
+    Ng2SearchPipeModule,
     NbCardModule,
     NbButtonModule,
     NbActionsModule,
     NbUserModule,
+    NgxPaginationModule,
     NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,

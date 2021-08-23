@@ -3,8 +3,9 @@ import { NgForm } from '@angular/forms';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsUpdate } from '../../../modele/contacts';
+import { ContactCanalsService } from '../../../services/contact-canals.service';
 import {  ContactsService } from '../../../services/contacts.service';
-import { UtilisateursService } from '../../../services/utilisateurs.service';
+import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 
 @Component({
   selector: 'ngx-listcontact',
@@ -17,12 +18,15 @@ datacontact;
 closeResult:string;
 donneesUser;
 contact;
+canauxContact;
 tiko :'1995-01-0555';
-
+searchedKeyword: string;
+p:number=1;
+ndv;
 
 con : any;
   constructor(private contactService : ContactsService,
-    private modalService: NgbModal,private utilisateurService : UtilisateursService,private toastrService: NbToastrService) {
+    private modalService: NgbModal,private niveauDeVisibliteService : NiveauDeVisibilitesService,private contactCanalService : ContactCanalsService,private toastrService: NbToastrService) {
     }
     
     config: NbToastrConfig;
@@ -39,10 +43,25 @@ con : any;
     titleSupprim = 'Supression d\'un contact !';
     contentSupprim = `Contact supprimé avec suucès!`;
 
-    title = 'Ajout d\'un nouveau contact !';
-    content = `Contact ajouté avec suucès!`;
+    title = 'Modification d\'un nouveau contact !';
+    content = `Contact modifié avec suucès!`;
     
     
+    cont : ContactsUpdate={
+      Nom: '',
+      Prenom:'',
+      Etat: true,
+      Statut: true,
+      DateDeNaissance: '',
+      Sexe: '',
+      Adresse:'',
+      Situation: '',
+      Profession: '',
+      IdNiveauVisibilite: '',
+      IdUser : '',
+      Matricule:'',
+      IdEntite:localStorage.getItem('idEntite')
+    }
     
   ngOnInit() {
     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
@@ -51,24 +70,32 @@ con : any;
     }, (err) => {
       console.log(err);
     });
-
-}
-
-
-cont : ContactsUpdate={
-DateDeNaissance: ''
+    this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
+      this.ndv = data;
+      
+    }, (err) => {
+      console.log(err);
+    });
 }
 open(id) {
   this.contactService.getContact(id).subscribe((data) => {
     this.datacontact = data;
-    this.cont.DateDeNaissance = data['dateDeNaissance']
-    this.utilisateurService.getUtilisateurById(this.datacontact.idUser).subscribe((data) => {
-
+    this.cont.Nom = data["nom"];
+    this.cont.Prenom = data["prenom"];
+    this.cont.DateDeNaissance = data["dateDeNaissance"];
+    this.cont.Sexe = data["sexe"];
+    this.cont.Adresse = data["adresse"];
+    this.cont.Situation = data["situation"];
+    this.cont.Profession = data["profession"];
+    this.cont.IdNiveauVisibilite = data["idNiveauVisibilite"];
+    this.cont.IdUser = data["idUser"];
+    this.cont.Matricule = data["matricule"];
   }, (err) => {
     console.log(err);
   });
-
-
+  this.contactCanalService.getCanauxByContact(id).subscribe((data) => {
+     this.canauxContact =data;
+     console.log(data);
   }, (err) => {
     console.log(err);
   });
@@ -91,9 +118,9 @@ private getDismissReason(reason: any): string {
 }
 
 changestatut(id){
-  this.contactService.changerStatutUtilisateur(id).subscribe((data) => {
+  this.contactService.changerStatutContactt(id).subscribe((data) => {
      console.log(data)
-     this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
       console.log(this.contacts)
     }, (err) => {
@@ -136,9 +163,36 @@ private ToastSuppression(type: NbComponentStatus, title: string, body: string) {
     config);
 }
 
-save(form :NgForm){
-console.log(form)
-  console.log(this.con)
+private ToastValide(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
+
+editcontact(id, form: NgForm){
+  this.contactService.EditContact(id, this.cont).subscribe((data) => {
+    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.contacts = data;
+      this.ToastValide(this.status, this.title, this.content);
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+
 }
 }
 

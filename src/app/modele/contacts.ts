@@ -17,8 +17,19 @@ export class Contacts {
 
 
 export class ContactsUpdate {
-  
+  Nom: string;
+  Prenom:string;
+  Etat: boolean;
+  Statut: boolean;
   DateDeNaissance: string;
+  Sexe: string;
+  Adresse:string
+  Situation: string;
+  Profession: string; 
+  IdNiveauVisibilite: string;
+  IdUser : string;
+  IdEntite:string;
+  Matricule:string;
 
 }
 

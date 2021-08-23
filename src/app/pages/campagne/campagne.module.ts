@@ -12,6 +12,8 @@ import { ContactRoutingModule, routedComponents} from './campagne-routing.module
 import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AddcampagneComponent } from './addcampagne/addcampagne.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { AddcampagneComponent } from './addcampagne/addcampagne.component';
     Ng2SmartTableModule,
     NbIconModule,
     ngFormsModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     ...routedComponents,

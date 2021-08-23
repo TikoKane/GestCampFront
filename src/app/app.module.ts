@@ -27,7 +27,6 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
 import { NgSelectModule } from '@ng-select/ng-select';
-
 export function tokenGetter (){
   return localStorage.getItem("token");
 }

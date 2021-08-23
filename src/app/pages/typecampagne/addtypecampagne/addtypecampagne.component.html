@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-lg-8" style="float:none;margin:auto;">
+      <nb-card>
+        <nb-card-header style="text-align: center;">Ajout d'un nouveau utilisateur</nb-card-header>
+        <nb-card-body>
+          <form #form="ngForm" (ngSubmit)="Ajout(form)">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="inputFirstName" class="label">Libelle</label>
+                  <input [(ngModel)]="user.Libelle" nbInput placeholder="Entrer le libelle " fullWidth #nameInput="ngModel"
+                    name="Libelle" type="text" required minlength="2" maxlength="50">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-sm-3 col-sm-9">
+                <br>
+                <button type="submit" nbButton status="success" style="float: right;"
+                  [disabled]="!form.valid"><i class="fas fa-save"></i>&nbsp; Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  
+  </div>

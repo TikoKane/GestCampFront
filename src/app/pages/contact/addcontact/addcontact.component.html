@@ -34,7 +34,7 @@
                                             <label for="inputLastName" class="label">Date de naissance</label>
                                             <input [(ngModel)]="contact.DateDeNaissance" nbInput
                                                 placeholder="02/05/2051" fullWidth #nameInput="ngModel" required
-                                                name="DateDeNaissance" type="date" max="{{maxdate | date:'2020-01-01'}}" min="{{mindate | date:'1900-01-01'}}">
+                                                name="DateDeNaissance" type="date" max="{{dateExecutionCampagne | date:'yyyy-MM-dd' }}" min="{{mindate | date:'1900-01-01'}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

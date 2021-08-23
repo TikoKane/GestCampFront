@@ -16,6 +16,8 @@ export class ListcanalenvoiComponent  {
   datacanal: any;
   closeResult:string;
   tiko :any;
+  searchedKeyword: string;
+p:number=1;
 
   constructor(private CanalEnvoisService: CanalEnvoisService,
               private router:Router,

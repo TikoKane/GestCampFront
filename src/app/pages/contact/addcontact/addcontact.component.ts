@@ -21,6 +21,8 @@ face = false;
 wha = false;
 mail = false;
 ndv;
+dateExecutionCampagne = new Date;
+
 
 
 firstForm: FormGroup;
@@ -86,6 +88,7 @@ maxdate = new Date;
 mindate = new Date;
 
 ngOnInit() {
+
   this.niveauDeVisibliteService.getAllNiveauDeVisibilite().subscribe((data) => {
     this.ndv = data;
     

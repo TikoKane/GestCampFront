@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label for="inputLastName" class="label">Canal Envoi</label>
                                 <select class="form-control" id="IdCanalEnvoi" [(ngModel)]="model.IdCanalEnvoi"
-                                    name="IdCanalEnvoi">
+                                    name="IdCanalEnvoi" (change)="onChangeModel($event.target.value)">
                                     <option value="" disabled selected>Veuillez choisir le canal</option>
                                     <option *ngFor="let ndvl of canal" [value]="ndvl.id">
                                         {{ndvl.titre}}
@@ -42,13 +42,13 @@
                     <br>
                     <br>
 
-                    <div class="row">
+                    <div class="row" *ngIf="model.IdCanalEnvoi=='2'">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="inputFirstName" class="label">Contenue du modèle</label>
                                 <nb-card>
                                     <nb-card-body>
-                                        <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"
+                                        <ckeditor [config]="{ extraPlugins: 'divarea', height: '220' }"
                                             [(ngModel)]="model.Contenu" name="Contenu" #nameInput="ngModel" required>
                                         </ckeditor>
                                     </nb-card-body>
@@ -56,11 +56,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" *ngIf="model.IdCanalEnvoi=='1'">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Contenue du modèle </label>
+                                <textarea [(ngModel)]="model.Contenu" name="Model" #nameInput="ngModel" nbInput
+                                    fullWidth placeholder="Entrer le contenu du modèle" required
+                                    minlength="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="offset-sm-3 col-sm-9">
                             <br>
                             <button type="submit" nbButton status="success" style="float: right;"
-                                [disabled]="!form.valid">Ajouter</button>
+                                [disabled]="!form.valid"><i class="fa fa-save"
+                                    aria-hidden="true"></i>&nbsp;Enregistrer</button>
                         </div>
                     </div>
                 </form>

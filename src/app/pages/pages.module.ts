@@ -9,7 +9,7 @@ import { PagesRoutingModule } from './pages-routing.module';
   imports: [
     PagesRoutingModule,
     ThemeModule,
-    NbMenuModule,
+    NbMenuModule
   ],
   declarations: [
     PagesComponent,

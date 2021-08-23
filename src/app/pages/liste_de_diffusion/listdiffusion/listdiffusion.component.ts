@@ -16,7 +16,9 @@ export class ListdiffusionComponent implements OnInit {
   listes: any;
   dataliste: any;
   closeResult:string;
-  thierno :any;
+  searchedKeyword: string;
+  p:number=1;
+  
 
 
   constructor(
