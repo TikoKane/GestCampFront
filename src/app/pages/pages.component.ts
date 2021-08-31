@@ -104,17 +104,17 @@ export class PagesComponent implements OnInit{
       ],
     },
     {
-      title: 'Type de campagne',
+      title: 'Catégorie',
       icon: 'options-2-outline',
       link: '/pages/ui-features',
       children: [
         {
-          title: 'Créer un type campagne',
-          link: '/pages/typecampagne/add',
+          title: 'Créer une catégorie',
+          link: '/pages/categorie/add',
         },
         {
-          title: 'Liste des types de campagne',
-          link: '/pages/typecampagne/list',
+          title: 'Liste des catégories',
+          link: '/pages/categorie/list',
         },
       ],
     },
@@ -128,6 +128,10 @@ export class PagesComponent implements OnInit{
           link: '/pages/campagne/add',
         },
         {
+          title: 'Créer une campagne unitaire',
+          link: '/pages/campagne/unitaire',
+        },
+        {
           title: 'Liste des campagne',
           link: '/pages/campagne/list',
         },
@@ -137,10 +141,10 @@ export class PagesComponent implements OnInit{
       title: 'Canal Envoie',
       icon: 'paper-plane-outline',
       children: [
-        {
+       /* {
           title: 'Ajouter un canal',
           link: '/pages/canalenvoi/add',
-        },
+        },*/
         {
           title: 'Liste des canaux',
           link: '/pages/canalenvoi/list',

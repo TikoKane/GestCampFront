@@ -7,6 +7,7 @@ import 'ckeditor';
 import { CanalEnvoisService } from '../../../services/canal-envois.service';
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-addmodele',
@@ -16,7 +17,7 @@ import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastr
 export class AddmodeleComponent implements OnInit {
 canal;
 config: NbToastrConfig;
-
+closeResult:string;
 index = 1;
 destroyByClick = true;
 duration = 2000;
@@ -34,7 +35,9 @@ statusDanger: NbComponentStatus = 'danger';
 titleDanger = 'Ajout d\'un nouveau modèle !';
 contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
 
-  constructor(private toastrService: NbToastrService,private router: Router,private modeleService : ModelesService, private canalEnvoiService : CanalEnvoisService) { }
+  constructor(private toastrService: NbToastrService,private router: Router
+    , private modalService: NgbModal, private canalEnvoiService : CanalEnvoisService, 
+    private modeleService : ModelesService) { }
 
   ngOnInit(): void {
     this.canalEnvoiService.getAllCanalEnvoi().subscribe((data) => {
@@ -48,6 +51,27 @@ contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
    console.log(deviceValue)
   }
 
+  open() {
+    
+    this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   model: Modeles = {
     Libelle: '',
     Contenu :'',
@@ -58,14 +82,14 @@ contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
     IdCanalEnvoi:'',
     IdEntite:localStorage.getItem('idEntite')
   };
-  Ajout(form :NgForm){/*
+  Ajout(form :NgForm){
     this.modeleService.AddModele(this.model).subscribe((data) => {
       this.ToastValide(this.status,this.title,this.content)
       this.router.navigate(['pages/modele/list']);
     }, (err) => {
       this.ToastValideDanger(this.statusDanger,this.titleDanger,this.contentDanger)
       console.log(err);
-    });*/
+    });
     console.log(this.model.Contenu);
   }
 

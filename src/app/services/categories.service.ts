@@ -19,8 +19,8 @@ export class CategoriesService {
     return this.http.post<Categories>(this.url + 'add', categorie);
   }
 
-  getAllCategorie(): Observable<Categories> {
-    return this.http.get<Categories>(this.url);
+  getAllCategorie(id): Observable<Categories> {
+    return this.http.get<Categories>(this.url+'all/'+id);
   }
 
   getCategorie(id): Observable<Categories> {

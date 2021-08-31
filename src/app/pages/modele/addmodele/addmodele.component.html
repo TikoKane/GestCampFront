@@ -29,7 +29,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="inputLastName" class="label">Canal Envoi</label>
-                                <select class="form-control" id="IdCanalEnvoi" [(ngModel)]="model.IdCanalEnvoi"
+                                <select class="form-control"  [(ngModel)]="model.IdCanalEnvoi"
                                     name="IdCanalEnvoi" (change)="onChangeModel($event.target.value)">
                                     <option value="" disabled selected>Veuillez choisir le canal</option>
                                     <option *ngFor="let ndvl of canal" [value]="ndvl.id">
@@ -41,7 +41,13 @@
                     </div>
                     <br>
                     <br>
-
+                    <div class="offset-sm-3 col-sm-9">
+                        <br>
+                        <button type="submit" nbButton status="success" style="float: right;" [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable" (click)="open()"><i class="fa fa-plus"
+                                aria-hidden="true" ></i>&nbsp;</button>
+                    </div>
+                    <br>
+                    <br>
                     <div class="row" *ngIf="model.IdCanalEnvoi=='2'">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -77,7 +83,33 @@
                 </form>
             </nb-card-body>
         </nb-card>
-
+        <div class="modal modal-danger fade" id="addVariable" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Ajout d'une variable</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">
+                <select name="pets" id="pet-select">
+                    <option value="">--Veuillez choisir une variable--</option>
+                    <option value="dog">Nom</option>
+                    <option value="cat">Prénom</option>
+                    <option value="hamster">Téléphone</option>
+                    <option value="parrot">Adresse</option>
+                    <option value="spider">Date de naissance</option>
+                </select>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" >Valider</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 </div>

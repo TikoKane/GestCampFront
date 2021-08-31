@@ -1,4 +1,4 @@
 export class Categories {
-  Id: number;
+  idEntite: string;
   Libelle: string;
 }

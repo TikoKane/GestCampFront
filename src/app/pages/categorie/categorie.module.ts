@@ -8,20 +8,19 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbStepperModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
-import { ContactRoutingModule, routedComponents} from './campagne-routing.module';
 import { NewsService } from './news.service';
 import { FormsModule as ngFormsModule,ReactiveFormsModule  } from '@angular/forms';
-import { AddcampagneComponent } from './addcampagne/addcampagne.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { CKEditorModule } from 'ng2-ckeditor';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { UnitairecampagneComponent } from './unitairecampagne/unitairecampagne.component';
+import { CategorieRoutingModule, routedComponents } from './categorie-routing.module';
+import { AddCategorieComponent } from './add-categorie/add-categorie.component';
 
 
 @NgModule({
   imports: [
-    NbStepperModule,
     ReactiveFormsModule,
-    ContactRoutingModule,
+    CategorieRoutingModule,
     ThemeModule,
     NbInputModule,
     NbCardModule,
@@ -36,16 +35,17 @@ import { UnitairecampagneComponent } from './unitairecampagne/unitairecampagne.c
     Ng2SmartTableModule,
     NbIconModule,
     ngFormsModule,
+    CKEditorModule,
+    NbStepperModule,
     NgxPaginationModule,
     Ng2SearchPipeModule
   ],
   declarations: [
     ...routedComponents,
-    AddcampagneComponent,
-    UnitairecampagneComponent,
+    AddCategorieComponent,
   ],
   providers: [
     NewsService,
   ],
 })
-export class CampagneModule { }
+export class CategorieModule { }

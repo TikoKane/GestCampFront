@@ -49,6 +49,11 @@ const routes: Routes = [{
       loadChildren: () => import('./typecampagne/typecampagne.module')
         .then(m => m.TypeCampagneModule),
     },
+    {
+      path: 'categorie',
+      loadChildren: () => import('./categorie/categorie.module')
+        .then(m => m.CategorieModule),
+    },
 
     { path: '', redirectTo: 'utilisateur', pathMatch: 'full' },
     { path: '**', redirectTo: 'utilisateur' },

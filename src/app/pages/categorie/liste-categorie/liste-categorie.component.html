@@ -9,10 +9,10 @@
               <input type="text" class="form-control" placeholder="Filtrer votre recherche" [(ngModel)]="searchedKeyword">
             </div>
             <div class="form-group col col-lg-6">
-              <b> Liste des types de campagne</b>
+              <b> Liste des categories</b>
             </div>
             <div class="form-group col-md-3">
-              <a routerLink="/pages/typecampagne/add"> <button type="submit" nbButton status="success" style="float: right;"><i class="fa fa-plus"
+              <a routerLink="/pages/categorie/add"> <button type="submit" nbButton status="success" style="float: right;"><i class="fa fa-plus"
                 aria-hidden="true" ></i>&nbsp;</button></a>
             </div>
           </div>
@@ -62,16 +62,16 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Suppression
-                utilisateur
+                d'une categorie
               </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <p class="text-center">
-                <strong>Vous voulez vraiment supprimer l'utilisateur {{datauser?.libelle }}</strong>
+                <strong>Vous voulez vraiment supprimer la categorie {{datauser?.libelle }}</strong>
               </p>
               <p>
-                Toutes les informations associées à ce profil utilisateur seront supprimées définitivement.
+                Toutes les informations associées à cette catégorie seront supprimées définitivement.
                 <span class="text-danger">Cette opération ne peut pas être annulée.</span>
               </p>
             </div>
@@ -90,7 +90,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations du contact {{datauser?.prenom | uppercase}}</h5>
+              <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations de la categorie {{datauser?.prenom | uppercase}}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

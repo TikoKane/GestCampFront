@@ -50,6 +50,12 @@ status: NbComponentStatus = 'success';
 title = 'Ajout d\'une nouvelle campagne !';
 content = `Campagne ajoutée avec succès!`;
 
+
+statusNoValide: NbComponentStatus = 'danger';
+
+titleNoValide = 'Ajout d\'un nouveau canal !';
+contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
+
   constructor(private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
     private regleDenvoiService : RegleDEnvoisService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
   camp : Campagnes = {
@@ -148,7 +154,6 @@ onChangeCDE(deviceValue) {
     this.libelleCDE = data['titre'];
     this.modelService.getModeleByCanal(localStorage.getItem('idEntite'),data['id']).subscribe((data) => {
       this.modeles = data;
-      console.log(this.modeles)
     }, (err) => {
       console.log(err);
     });
@@ -183,6 +188,7 @@ valider(){
             this.ToastValide(this.status,this.title,this.content);
             this.router.navigate(['/pages/campagne/list']);
           }, (err) => {
+            this.ToastValideNoValide(this.statusNoValide,this.titleNoValide,this.contentNoValide);
             console.log(err);
           });
         }
@@ -211,6 +217,24 @@ valider(){
     };
     const titleContent = title ? `${title}` : '';
 
+    this.index += 1;
+    this.toastrService.show(
+      body,
+      `${titleContent}`,
+      config);
+  }
+
+  private ToastValideNoValide(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: this.destroyByClick,
+      duration: this.duration,
+      hasIcon: this.hasIcon,
+      position: this.position,
+      preventDuplicates: this.preventDuplicates,
+    };
+    const titleContent = title ? `${title}` : '';
+  
     this.index += 1;
     this.toastrService.show(
       body,

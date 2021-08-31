@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup }   from '@angular/forms';
-
-import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../../@core/data/smart-table';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.service";
-import { ListeDeDiffusions } from "../../../modele/liste-de-diffusions";
 @Component({
   selector: 'ngx-listdiffusion',
   templateUrl: './listdiffusion.component.html',
