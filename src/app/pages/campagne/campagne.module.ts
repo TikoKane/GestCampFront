@@ -15,7 +15,7 @@ import { AddcampagneComponent } from './addcampagne/addcampagne.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UnitairecampagneComponent } from './unitairecampagne/unitairecampagne.component';
-
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   imports: [
@@ -28,6 +28,7 @@ import { UnitairecampagneComponent } from './unitairecampagne/unitairecampagne.c
     NbButtonModule,
     NbActionsModule,
     NbUserModule,
+    CKEditorModule,
     NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,

@@ -13,4 +13,5 @@ export class Campagnes {
   IdTypeCampagne: string;
   IdEntite: string;
   IdCanalEnvoi: string;
+  Contenu : string;
 }

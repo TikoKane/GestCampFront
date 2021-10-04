@@ -10,6 +10,9 @@ import { ModelesService } from '../../../services/modeles.service';
 import { NiveauDeVisibilitesService } from '../../../services/niveau-de-visibilites.service';
 import { RegleDEnvoisService } from '../../../services/regle-denvois.service';
 import { TypeDeCampagnesService } from '../../../services/type-de-campagnes.service';
+import './ckeditor.loader';
+import 'ckeditor';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-addcampagne',
@@ -38,6 +41,7 @@ export class AddcampagneComponent implements OnInit {
   libelleCDE;
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
+  closeResult:string;
 config: NbToastrConfig;
 index = 1;
 destroyByClick = true;
@@ -56,7 +60,7 @@ statusNoValide: NbComponentStatus = 'danger';
 titleNoValide = 'Ajout d\'un nouveau canal !';
 contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
 
-  constructor(private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
+  constructor(private modalService: NgbModal,private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
     private regleDenvoiService : RegleDEnvoisService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
   camp : Campagnes = {
     Code :'Codeeeee',
@@ -72,7 +76,9 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
     IdRegleEnvoi:'',
     IdTypeCampagne:'',
     IdUtilisateur:localStorage.getItem('id'),
-    Titre:''
+    Titre:'',
+  Contenu : ''
+
   }
 
   regleEnvoi: RegleDEnvois = {
@@ -240,6 +246,27 @@ valider(){
       body,
       `${titleContent}`,
       config);
+  }
+
+  open() {
+    
+    this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
 
