@@ -4,7 +4,7 @@ import { AddcampagneComponent } from './addcampagne/addcampagne.component';
 import { CampagneComponent } from './campagne.component';
 
 import { ListecampagneComponent } from './listecampagne/listecampagne.component';
-import { UnitairecampagneComponent } from './unitairecampagne/unitairecampagne.component';
+
 
 
 const routes: Routes = [{
@@ -18,10 +18,6 @@ const routes: Routes = [{
     {
       path: 'add',
       component: AddcampagneComponent,
-    },
-    {
-      path: 'unitaire',
-      component: UnitairecampagneComponent,
     },/*
     {
       path: 'accordion',

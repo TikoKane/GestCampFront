@@ -11,6 +11,7 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ChartsModule } from 'ng2-charts';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -35,6 +36,7 @@ export function tokenGetter (){
 @NgModule({
   declarations: [AppComponent, LoginComponent, ChangerpasswordComponent],
   imports: [
+    ChartsModule,
     BrowserModule,
     NgSelectModule,
     BrowserAnimationsModule,

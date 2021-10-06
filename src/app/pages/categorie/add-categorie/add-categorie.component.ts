@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categories } from '../../../modele/categories';
 import { CategoriesService } from '../../../services/categories.service';
 
@@ -14,7 +15,8 @@ export class AddCategorieComponent implements OnInit {
 
   
   constructor(private CategorieService: CategoriesService,
-    private router:Router,private toastrService: NbToastrService) {
+    private router:Router,private toastrService: NbToastrService,
+    private modalService: NgbModal) {
 }
 
 config: NbToastrConfig;
@@ -30,11 +32,23 @@ status: NbComponentStatus = 'success';
 title = 'Ajout d\'un nouveau type de campagne !';
 content = `Type de campagne ajouté avec suucès!`;
 
+users: any;
+datauser: any;
+closeResult:string;
+tiko :any;
+roles: any;
+idUser = localStorage.getItem("id");
+searchedKeyword: string;
+p:number=1;
 
 
 
 ngOnInit() {
-
+  this.CategorieService.getAllCategorie(localStorage.getItem('idEntite')).subscribe((data) => {
+    this.users = data;
+  }, (err) => {
+    console.log(err);
+  });
 }
 
 
@@ -75,4 +89,58 @@ body,
 `${titleContent}`,
 config);
 }
-}
+
+
+open(id) {
+  this.CategorieService.getCategorie(id).subscribe((data) => {
+    this.datauser = data;
+    this.user.Libelle=data['libelle'];
+  }, (err) => {
+    console.log(err);
+  });
+  this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+    
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+  }
+  
+  private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return `with: ${reason}`;
+  }
+  }
+  
+  
+  supprimeruser(id){
+  this.CategorieService.DeleteCategorie(id).subscribe((data1) => {
+     this.CategorieService.getAllCategorie(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.users = data;
+    }, (err) => {
+      console.log(err);
+    });
+  }, (err) => {
+    console.log(err);
+  });
+  }
+  
+  saveModification(id,form :NgForm){
+    
+    this.CategorieService.EditCategorie(id,this.user).subscribe((data1) => {
+      console.log(data1)
+      this.CategorieService.getAllCategorie(localStorage.getItem('idEntite')).subscribe((data) => {
+       this.users = data;
+     }, (err) => {
+       console.log(err);
+     });
+   }, (err) => {
+     console.log(err);
+   });
+  }
+  
+  }

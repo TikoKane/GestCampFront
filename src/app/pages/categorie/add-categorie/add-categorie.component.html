@@ -1,8 +1,12 @@
-<div class="row">
-    <div class="col-lg-8" style="float:none;margin:auto;">
-      <nb-card>
-        <nb-card-header style="text-align: center;">Ajout d'une nouvelle catégorie</nb-card-header>
-        <nb-card-body>
+<div class="col-12">
+  <nb-card>
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="Campagne avec liste de diffusion">
+        <br>
+        <br>
+        <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+          <nb-card-body>
+     
           <form #form="ngForm" (ngSubmit)="Ajout(form)">
             <div class="row">
               <div class="col-sm-12">
@@ -22,7 +26,141 @@
             </div>
           </form>
         </nb-card-body>
-      </nb-card>
+          </nb-card>
+    </nb-tab> 
+
+  <nb-tab tabTitle="Campagne avec liste de diffusion">
+    <nb-card>
+       
+      <nb-card-header style="text-align: center;">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <input type="text" class="form-control" placeholder="Filtrer votre recherche" [(ngModel)]="searchedKeyword">
+          </div>
+          <div class="form-group col col-lg-6">
+            <b> Liste des categories</b>
+          </div>
+         
+        </div>
+      </nb-card-header>
+    
+      <nb-card-body>
+        <table class='table table-bordered'>
+          <thead style='background-color: #2d8ac7'>
+            <tr>
+              <th>#</th>
+              <th style="text-align: center;">Libelle</th>
+              <th style="text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody style='background-color:white'>
+            <tr *ngFor="let g of users | filter:searchedKeyword | paginate:{ itemsPerPage:10,currentPage:p};let i =index" >
+              <th scope='row'>{{i+1}}</th>
+              <td style="text-align: center;" >{{g.libelle}}</td>
+              
+              <td style="text-align: center;">
+                <div class="btn-group mr-2" role="group" aria-label="First group" >
+                  <button (click)="open(g.id)" nbButton status="danger" data-bs-toggle="modal"
+                    data-bs-target="#delete"><i class="fa fa-trash" aria-hidden="true"></i> </button>
+                </div>
+
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                  <button nbButton (click)="open(g.id)" status="warning" data-bs-toggle="modal"
+                    data-bs-target="#edit"><i class="fa fa-edit" aria-hidden="true"></i> </button>
+                </div>
+
+                <div class="btn-group mr-2" role="group" aria-label="Third group">
+                  <button nbButton (click)="open(g.id)" status="success" data-bs-toggle="modal"
+                    data-bs-target="#detail"><i class="fa fa-eye" aria-hidden="true"></i> </button>
+                </div>
+              </td>
+            
+            </tr>
+          <tbody>
+        </table>
+        <pagination-controls (pageChange)="p= $event"></pagination-controls>
+      </nb-card-body>
+    </nb-card>
+
+    <div class="modal modal-danger fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Suppression
+              d'une categorie
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">
+              <strong>Vous voulez vraiment supprimer la categorie {{datauser?.libelle }}</strong>
+            </p>
+            <p>
+              Toutes les informations associées à cette catégorie seront supprimées définitivement.
+              <span class="text-danger">Cette opération ne peut pas être annulée.</span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+              (click)="supprimeruser(datauser?.id)"><i class="fas fa-trash"></i>&nbsp;Ok, Supprimer</button>
+          </div>
+        </div>
+      </div>
     </div>
-  
-  </div>
+
+
+    <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Informations de la categorie {{datauser?.prenom | uppercase}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+        
+          <b> Libelle :</b>  {{datauser?.libelle }}<br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fas fa-undo"></i>&nbsp;Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form #form="ngForm">
+          <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label">Libelle</label>
+                    <input  nbInput fullWidth  [(ngModel)]="user.Libelle"  #nameInput="ngModel"
+                      name="nom" type="text" required minlength="2" maxlength="50" value="{{datauser?.libelle}}">
+                  </div>
+                </div>
+              </div>
+          </div> 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                class="fas fa-undo"></i>&nbsp;Annuler</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="saveModification(datauser?.id,form)"><i class="fas fa-save" ></i>&nbsp;Enregistrer</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nb-tab>
+    </nb-tabset>
+  </nb-card>
+</div>

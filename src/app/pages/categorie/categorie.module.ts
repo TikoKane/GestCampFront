@@ -5,7 +5,8 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
-  NbStepperModule, } from '@nebular/theme';
+  NbStepperModule,
+  NbTabsetModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { NewsService } from './news.service';
@@ -28,6 +29,7 @@ import { AddCategorieComponent } from './add-categorie/add-categorie.component';
     NbActionsModule,
     NbUserModule,
     NbCheckboxModule,
+    NbTabsetModule,
     NbRadioModule,
     NbDatepickerModule,
     NbSelectModule,

@@ -54,9 +54,14 @@ const routes: Routes = [{
       loadChildren: () => import('./categorie/categorie.module')
         .then(m => m.CategorieModule),
     },
+    {
+      path: 'accueil',
+      loadChildren: () => import('./accueil/charts.module')
+        .then(m => m.ChartsModule),
+    },
 
-    { path: '', redirectTo: 'utilisateur', pathMatch: 'full' },
-    { path: '**', redirectTo: 'utilisateur' },
+    { path: '', redirectTo: 'accueil/d3', pathMatch: 'full' },
+    { path: '**', redirectTo: 'accueil/d3' },
   ],
 }];
 

@@ -13,6 +13,7 @@ import { TypeDeCampagnesService } from '../../../services/type-de-campagnes.serv
 import './ckeditor.loader';
 import 'ckeditor';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContactsService } from '../../../services/contacts.service';
 
 @Component({
   selector: 'ngx-addcampagne',
@@ -22,6 +23,17 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddcampagneComponent implements OnInit {
 
+  tabs: any[] = [
+    {
+      title: 'Route tab #1',
+      route: '/pages/campagne/unitaire',
+    },
+    {
+      title: 'Route tab #2',
+      route: '/pages/campagne/unitaire',
+    },
+  ];
+
   dateExecutionCampagne = new Date;
   dateExecutionFin = new Date;
   niveaudevisbilite: any;
@@ -29,6 +41,7 @@ export class AddcampagneComponent implements OnInit {
   niveaudevisibilites;
   canalenvois;
   regledenvois;
+  contacts;
   listeDiffusion;
   idListeDiffusion='';
   idCanalEnvoi='';
@@ -39,6 +52,7 @@ export class AddcampagneComponent implements OnInit {
   libelleNDV;
   libelleTDC;
   libelleCDE;
+  campUni='';
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
   closeResult:string;
@@ -61,7 +75,7 @@ titleNoValide = 'Ajout d\'un nouveau canal !';
 contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
 
   constructor(private modalService: NgbModal,private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
-    private regleDenvoiService : RegleDEnvoisService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
+    private regleDenvoiService : RegleDEnvoisService, private contactService : ContactsService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
   camp : Campagnes = {
     Code :'Codeeeee',
     DateDeDebut:'',
@@ -99,6 +113,14 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
       console.log(err);
     });
 
+    
+
+    this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.contacts = data;
+      console.log(this.contacts)
+    }, (err) => {
+      console.log(err);
+    });
 
     this.canalEnvoiService.getAllCanalEnvoi().subscribe((data) => {
       this.canalenvois = data;
@@ -268,5 +290,7 @@ valider(){
       return `with: ${reason}`;
     }
   }
+
+  
 }
 
