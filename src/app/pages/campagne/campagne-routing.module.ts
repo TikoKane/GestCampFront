@@ -6,7 +6,6 @@ import { CampagneComponent } from './campagne.component';
 import { ListecampagneComponent } from './listecampagne/listecampagne.component';
 
 
-
 const routes: Routes = [{
   path: '',
   component: CampagneComponent,

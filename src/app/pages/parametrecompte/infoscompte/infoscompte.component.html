@@ -1,1 +1,21 @@
-<p>infoscompte works!</p>
+
+<div class="row">
+    <div class="col-md-8" style="float: none; margin: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Informations du compte: {{users?.prenom | uppercase}}</h5>
+            </div>
+            <div class="modal-body">
+                <b> Nom :</b>  {{users?.nom | uppercase}}<br>
+                <b> Login :</b>  {{users?.login }}<br>
+                <b> Email :</b>  {{users?.email}}<br>
+                <b> Téléphone :</b>  {{users?.telephone}}<br>
+                <b *ngIf="users?.idRole===1"> Role :</b> <span *ngIf="users?.idRole===1"> Administratateur <br> </span> 
+                <b *ngIf="users?.idRole===2"> Role :</b> <span *ngIf="users?.idRole===2"> Editeur <br> </span>  
+                <b *ngIf="users?.idRole===3"> Role :</b> <span *ngIf="users?.idRole===3"> Responsable campagne <br> </span>  
+                <b *ngIf="users?.statut===true"> Statut :</b> <span *ngIf="users?.statut===true" style="color: green;">  ACTIF</span>
+                <b *ngIf="users?.statut===false"> Statut :</b>  <span *ngIf="users?.statut===false" style="color: red;"> INACTIF</span>
+            </div>
+        </div>
+    </div>
+</div>

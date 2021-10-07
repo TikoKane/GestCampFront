@@ -1,32 +1,23 @@
-<div class="row">
-    <div class="col-lg-6" style="float:none;margin:auto;">
-      <nb-card>
-        <nb-card-header style="text-align: center;">
-          <b> Changement de mot de passe</b>
-        </nb-card-header>
-  
-        <nb-card-body>
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-    <div class="container-fluid">
-        <div *ngIf="invalidLogin" class="alert alert-danger">Login ou mot de passe invalide</div>
-        <br>
-        <label for="login" class="sr-only">Ancien mot de passe</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Ancien mot de passe" required>
-        <br>
-        <label for="password" class="sr-only">Nouveau mot de passe</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Nouveau mot de passe" required>
-        <br>
-        <label for="password" class="sr-only">Confirmation de mot de passe</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Confirmation nouveau mot de passe" required>
-        <br>
-        <br>
-        <div style="text-align: center;">
-        <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit" status="danger" >Se connecter</button>
-        </div>
-    </div>
+<div class="col-md-8" style="float: none; margin: auto;">
+    <form class="form-signin" #loginForm="ngForm">
+        <div class="container-fluid">
+            <h2 class="form-signin-heading" style="text-align: center;">Changer le mot de passe</h2>
+            <br>
+            <div *ngIf="invalidLogin" class="alert alert-danger">Mot de passe invalide</div>
+            <br>
+            <label for="password" class="sr-only">Ancien mot de passe </label>
+            <input type="password" id="amp" name="amp"  class="form-control" ngModel  placeholder="Ancien mot de passe" required>
 
-</form>
-        </nb-card-body>
-      </nb-card>
-    </div>
+            <br>
+            <label for="login" class="sr-only">Nouveau mot de passe</label>
+            <input type="password" id="nmp" name="nmp"  class="form-control" ngModel  placeholder="Nouveau mot de passe" required>
+            <br>
+
+            <label for="password" class="sr-only">Confirmation mot de passe</label>
+            <input type="password" id="cnmp" name="cnmp"  class="form-control"  placeholder="Confirmation mot de passe" ngModel required>
+            <br>
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="ChangerMotDepasse(loginForm)"> Sauvegarder </button>
+        </div>
+    </form>
 </div>

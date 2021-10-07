@@ -19,12 +19,17 @@ export class ModelesService {
     return this.http.post<Modeles>(this.url + 'add', modele);
   }
 
+<<<<<<< HEAD
   getAllModele(id): Observable<Modeles> {
     return this.http.get<Modeles>(this.url+'all/'+id);
   }
 
   getModeleByCanal(id,idCanal): Observable<Modeles> {
     return this.http.get<Modeles>(this.url+'all/'+id+'/'+idCanal);
+=======
+  getAllModele(): Observable<Modeles> {
+    return this.http.get<Modeles>(this.url);
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
   }
 
   getModele(id): Observable<Modeles> {
@@ -38,9 +43,12 @@ export class ModelesService {
   DeleteModele(id): Observable<Modeles> {
     return this.http.delete<Modeles>(this.url + 'delete/' + id);
   }
+<<<<<<< HEAD
 
   
   changeEtatModele(id): Observable<Modeles> {
     return this.http.get<Modeles>(this.url + 'changeEtat/' + id);
   }
+=======
+>>>>>>> 883326b75956340257501077c3438bd45baad99d
 }

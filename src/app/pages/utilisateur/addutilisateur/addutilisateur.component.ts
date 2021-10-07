@@ -87,7 +87,6 @@ roles: any;
       preventDuplicates: this.preventDuplicates,
     };
     const titleContent = title ? `${title}` : '';
-
     this.index += 1;
     this.toastrService.show(
       body,
