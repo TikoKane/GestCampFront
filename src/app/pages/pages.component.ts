@@ -115,10 +115,6 @@ export class PagesComponent implements OnInit{
           link: '/pages/campagne/add',
         },
         {
-          title: 'Créer une campagne unitaire',
-          link: '/pages/campagne/unitaire',
-        },
-        {
           title: 'Liste des campagne',
           link: '/pages/campagne/list',
         },

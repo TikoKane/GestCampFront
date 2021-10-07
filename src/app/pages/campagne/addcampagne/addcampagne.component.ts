@@ -45,7 +45,9 @@ export class AddcampagneComponent implements OnInit {
   listeDiffusion;
   idListeDiffusion='';
   idCanalEnvoi='';
+  idCanalEnvoiUni='';
   idModel='';
+  idModelUni='';
   modeles;
   libelleModele;
   libelleLDD;
@@ -95,7 +97,37 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
 
   }
 
+  campUnitaire : Campagnes = {
+    Code :'Codeeeee',
+    DateDeDebut:'',
+    DateDeFin:'',
+    Description:'',
+    Etat : true,
+    Statut : true,
+    Id:0,
+    IdCanalEnvoi:'',
+    IdEntite:localStorage.getItem('idEntite'),
+    IdNiveauVisibilite:'',
+    IdRegleEnvoi:'',
+    IdTypeCampagne:'',
+    IdUtilisateur:localStorage.getItem('id'),
+    Titre:'',
+  Contenu : ''
+
+  }
+
   regleEnvoi: RegleDEnvois = {
+    DateExecution: new Date(),
+    Expediteur: '',
+    Frequence: null,
+    Id: 0,
+    FuseauHoraire: '',
+    NombreTentative: null,
+    Recepteur: '',
+    IdEntite: localStorage.getItem('idEntite'),
+  }
+
+  regleEnvoiUni: RegleDEnvois = {
     DateExecution: new Date(),
     Expediteur: '',
     Frequence: null,
@@ -196,6 +228,7 @@ onChangeDF(deviceValue) {
 
 
 valider(){
+  this.camp.IdTypeCampagne='1';
   this.regleDenvoiService.AddRegleDEnvoi(this.regleEnvoi).subscribe((data) => {
     this.camp.IdRegleEnvoi=data['id'];
     this.campagneService.AddCampagne(this.camp).subscribe((data) => {
@@ -232,6 +265,42 @@ valider(){
 }
 
   
+validerUnitaire(){
+  this.campUnitaire.IdTypeCampagne='2';
+  this.regleDenvoiService.AddRegleDEnvoi(this.regleEnvoiUni).subscribe((data) => {
+    this.campUnitaire.IdRegleEnvoi=data['id'];
+    this.campagneService.AddCampagne(this.campUnitaire).subscribe((data) => {
+
+      //Send SMS
+      if(this.idCanalEnvoi=='1'){
+      this.campagneService.SendSms(this.campUnitaire,localStorage.getItem('idEntite'),this.idModelUni).subscribe((data) => {
+        this.ToastValide(this.status,this.title,this.content);
+        this.router.navigate(['/pages/campagne/list']);
+      }, (err) => {
+        console.log(err);
+      });
+    }
+
+         //Send Email
+         if(this.idCanalEnvoi=='2'){
+          this.campagneService.SendEmail(this.campUnitaire,localStorage.getItem('idEntite'),this.idModelUni).subscribe((data) => {
+            this.ToastValide(this.status,this.title,this.content);
+            this.router.navigate(['/pages/campagne/list']);
+          }, (err) => {
+            this.ToastValideNoValide(this.statusNoValide,this.titleNoValide,this.contentNoValide);
+            console.log(err);
+          });
+        }
+
+    }, (err) => {
+      console.log(err);
+    });
+    
+  }, (err) => {
+    console.log(err);
+  });
+  
+}
 
 
   private ToastValide(type: NbComponentStatus, title: string, body: string) {
