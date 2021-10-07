@@ -4,7 +4,8 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbDatepickerModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule, } from '@nebular/theme';
+  NbUserModule,
+  NbTabsetModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ParametrecompteRoutingModule, routedComponents,} from './parametrcompte-routing.module';
@@ -15,6 +16,7 @@ import { ModifiercompteComponent } from './modifiercompte/modifiercompte.compone
 
 @NgModule({
   imports: [
+    NbTabsetModule,
     ReactiveFormsModule,
     ParametrecompteRoutingModule,
     ThemeModule,

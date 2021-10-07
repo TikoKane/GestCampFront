@@ -57,7 +57,6 @@ export class PagesComponent implements OnInit{
     {
       title: 'Contact',
       icon: 'people-outline',
-      link: '/pages/ui-features',
       children: [
         {
           title: 'Ajouter un contact',
@@ -76,7 +75,6 @@ export class PagesComponent implements OnInit{
     {
       title: 'Liste de diffusion',
       icon: 'file-text-outline',
-      link: '/pages/ui-features',
       children: [
         {
           title: 'Créer une liste de diffusion',
@@ -91,7 +89,6 @@ export class PagesComponent implements OnInit{
     {
       title: 'Modèle',
       icon: 'clipboard-outline',
-      link: '/pages/ui-features',
       children: [
         {
           title: 'Créer un modèle',
@@ -106,17 +103,7 @@ export class PagesComponent implements OnInit{
     {
       title: 'Catégorie',
       icon: 'options-2-outline',
-      link: '/pages/ui-features',
-      children: [
-        {
-          title: 'Créer une catégorie',
-          link: '/pages/categorie/add',
-        },
-        {
-          title: 'Liste des catégories',
-          link: '/pages/categorie/list',
-        },
-      ],
+      link: '/pages/categorie/add',
     },
     {
       title: 'Campagne',
@@ -154,16 +141,7 @@ export class PagesComponent implements OnInit{
     {
       title: 'Paramètre du compte',
       icon: 'settings-2-outline',
-      children: [
-        {
-          title: 'Infos du compte',
-          link: '/pages/compte/infos',
-        },
-        {
-          title: 'Changer mot de passe',
-          link: '/pages/compte/mod',
-        },
-      ],
+      link: '/pages/compte/infos',
     },]
   }
 

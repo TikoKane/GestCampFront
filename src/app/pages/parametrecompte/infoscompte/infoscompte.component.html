@@ -1,21 +1,67 @@
-
-<div class="row">
-    <div class="col-md-8" style="float: none; margin: auto;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Informations du compte: {{users?.prenom | uppercase}}</h5>
-            </div>
-            <div class="modal-body">
-                <b> Nom :</b>  {{users?.nom | uppercase}}<br>
-                <b> Login :</b>  {{users?.login }}<br>
-                <b> Email :</b>  {{users?.email}}<br>
-                <b> Téléphone :</b>  {{users?.telephone}}<br>
-                <b *ngIf="users?.idRole===1"> Role :</b> <span *ngIf="users?.idRole===1"> Administratateur <br> </span> 
-                <b *ngIf="users?.idRole===2"> Role :</b> <span *ngIf="users?.idRole===2"> Editeur <br> </span>  
-                <b *ngIf="users?.idRole===3"> Role :</b> <span *ngIf="users?.idRole===3"> Responsable campagne <br> </span>  
-                <b *ngIf="users?.statut===true"> Statut :</b> <span *ngIf="users?.statut===true" style="color: green;">  ACTIF</span>
-                <b *ngIf="users?.statut===false"> Statut :</b>  <span *ngIf="users?.statut===false" style="color: red;"> INACTIF</span>
-            </div>
+<div class="col-12">
+    <nb-card>
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Infos compte">
+          <br>
+          <br>
+          <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+            <nb-card-body>
+       
+                <div class="col-md-8" style="float: none; margin: auto;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Informations du compte: {{infuser?.prenom | uppercase}}</h5>
+                        </div>
+                        <div class="modal-body">
+                            <b> Nom :</b>  {{infuser?.nom | uppercase}}<br>
+                            <b> Login :</b>  {{infuser?.login }}<br>
+                            <b> Email :</b>  {{infuser?.email}}<br>
+                            <b> Téléphone :</b>  {{infuser?.telephone}}<br>
+                            <b *ngIf="infuser?.idRole===1"> Role :</b> <span *ngIf="infuser?.idRole===1"> Administratateur <br> </span> 
+                            <b *ngIf="infuser?.idRole===2"> Role :</b> <span *ngIf="infuser?.idRole===2"> Editeur <br> </span>  
+                            <b *ngIf="infuser?.idRole===3"> Role :</b> <span *ngIf="infuser?.idRole===3"> Responsable campagne <br> </span>  
+                            <b *ngIf="infuser?.statut===true"> Statut :</b> <span *ngIf="infuser?.statut===true" style="color: green;">  ACTIF</span>
+                            <b *ngIf="infuser?.statut===false"> Statut :</b>  <span *ngIf="infuser?.statut===false" style="color: red;"> INACTIF</span>
+                        </div>
+                    </div>
+                </div>
+          </nb-card-body>
+            </nb-card>
+      </nb-tab> 
+  
+      <nb-tab tabTitle="Changement de mot de passe">
+      <nb-card>
+         
+        <div class="col-md-8" style="float: none; margin: auto;">
+            <form class="form-signin" #loginForm="ngForm">
+                <div class="container-fluid">
+                    <h5 class="form-signin-heading" style="text-align: center;">Formulaire de changement de mot de passe</h5>
+                    <br>
+                    <div *ngIf="invalidLogin" class="alert alert-danger">Mot de passe invalide</div>
+                    <br>
+                    <label for="password" class="sr-only">Ancien mot de passe </label>
+                    <input type="password" id="amp" name="amp"  class="form-control" ngModel  placeholder="Ancien mot de passe" required>
+        
+                    <br>
+                    <label for="login" class="sr-only">Nouveau mot de passe</label>
+                    <input type="password" id="nmp" name="nmp"  class="form-control" ngModel  placeholder="Nouveau mot de passe" required>
+                    <br>
+        
+                    <label for="password" class="sr-only">Confirmation mot de passe</label>
+                    <input type="password" id="cnmp" name="cnmp"  class="form-control"  placeholder="Confirmation mot de passe" ngModel required>
+                    <br>
+                    
+                    <div style="text-align: right;">
+                        <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit" status="warning"(click)="ChangerMotDepasse(loginForm)" ><i class="fa fa-edit" aria-hidden="true"></i>&nbsp;Modifier</button>
+                        </div>
+               <br><br>
+                </div>
+            </form>
         </div>
-    </div>
-</div>
+      </nb-card>
+  
+    
+    </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>

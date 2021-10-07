@@ -65,3 +65,9 @@ export class Changerpassword {
   Nmp: string;
   Cnmp: string;
 }
+
+export class ChangePassword {
+  Amp: string;
+  Nmp: string;
+  Cnmp: string;
+}

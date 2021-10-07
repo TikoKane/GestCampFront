@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import { Authentification, Changerpassword } from '../modele/utilisateurs.model';
+import { Authentification, ChangePassword, Changerpassword } from '../modele/utilisateurs.model';
 import { environment } from '../../environments/environment';
 
 
@@ -39,6 +39,10 @@ export class AuthService {
       localStorage.removeItem('idEntite');
       this.isLoggedIn = false;
       this.router.navigate(['']);
+    }
+
+     changeMotDepass(value:  ChangePassword,id){
+      return this.http.put(this.url+'utilisateurs/changepassword/'+id,value);
     }
     saveToken(token: string, id :number,idRole: number,
             nom: string, prenom: string,email: string, telephone: string,login: string,idEntite :number, etat: number,statut: number) {
