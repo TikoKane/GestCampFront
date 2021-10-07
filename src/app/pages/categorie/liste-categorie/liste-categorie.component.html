@@ -22,14 +22,14 @@
           <table class='table table-bordered'>
             <thead style='background-color: #2d8ac7'>
               <tr>
-                <th>#</th>
+                <th style="text-align: center;">#</th>
                 <th style="text-align: center;">Libelle</th>
                 <th style="text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody style='background-color:white'>
               <tr *ngFor="let g of users | filter:searchedKeyword | paginate:{ itemsPerPage:10,currentPage:p};let i =index" >
-                <th scope='row'>{{i+1}}</th>
+                <th scope='row' style="text-align: center;">{{i+1}}</th>
                 <td style="text-align: center;" >{{g.libelle}}</td>
                 
                 <td style="text-align: center;">

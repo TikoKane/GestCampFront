@@ -50,11 +50,11 @@ export class D3LineComponent implements OnDestroy {
       series: [
         {
           name: '2010',
-          value: 5002,
+          value: 7000,
         },
         {
           name: '2011',
-          value: 5800,
+          value: 6000,
         },
       ],
     },

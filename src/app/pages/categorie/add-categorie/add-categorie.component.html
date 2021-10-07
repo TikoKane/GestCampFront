@@ -21,7 +21,7 @@
               <div class="offset-sm-3 col-sm-9">
                 <br>
                 <button type="submit" nbButton status="success" style="float: right;"
-                  [disabled]="!form.valid"><i class="fas fa-save"></i>&nbsp; Enregistrer</button>
+                  [disabled]="!form.valid"><i class="fas fa-save"></i>&nbsp; Ajouter</button>
               </div>
             </div>
           </form>
@@ -48,14 +48,14 @@
         <table class='table table-bordered'>
           <thead style='background-color: #2d8ac7'>
             <tr>
-              <th>#</th>
+              <th style="text-align: center;">#</th>
               <th style="text-align: center;">Libelle</th>
               <th style="text-align: center;">Actions</th>
             </tr>
           </thead>
           <tbody style='background-color:white'>
             <tr *ngFor="let g of users | filter:searchedKeyword | paginate:{ itemsPerPage:10,currentPage:p};let i =index" >
-              <th scope='row'>{{i+1}}</th>
+              <th scope='row' style="text-align: center;">{{i+1}}</th>
               <td style="text-align: center;" >{{g.libelle}}</td>
               
               <td style="text-align: center;">
@@ -154,7 +154,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
                 class="fas fa-undo"></i>&nbsp;Annuler</button>
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="saveModification(datauser?.id,form)"><i class="fas fa-save" ></i>&nbsp;Enregistrer</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="saveModification(datauser?.id,form)"><i class="fas fa-save" ></i>&nbsp;Valider</button>
           </div>
           </form>
         </div>

@@ -18,9 +18,9 @@ import { NbThemeService } from '@nebular/theme';
 export class D3BarComponent implements OnDestroy {
 
   results = [
-    { name: 'Germany', value: 8940 },
-    { name: 'USA', value: 5000 },
-    { name: 'France', value: 7200 },
+    { name: 'Réussi', value: 8940 },
+    { name: 'En attente', value: 5000 },
+    { name: 'Echec', value: 7200 },
   ];
   showLegend = true;
   showXAxis = true;
@@ -34,7 +34,7 @@ export class D3BarComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [colors.successLight, colors.warning, colors.danger, colors.warningLight, colors.dangerLight],
       };
     });
   }

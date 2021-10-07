@@ -31,7 +31,7 @@ export class PagesComponent implements OnInit{
      
       title: 'Dashboard',
       icon: 'home-outline',
-      link: '/pages/iot-dashboard',
+      link: '/pages/accueil/d3',
       home: true,
       hidden : this.hiEditeur 
     },

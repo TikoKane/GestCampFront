@@ -1,23 +1,52 @@
 <div class="row">
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Pie</nb-card-header>
+      <nb-card-header>Répartition des campagnes</nb-card-header>
+      <nb-card-body>
+        <ngx-d3-advanced-pie></ngx-d3-advanced-pie>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Répartition par canal</nb-card-header>
+      <nb-card-body>
+        <ngx-chartjs-pie></ngx-chartjs-pie>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Campagne par jour</nb-card-header>
+      <nb-card-body>
+        <ngx-echarts-bar></ngx-echarts-bar>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Email</nb-card-header>
       <nb-card-body>
         <ngx-d3-pie></ngx-d3-pie>
       </nb-card-body>
     </nb-card>
   </div>
+
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Bar</nb-card-header>
+      <nb-card-header>SMS</nb-card-header>
       <nb-card-body>
         <ngx-d3-bar></ngx-d3-bar>
       </nb-card-body>
     </nb-card>
   </div>
+
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Line</nb-card-header>
+      <nb-card-header>Evolution entre deux mois</nb-card-header>
       <nb-card-body>
         <ngx-d3-line></ngx-d3-line>
       </nb-card-body>
@@ -25,12 +54,13 @@
   </div>
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Advanced Pie</nb-card-header>
+      <nb-card-header>Bar</nb-card-header>
       <nb-card-body>
-        <ngx-d3-advanced-pie></ngx-d3-advanced-pie>
+        <ngx-chartjs-bar></ngx-chartjs-bar>
       </nb-card-body>
     </nb-card>
   </div>
+
   <div class="col-lg-6">
     <nb-card>
       <nb-card-header>Area Chart</nb-card-header>
