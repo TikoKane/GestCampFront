@@ -1,581 +1,619 @@
+<div class="col-12">
+  <nb-card>
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="Campagne avec liste de diffusion">
 
-  <div class="col-12">
-    <nb-card>
-      <nb-tabset fullWidth>
-        <nb-tab tabTitle="Campagne avec liste de diffusion">
-       
-          <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-            <nb-card-body>
-              <nb-stepper orientation="horizontal">
-                <nb-step [label]="labelOne">
-                  <ng-template #labelOne>Etape 1</ng-template>
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Lancement campagne</nb-card-header>
-                      <nb-card-body>
-                        <form #form="ngForm">
-                          <div class="row">
-          
+        <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+          <nb-card-body>
+            <nb-stepper orientation="horizontal">
+              <nb-step [label]="labelOne">
+                <ng-template #labelOne>Etape 1</ng-template>
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Lancement campagne</nb-card-header>
+                    <nb-card-body>
+                      <form #form="ngForm">
+                        <div class="row">
+
+                          <div class="form-group">
+                            <label for="inputFirstName" class="label">Titre </label>
+                            <input [(ngModel)]="camp.Titre" nbInput placeholder="Entrer le titre de la campagne "
+                              fullWidth #nameInput="ngModel" name="titre" type="text" required minlength="2"
+                              maxlength="50">
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="form-group">
+                            <label for="inputFirstName" class="label">Description </label>
+                            <textarea [(ngModel)]="camp.Description" name="Description" #nameInput="ngModel" nbInput
+                              fullWidth placeholder="Entrer la description de la campagne" required
+                              minlength="2"></textarea>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="inputFirstName" class="label">Titre </label>
-                              <input [(ngModel)]="camp.Titre" nbInput placeholder="Entrer le titre de la campagne " fullWidth
-                                #nameInput="ngModel" name="titre" type="text" required minlength="2" maxlength="50">
+                              <label for="inputLastName" class="label">Date de début de la campagne</label>
+                              <input [(ngModel)]="camp.DateDeDebut" (change)="onChangeDF($event.target.value)" nbInput
+                                placeholder="02/05/2051" fullWidth #nameInput="ngModel"
+                                min="{{dateExecutionCampagne | date:'yyyy-MM-dd' }}" name="DateDeDebut" type="date"
+                                required>
                             </div>
                           </div>
-                          <div class="row">
-          
+                          <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="inputFirstName" class="label">Description </label>
-                              <textarea [(ngModel)]="camp.Description" name="Description" #nameInput="ngModel" nbInput fullWidth
-                                placeholder="Entrer la description de la campagne" required minlength="2"></textarea>
+                              <label for="inputLastName" class="label">Date de fin de la campagne</label>
+                              <input [(ngModel)]="camp.DateDeFin" nbInput placeholder="02/05/2051" fullWidth
+                                #nameInput="ngModel" min="{{camp.DateDeDebut | date:'yyyy-MM-dd' }}" name="DateDeFin"
+                                type="date" required>
                             </div>
                           </div>
-          
-          
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputLastName" class="label">Date de début de la campagne</label>
-                                <input [(ngModel)]="camp.DateDeDebut"  (change)="onChangeDF($event.target.value)" nbInput placeholder="02/05/2051" fullWidth
-                                  #nameInput="ngModel" min="{{dateExecutionCampagne | date:'yyyy-MM-dd' }}" name="DateDeDebut" type="date" required>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputLastName" class="label">Date de fin de la campagne</label>
-                                <input [(ngModel)]="camp.DateDeFin" nbInput placeholder="02/05/2051"  fullWidth
-                                  #nameInput="ngModel" min="{{camp.DateDeDebut | date:'yyyy-MM-dd' }}" name="DateDeFin" type="date" required>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-          
-                  <button nbButton disabled nbStepperNext status="warning"><i class="fa fa-arrow-left"
-                      aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 2">
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Liste de diffusion</nb-card-header>
-                      <nb-card-body>
-                        <form #form2="ngForm">
-          
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Liste de diffusion</label>
-                                <select name="idListeDiffusion" (change)="onChangeLDD($event.target.value)" id="idListeDiffusion"
-                                  [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control" fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
-                                  <option *ngFor="let data of listeDiffusion" [value]="data.id" [selected]="data.titre == true">
-                                    {{data.titre}}</option>
-                                </select>
-                              </div>
-                            </div>
-                          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Niveau de visibilité</label>
-                                <select name="IdNiveauVisibilite" (change)="onChangeNDV($event.target.value)"
-                                  id="IdNiveauVisibilite" [(ngModel)]="camp.IdNiveauVisibilite" class="col-sm-12 form-control"
-                                  fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir le niveau de visibilité</option>
-                                  <option *ngFor="let data of niveaudevisbilite" [value]="data.id"
-                                    [selected]="data.libelle == true">
-                                    {{data.libelle}}</option>
-                                </select>
-                              </div>
+                        </div>
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton disabled nbStepperNext status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 2">
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Liste de diffusion</nb-card-header>
+                    <nb-card-body>
+                      <form #form2="ngForm">
+
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Liste de diffusion</label>
+                              <select name="idListeDiffusion" (change)="onChangeLDD($event.target.value)"
+                                id="idListeDiffusion" [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control"
+                                fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
+                                <option *ngFor="let data of listeDiffusion" [value]="data.id"
+                                  [selected]="data.titre == true">
+                                  {{data.titre}}</option>
+                              </select>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Canal envoi</label>
-                                <select name="idCanalEnvoi" (change)="onChangeCDE($event.target.value)" id="idCanalEnvoi"
-                                  [(ngModel)]="idCanalEnvoi" class="col-sm-12 form-control" fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir le canal d'envoi</option>
-                                  <option *ngFor="let data of canalenvois" [value]="data.id" [selected]="data.titre == true">
-                                    {{data.titre}}</option>
-                                </select>
-                              </div>
-                            </div>
-          
-                            <div class="col-sm-6" *ngIf="idCanalEnvoi">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Modèle</label>
-                                <select name="idModel" id="idModel" [(ngModel)]="idModel" class="col-sm-12 form-control" fullWidth
-                                  required (change)="onChangeModel($event.target.value)">
-                                  <option value="" disabled selected>Veuillez choisir le modèle</option>
-                                  <option *ngFor="let data of modeles" [value]="data.id" [selected]="data.libelle == true">
-                                    {{data.libelle}}</option>
-                                </select>
-                              </div>
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Niveau de visibilité</label>
+                              <select name="IdNiveauVisibilite" (change)="onChangeNDV($event.target.value)"
+                                id="IdNiveauVisibilite" [(ngModel)]="camp.IdNiveauVisibilite"
+                                class="col-sm-12 form-control" fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir le niveau de visibilité</option>
+                                <option *ngFor="let data of niveaudevisbilite" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
                             </div>
                           </div>
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form2.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 3">
-                  <form #form7="ngForm">
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Canal envoi</label>
+                              <select name="idCanalEnvoi" (change)="onChangeCDE($event.target.value)" id="idCanalEnvoi"
+                                [(ngModel)]="idCanalEnvoi" class="col-sm-12 form-control" fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir le canal d'envoi</option>
+                                <option *ngFor="let data of canalenvois" [value]="data.id"
+                                  [selected]="data.titre == true">
+                                  {{data.titre}}</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-6" *ngIf="idCanalEnvoi">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Modèle</label>
+                              <select name="idModel" id="idModel" [(ngModel)]="idModel" class="col-sm-12 form-control"
+                                fullWidth required (change)="onChangeModel($event.target.value)">
+                                <option value="" disabled selected>Veuillez choisir le modèle</option>
+                                <option *ngFor="let data of modeles" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form2.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 3">
+                <form #form7="ngForm">
                   <div class="row">
                     <div class="col-sm-12">
-                        <div class="form-group">
-                           
-                            <label for="inputFirstName" class="label">Contenue du modèle</label>
-                            <nb-card>
-                                <nb-card-body>
-                                  <button type="submit" nbButton status="success" style="float: right;" [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable" (click)="open()"><i class="fa fa-plus"
-                                    aria-hidden="true" ></i>&nbsp;</button>
-                                    <ckeditor [config]="{ extraPlugins: 'divarea', height: '150' }"
-                                        [(ngModel)]="camp.Contenu" name="Contenu" #nameInput="ngModel" required>
-                                    </ckeditor>
-                                </nb-card-body>
-                            </nb-card>
-                        </div>
+                      <div class="form-group">
+
+                        <label for="inputFirstName" class="label">Contenue du modèle</label>
+                        <nb-card>
+                          <nb-card-body>
+                            <button type="submit" nbButton status="success" style="float: right;"
+                              [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable"
+                              (click)="open()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</button>
+                            <ckeditor [config]="{ extraPlugins: 'divarea', height: '150' }" [(ngModel)]="camp.Contenu"
+                              name="Contenu" #nameInput="ngModel" required>
+                            </ckeditor>
+                          </nb-card-body>
+                        </nb-card>
+                      </div>
                     </div>
-                </div>
-              </form>
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form7.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 4">
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Règle d'envoi</nb-card-header>
-                      <nb-card-body>
-                        <form #form3="ngForm">
-                          <div class="row">
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Nombe tentative</label>
-                                <input [(ngModel)]="regleEnvoi.Frequence" nbInput placeholder="Entrer le nombre de tentative "
-                                  fullWidth #nameInput="ngModel" name="frequence" type="number" required min="1" max="100">
-                              </div>
-                            </div>
-          
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Fréquence d'excution</label>
-                                <input [(ngModel)]="regleEnvoi.NombreTentative" nbInput placeholder="Entrer la fréquence "
-                                  fullWidth #nameInput="ngModel" name="nombreTentative" type="number" required min="1" max="100">
-                              </div>
-                            </div>
-                          </div>
-          
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Expéditeur</label>
-                                <input [(ngModel)]="regleEnvoi.Expediteur" nbInput placeholder="Entrer l'expéditeur " fullWidth
-                                  #nameInput="ngModel" name="expediteur" type="text" required minlength="2" maxlength="100">
-                              </div>
-                            </div>
-          
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Réceptuer</label>
-                                <input [(ngModel)]="regleEnvoi.Recepteur" nbInput placeholder="Entrer le récepteur" fullWidth
-                                  #nameInput="ngModel" name="recepteur" type="text" required minlength="2" maxlength="100">
-                              </div>
-                            </div>
-                          </div>
-          
-          
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
                   </div>
-                
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton [disabled]="!form3.valid" nbStepperNext status="success"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 5">
+                </form>
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form7.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 4">
                 <div class="col-lg-12" style="float:none;margin:auto;">
-                <nb-card>
-                  <nb-card-header style="text-align: center;">Informations de la campagne</nb-card-header>
-                  <nb-card-body>
-                    <form #form="ngForm">
-                      <div class="row" style="height: auto;">
-                        <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
-                          <b> Titre : </b> {{camp.Titre}}<br>
-                          <b> Liste de diffusion :</b> {{libelleLDD}}<br>
-                          <b> Canal Envoi :</b> {{libelleCDE}}<br>
-                          <b> Type de campagne :</b> {{libelleTDC}}<br>
-                          <b> Modèle :</b> {{libelleModele}} <br>
-                          <b> Date Début :</b> {{camp.DateDeDebut}}<br>
-                          <b> Date Fin : </b> {{camp.DateDeFin}}<br>
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Règle d'envoi</nb-card-header>
+                    <nb-card-body>
+                      <form #form3="ngForm">
+                        <div class="row">
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Nombe tentative</label>
+                              <input [(ngModel)]="regleEnvoi.Frequence" nbInput
+                                placeholder="Entrer le nombre de tentative " fullWidth #nameInput="ngModel"
+                                name="frequence" type="number" required min="1" max="100">
+                            </div>
+                          </div>
+
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Fréquence d'excution</label>
+                              <input [(ngModel)]="regleEnvoi.NombreTentative" nbInput placeholder="Entrer la fréquence "
+                                fullWidth #nameInput="ngModel" name="nombreTentative" type="number" required min="1"
+                                max="100">
+                            </div>
+                          </div>
                         </div>
-                        <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
-                        
-                          <b> Niveau de visibilité :</b> {{libelleNDV}}<br>
-                          <b> Nombre de tentative : </b> {{regleEnvoi.NombreTentative}}<br>
-                          <b> Fréquence :</b> {{regleEnvoi.Frequence}}<br>
-                          <b> Expéditeur : </b> {{regleEnvoi.Expediteur}}<br>
-                          <b> Récepteur :</b> {{regleEnvoi.Recepteur}}<br>
-                          <b> Fuseau Horaire :</b> {{regleEnvoi.FuseauHoraire}}<br>
-                          <b> Créé par :</b> {{nomComplet}}<br>
-          
-                          
+
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Expéditeur</label>
+                              <input [(ngModel)]="regleEnvoi.Expediteur" nbInput placeholder="Entrer l'expéditeur "
+                                fullWidth #nameInput="ngModel" name="expediteur" type="text" required minlength="2"
+                                maxlength="100">
+                            </div>
+                          </div>
+
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Réceptuer</label>
+                              <input [(ngModel)]="regleEnvoi.Recepteur" nbInput placeholder="Entrer le récepteur"
+                                fullWidth #nameInput="ngModel" name="recepteur" type="text" required minlength="2"
+                                maxlength="100">
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-3 col-sm-9">
-                          <br>
-                          <button type="submit" nbButton status="success" style="float: right; margin-top: -2%;"
-                            (click)="valider()">Enregistrer</button>
+
+
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton [disabled]="!form3.valid" nbStepperNext status="success"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 5">
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Informations de la campagne</nb-card-header>
+                    <nb-card-body>
+                      <form #form="ngForm">
+                        <div class="row" style="height: auto;">
+                          <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+                            <b> Titre : </b> {{camp.Titre}}<br>
+                            <b> Liste de diffusion :</b> {{libelleLDD}}<br>
+                            <b> Canal Envoi :</b> {{libelleCDE}}<br>
+                            <b> Type de campagne :</b> {{libelleTDC}}<br>
+                            <b> Modèle :</b> {{libelleModele}} <br>
+                            <b> Date Début :</b> {{camp.DateDeDebut}}<br>
+                            <b> Date Fin : </b> {{camp.DateDeFin}}<br>
+                          </div>
+                          <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+
+                            <b> Niveau de visibilité :</b> {{libelleNDV}}<br>
+                            <b> Nombre de tentative : </b> {{regleEnvoi.NombreTentative}}<br>
+                            <b> Fréquence :</b> {{regleEnvoi.Frequence}}<br>
+                            <b> Expéditeur : </b> {{regleEnvoi.Expediteur}}<br>
+                            <b> Récepteur :</b> {{regleEnvoi.Recepteur}}<br>
+                            <b> Fuseau Horaire :</b> {{regleEnvoi.FuseauHoraire}}<br>
+                            <b> Créé par :</b> {{nomComplet}}<br>
+
+
+                          </div>
                         </div>
-                      </div>
-                    </form>
-                  </nb-card-body>
-                </nb-card>
-              </div>
-                
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton disabled nbStepperNext status="success"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-              </nb-stepper>
-          
-              <div class="modal modal-danger fade" id="addVariable" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="form-group row">
+                          <div class="offset-sm-3 col-sm-9">
+                            <br>
+                            <button type="submit" nbButton status="success" style="float: right; margin-top: -2%;"
+                              (click)="valider()">Enregistrer</button>
+                          </div>
+                        </div>
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton disabled nbStepperNext status="success"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+            </nb-stepper>
+
+            <div class="modal modal-danger fade" id="addVariable" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Ajout d'une variable</h5>
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Ajout d'une
+                      variable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p class="text-center">
-                      <select name="pets" class="col-sm-12 form-control" fullWidth >
+                      <select name="pets" class="col-sm-12 form-control" fullWidth>
                         <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
-                          <option value="dog">Nom</option>
-                          <option value="cat">Prénom</option>
-                          <option value="hamster">Téléphone</option>
-                          <option value="parrot">Adresse</option>
-                          <option value="spider">Date de naissance</option>
+                        <option value="dog">Nom</option>
+                        <option value="cat">Prénom</option>
+                        <option value="hamster">Téléphone</option>
+                        <option value="parrot">Adresse</option>
+                        <option value="spider">Date de naissance</option>
                       </select>
                     </p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" >Valider</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Valider</button>
                   </div>
                 </div>
               </div>
             </div>
-            </nb-card-body>
-          </nb-card>
-        </nb-tab>
-        <nb-tab tabTitle="Campagne unitaire">
-          <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-            <nb-card-body>
-              <nb-stepper orientation="horizontal">
-                <nb-step [label]="labelOne">
-                  <ng-template #labelOne>Etape 1</ng-template>
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Lancement campagne</nb-card-header>
-                      <nb-card-body>
-                        <form #form="ngForm">
-                          <div class="row">
-          
-                            <div class="form-group">
-                              <label for="inputFirstName" class="label">Contact </label>
-                              <select name="idContact"  id="idContact"
-                              [(ngModel)]="campUni" class="col-sm-12 form-control" fullWidth required>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+      <nb-tab tabTitle="Campagne unitaire">
+        <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+          <nb-card-body>
+            <nb-stepper orientation="horizontal">
+              <nb-step [label]="labelOne">
+                <ng-template #labelOne>Etape 1</ng-template>
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Lancement campagne</nb-card-header>
+                    <nb-card-body>
+                      <form #form="ngForm">
+                        <div class="row">
+
+                          <div class="form-group">
+                            <label for="inputFirstName" class="label">Contact </label>
+                            <select name="idContact" id="idContact" [(ngModel)]="campUni" class="col-sm-12 form-control"
+                              fullWidth required>
                               <option value="" disabled selected>Veuillez choisir un contact</option>
                               <option *ngFor="let data of contacts" [value]="data.id" [selected]="data.libelle == true">
                                 {{data.nom}} {{data.prenom}}</option>
                             </select>
-                            </div>
                           </div>
-                          <div class="row">
-          
+                        </div>
+                        <div class="row">
+
+                          <div class="form-group">
+                            <label for="inputFirstName" class="label">Titre </label>
+                            <input [(ngModel)]="campUnitaire.Titre" nbInput
+                              placeholder="Entrer le titre de la campagne " fullWidth #nameInput="ngModel" name="titre"
+                              type="text" required minlength="2" maxlength="50">
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="form-group">
+                            <label for="inputFirstName" class="label">Description </label>
+                            <textarea [(ngModel)]="campUnitaire.Description" name="Description" #nameInput="ngModel"
+                              nbInput fullWidth placeholder="Entrer la description de la campagne" required
+                              minlength="2"></textarea>
+                          </div>
+                        </div>
+
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton disabled nbStepperNext status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 2">
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Liste de diffusion</nb-card-header>
+                    <nb-card-body>
+                      <form #form2="ngForm">
+                        <div class="row">
+                          <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="inputFirstName" class="label">Titre </label>
-                              <input [(ngModel)]="campUnitaire.Titre" nbInput placeholder="Entrer le titre de la campagne " fullWidth
-                                #nameInput="ngModel" name="titre" type="text" required minlength="2" maxlength="50">
+                              <label for="inputLastName" class="label">Date de début de la campagne</label>
+                              <input [(ngModel)]="campUnitaire.DateDeDebut" (change)="onChangeDF($event.target.value)"
+                                nbInput placeholder="02/05/2051" fullWidth #nameInput="ngModel"
+                                min="{{dateExecutionCampagne | date:'yyyy-MM-dd' }}" name="DateDeDebut" type="date"
+                                required>
                             </div>
                           </div>
-                          <div class="row">
-          
+                          <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="inputFirstName" class="label">Description </label>
-                              <textarea [(ngModel)]="campUnitaire.Description" name="Description" #nameInput="ngModel" nbInput fullWidth
-                                placeholder="Entrer la description de la campagne" required minlength="2"></textarea>
-                            </div>
-                          </div>          
-                          
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-          
-                  <button nbButton disabled nbStepperNext status="warning"><i class="fa fa-arrow-left"
-                      aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 2">
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Liste de diffusion</nb-card-header>
-                      <nb-card-body>
-                        <form #form2="ngForm">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputLastName" class="label">Date de début de la campagne</label>
-                                <input [(ngModel)]="campUnitaire.DateDeDebut"  (change)="onChangeDF($event.target.value)" nbInput placeholder="02/05/2051" fullWidth
-                                  #nameInput="ngModel" min="{{dateExecutionCampagne | date:'yyyy-MM-dd' }}" name="DateDeDebut" type="date" required>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputLastName" class="label">Date de fin de la campagne</label>
-                                <input [(ngModel)]="campUnitaire.DateDeFin" nbInput placeholder="02/05/2051"  fullWidth
-                                  #nameInput="ngModel" min="{{campUnitaire.DateDeDebut | date:'yyyy-MM-dd' }}" name="DateDeFin" type="date" required>
-                              </div>
+                              <label for="inputLastName" class="label">Date de fin de la campagne</label>
+                              <input [(ngModel)]="campUnitaire.DateDeFin" nbInput placeholder="02/05/2051" fullWidth
+                                #nameInput="ngModel" min="{{campUnitaire.DateDeDebut | date:'yyyy-MM-dd' }}"
+                                name="DateDeFin" type="date" required>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Liste de diffusion</label>
-                                <select name="idListeDiffusion" (change)="onChangeLDD($event.target.value)" id="idListeDiffusion"
-                                  [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control" fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
-                                  <option *ngFor="let data of listeDiffusion" [value]="data.id" [selected]="data.titre == true">
-                                    {{data.titre}}</option>
-                                </select>
-                              </div>
-                            </div>
-                          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Niveau de visibilité</label>
-                                <select name="IdNiveauVisibilite" (change)="onChangeNDV($event.target.value)"
-                                  id="IdNiveauVisibilite" [(ngModel)]="campUnitaire.IdNiveauVisibilite" class="col-sm-12 form-control"
-                                  fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir le niveau de visibilité</option>
-                                  <option *ngFor="let data of niveaudevisbilite" [value]="data.id"
-                                    [selected]="data.libelle == true">
-                                    {{data.libelle}}</option>
-                                </select>
-                              </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Liste de diffusion</label>
+                              <select name="idListeDiffusion" (change)="onChangeLDD($event.target.value)"
+                                id="idListeDiffusion" [(ngModel)]="idListeDiffusion" class="col-sm-12 form-control"
+                                fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
+                                <option *ngFor="let data of listeDiffusion" [value]="data.id"
+                                  [selected]="data.titre == true">
+                                  {{data.titre}}</option>
+                              </select>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Canal envoi</label>
-                                <select name="idCanalEnvoiUni" (change)="onChangeCDE($event.target.value)" id="idCanalEnvoiUni"
-                                  [(ngModel)]="idCanalEnvoiUni" class="col-sm-12 form-control" fullWidth required>
-                                  <option value="" disabled selected>Veuillez choisir le canal d'envoi</option>
-                                  <option *ngFor="let data of canalenvois" [value]="data.id" [selected]="data.titre == true">
-                                    {{data.titre}}</option>
-                                </select>
-                              </div>
-                            </div>
-          
-                            <div class="col-sm-6" *ngIf="idCanalEnvoiUni">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Modèle</label>
-                                <select name="idModelUni" id="idModelUni" [(ngModel)]="idModelUni" class="col-sm-12 form-control" fullWidth
-                                  required (change)="onChangeModel($event.target.value)">
-                                  <option value="" disabled selected>Veuillez choisir le modèle</option>
-                                  <option *ngFor="let data of modeles" [value]="data.id" [selected]="data.libelle == true">
-                                    {{data.libelle}}</option>
-                                </select>
-                              </div>
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Niveau de visibilité</label>
+                              <select name="IdNiveauVisibilite" (change)="onChangeNDV($event.target.value)"
+                                id="IdNiveauVisibilite" [(ngModel)]="campUnitaire.IdNiveauVisibilite"
+                                class="col-sm-12 form-control" fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir le niveau de visibilité</option>
+                                <option *ngFor="let data of niveaudevisbilite" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
                             </div>
                           </div>
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form2.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 3">
-                  <form #form7="ngForm">
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Canal envoi</label>
+                              <select name="idCanalEnvoiUni" (change)="onChangeCDE($event.target.value)"
+                                id="idCanalEnvoiUni" [(ngModel)]="idCanalEnvoiUni" class="col-sm-12 form-control"
+                                fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir le canal d'envoi</option>
+                                <option *ngFor="let data of canalenvois" [value]="data.id"
+                                  [selected]="data.titre == true">
+                                  {{data.titre}}</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-6" *ngIf="idCanalEnvoiUni">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Modèle</label>
+                              <select name="idModelUni" id="idModelUni" [(ngModel)]="idModelUni"
+                                class="col-sm-12 form-control" fullWidth required
+                                (change)="onChangeModel($event.target.value)">
+                                <option value="" disabled selected>Veuillez choisir le modèle</option>
+                                <option *ngFor="let data of modeles" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form2.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 3">
+                <form #form7="ngForm">
                   <div class="row">
                     <div class="col-sm-12">
-                        <div class="form-group">
-                           
-                            <label for="inputFirstName" class="label">Contenue du modèle</label>
-                            <nb-card>
-                                <nb-card-body>
-                                  <button type="submit" nbButton status="success" style="float: right;" [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable" (click)="open()"><i class="fa fa-plus"
-                                    aria-hidden="true" ></i>&nbsp;</button>
-                                    <ckeditor [config]="{ extraPlugins: 'divarea', height: '150' }"
-                                        [(ngModel)]="campUnitaire.Contenu" name="Contenu" #nameInput="ngModel" required>
-                                    </ckeditor>
-                                </nb-card-body>
-                            </nb-card>
-                        </div>
+                      <div class="form-group">
+
+                        <label for="inputFirstName" class="label">Contenue du modèle</label>
+                        <nb-card>
+                          <nb-card-body>
+                            <button type="submit" nbButton status="success" style="float: right;"
+                              [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable"
+                              (click)="open()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</button>
+                            <ckeditor [config]="{ extraPlugins: 'divarea', height: '150' }"
+                              [(ngModel)]="campUnitaire.Contenu" name="Contenu" #nameInput="ngModel" required>
+                            </ckeditor>
+                          </nb-card-body>
+                        </nb-card>
+                      </div>
                     </div>
-                </div>
-              </form>
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton nbStepperNext status="success" [disabled]="!form7.valid"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 4">
-                  <div class="col-lg-12" style="float:none;margin:auto;">
-                    <nb-card>
-                      <nb-card-header style="text-align: center;">Règle d'envoi</nb-card-header>
-                      <nb-card-body>
-                        <form #form3="ngForm">
-                          <div class="row">
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Nombe tentative</label>
-                                <input [(ngModel)]="regleEnvoiUni.Frequence" nbInput placeholder="Entrer le nombre de tentative "
-                                  fullWidth #nameInput="ngModel" name="frequence" type="number" required min="1" max="100">
-                              </div>
-                            </div>
-          
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Fréquence d'excution</label>
-                                <input [(ngModel)]="regleEnvoiUni.NombreTentative" nbInput placeholder="Entrer la fréquence "
-                                  fullWidth #nameInput="ngModel" name="nombreTentative" type="number" required min="1" max="100">
-                              </div>
-                            </div>
-                          </div>
-          
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Expéditeur</label>
-                                <input [(ngModel)]="regleEnvoiUni.Expediteur" nbInput placeholder="Entrer l'expéditeur " fullWidth
-                                  #nameInput="ngModel" name="expediteur" type="text" required minlength="2" maxlength="100">
-                              </div>
-                            </div>
-          
-          
-          
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="inputFirstName" class="label">Réceptuer</label>
-                                <input [(ngModel)]="regleEnvoiUni.Recepteur" nbInput placeholder="Entrer le récepteur" fullWidth
-                                  #nameInput="ngModel" name="recepteur" type="text" required minlength="2" maxlength="100">
-                              </div>
-                            </div>
-                          </div>
-          
-          
-                        </form>
-                      </nb-card-body>
-                    </nb-card>
                   </div>
-                
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton [disabled]="!form3.valid" nbStepperNext status="success"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-                <nb-step label="Etape 5">
+                </form>
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton nbStepperNext status="success" [disabled]="!form7.valid"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 4">
                 <div class="col-lg-12" style="float:none;margin:auto;">
-                <nb-card>
-                  <nb-card-header style="text-align: center;">Informations de la campagne</nb-card-header>
-                  <nb-card-body>
-                    <form #form="ngForm">
-                      <div class="row" style="height: auto;">
-                        <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
-                          <b> Titre : </b> {{campUnitaire.Titre}}<br>
-                          <b> Liste de diffusion :</b> {{libelleLDD}}<br>
-                          <b> Canal Envoi :</b> {{libelleCDE}}<br>
-                          <b> Type de campagne :</b> {{libelleTDC}}<br>
-                          <b> Modèle :</b> {{libelleModele}} <br>
-                          <b> Date Début :</b> {{campUnitaire.DateDeDebut}}<br>
-                          <b> Date Fin : </b> {{campUnitaire.DateDeFin}}<br>
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Règle d'envoi</nb-card-header>
+                    <nb-card-body>
+                      <form #form3="ngForm">
+                        <div class="row">
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Nombe tentative</label>
+                              <input [(ngModel)]="regleEnvoiUni.Frequence" nbInput
+                                placeholder="Entrer le nombre de tentative " fullWidth #nameInput="ngModel"
+                                name="frequence" type="number" required min="1" max="100">
+                            </div>
+                          </div>
+
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Fréquence d'excution</label>
+                              <input [(ngModel)]="regleEnvoiUni.NombreTentative" nbInput
+                                placeholder="Entrer la fréquence " fullWidth #nameInput="ngModel" name="nombreTentative"
+                                type="number" required min="1" max="100">
+                            </div>
+                          </div>
                         </div>
-                        <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
-                        
-                          <b> Niveau de visibilité :</b> {{libelleNDV}}<br>
-                          <b> Nombre de tentative : </b> {{regleEnvoiUni.NombreTentative}}<br>
-                          <b> Fréquence :</b> {{regleEnvoiUni.Frequence}}<br>
-                          <b> Expéditeur : </b> {{regleEnvoiUni.Expediteur}}<br>
-                          <b> Récepteur :</b> {{regleEnvoiUni.Recepteur}}<br>
-                          <b> Fuseau Horaire :</b> {{regleEnvoiUni.FuseauHoraire}}<br>
-                          <b> Créé par :</b> {{nomComplet}}<br>
-          
-                          
+
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Expéditeur</label>
+                              <input [(ngModel)]="regleEnvoiUni.Expediteur" nbInput placeholder="Entrer l'expéditeur "
+                                fullWidth #nameInput="ngModel" name="expediteur" type="text" required minlength="2"
+                                maxlength="100">
+                            </div>
+                          </div>
+
+
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Réceptuer</label>
+                              <input [(ngModel)]="regleEnvoiUni.Recepteur" nbInput placeholder="Entrer le récepteur"
+                                fullWidth #nameInput="ngModel" name="recepteur" type="text" required minlength="2"
+                                maxlength="100">
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-3 col-sm-9">
-                          <br>
-                          <button type="submit" nbButton status="success" style="float: right; margin-top: -2%;"
-                            (click)="validerUnitaire()">Enregistrer</button>
+
+
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton [disabled]="!form3.valid" nbStepperNext status="success"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+              <nb-step label="Etape 5">
+                <div class="col-lg-12" style="float:none;margin:auto;">
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">Informations de la campagne</nb-card-header>
+                    <nb-card-body>
+                      <form #form="ngForm">
+                        <div class="row" style="height: auto;">
+                          <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+                            <b> Titre : </b> {{campUnitaire.Titre}}<br>
+                            <b> Liste de diffusion :</b> {{libelleLDD}}<br>
+                            <b> Canal Envoi :</b> {{libelleCDE}}<br>
+                            <b> Type de campagne :</b> {{libelleTDC}}<br>
+                            <b> Modèle :</b> {{libelleModele}} <br>
+                            <b> Date Début :</b> {{campUnitaire.DateDeDebut}}<br>
+                            <b> Date Fin : </b> {{campUnitaire.DateDeFin}}<br>
+                          </div>
+                          <div class="column" style="border: 1px solid #e4e9f2;text-align: left;">
+
+                            <b> Niveau de visibilité :</b> {{libelleNDV}}<br>
+                            <b> Nombre de tentative : </b> {{regleEnvoiUni.NombreTentative}}<br>
+                            <b> Fréquence :</b> {{regleEnvoiUni.Frequence}}<br>
+                            <b> Expéditeur : </b> {{regleEnvoiUni.Expediteur}}<br>
+                            <b> Récepteur :</b> {{regleEnvoiUni.Recepteur}}<br>
+                            <b> Fuseau Horaire :</b> {{regleEnvoiUni.FuseauHoraire}}<br>
+                            <b> Créé par :</b> {{nomComplet}}<br>
+
+
+                          </div>
                         </div>
-                      </div>
-                    </form>
-                  </nb-card-body>
-                </nb-card>
-              </div>
-                
-                  <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button nbButton disabled nbStepperNext status="success"><i class="fa fa-arrow-right"
-                      aria-hidden="true"></i></button>
-                </nb-step>
-              </nb-stepper>
-          
-              <div class="modal modal-danger fade" id="addVariable" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="form-group row">
+                          <div class="offset-sm-3 col-sm-9">
+                            <br>
+                            <button type="submit" nbButton status="success" style="float: right; margin-top: -2%;"
+                              (click)="validerUnitaire()">Enregistrer</button>
+                          </div>
+                        </div>
+                      </form>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious status="warning"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button>
+                <button nbButton disabled nbStepperNext status="success"><i class="fa fa-arrow-right"
+                    aria-hidden="true"></i></button>
+              </nb-step>
+            </nb-stepper>
+
+            <div class="modal modal-danger fade" id="addVariable" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Ajout d'une variable</h5>
+                    <h5 class="modal-title text-center" id="exampleModalLabel" style="text-align: center;">Ajout d'une
+                      variable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p class="text-center">
-                      <select name="pets" class="col-sm-12 form-control" fullWidth >
+                      <select name="pets" class="col-sm-12 form-control" fullWidth>
                         <option value="" disabled selected>Veuillez choisir la liste de diffusion</option>
-                          <option value="dog">Nom</option>
-                          <option value="cat">Prénom</option>
-                          <option value="hamster">Téléphone</option>
-                          <option value="parrot">Adresse</option>
-                          <option value="spider">Date de naissance</option>
+                        <option value="dog">Nom</option>
+                        <option value="cat">Prénom</option>
+                        <option value="hamster">Téléphone</option>
+                        <option value="parrot">Adresse</option>
+                        <option value="spider">Date de naissance</option>
                       </select>
                     </p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" >Valider</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Valider</button>
                   </div>
                 </div>
               </div>
             </div>
-            </nb-card-body>
-          </nb-card>
-        </nb-tab>
-      </nb-tabset>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+    </nb-tabset>
   </nb-card>
 </div>
-

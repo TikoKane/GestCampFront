@@ -4,10 +4,11 @@
 
 <table class="sjs-table">
     <tbody>
-  <tr *ngFor="let row of data">
+  <tr *ngFor="let row of dataC">
         <td *ngFor="let val of row">
             {{val}}
         </td>
     </tr>
+    <button type="submit" (click)="addContacts()" nbButton status="success" style="float: right;">IMPORTER LE(S) CONTACT(S)</button>
 </tbody>
 </table>

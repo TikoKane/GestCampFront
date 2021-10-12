@@ -84,6 +84,11 @@ status: NbComponentStatus = 'success';
 title = 'Ajout d\'un nouveau contact !';
 content = `Contact ajouté avec suucès!`;
 
+statusNoValide: NbComponentStatus = 'danger';
+
+titleNoValide = 'Ajout d\'un nouveau contact !';
+contentNoValide = `Echec lors de l'ajout d'un nouveau contact !`;
+
 maxdate = new Date;
 mindate = new Date;
 
@@ -209,7 +214,7 @@ supTelephone(){
   this.router.navigateByUrl('pages/contact/list')
 
 }, (err) => {
- // console.log(this.user)
+  this.ToastValideNoValide(this.statusNoValide, this.titleNoValide, this.contentNoValide);
   console.log(err);
 });
 
@@ -232,4 +237,24 @@ private ToastValide(type: NbComponentStatus, title: string, body: string) {
     `${titleContent}`,
     config);
 }
+
+
+private ToastValideNoValide(type: NbComponentStatus, title: string, body: string) {
+  const config = {
+    status: type,
+    destroyByClick: this.destroyByClick,
+    duration: this.duration,
+    hasIcon: this.hasIcon,
+    position: this.position,
+    preventDuplicates: this.preventDuplicates,
+  };
+  const titleContent = title ? `${title}` : '';
+
+  this.index += 1;
+  this.toastrService.show(
+    body,
+    `${titleContent}`,
+    config);
+}
+
 }

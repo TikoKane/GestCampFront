@@ -95,7 +95,6 @@ open(id) {
   });
   this.contactCanalService.getCanauxByContact(id).subscribe((data) => {
      this.canauxContact =data;
-     console.log(data);
   }, (err) => {
     console.log(err);
   });
@@ -135,7 +134,7 @@ changestatut(id){
 supprimeruser(id){
   this.contactService.DeleteContact(id).subscribe((data1) => {
     this.ToastSuppression(this.statusSupprim, this.titleSupprim, this.contentSupprim);
-     this.contactService.getAllContact(localStorage.getItem('id')).subscribe((data) => {
+     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
     }, (err) => {
       console.log(err);
