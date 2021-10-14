@@ -1,14 +1,18 @@
-<a href="../../../../assets/document/Fiche_Contact.xlsx" download="formulairecontact.xlsx">Download File</a>
+<a href="../../../../assets/document/Fiche_Contact.xlsx" download="formulairecontact.xlsx">Télécharger le fichier</a>&nbsp;
 
 <input type="file" (change)="onFileChange($event)" multiple="false" />
-
-<table class="sjs-table">
-    <tbody>
+<br>
+<br>
+<br>
+<table class="sjs-table" *ngIf="afficheTab">
+    <tbody style='background-color:white'>
   <tr *ngFor="let row of dataC">
-        <td *ngFor="let val of row">
+        <td *ngFor="let val of row" style="text-align: center;">
             {{val}}
         </td>
     </tr>
-    <button type="submit" (click)="addContacts()" nbButton status="success" style="float: right;">IMPORTER LE(S) CONTACT(S)</button>
 </tbody>
+<br>
+<br>
+    <button type="submit" (click)="addContacts()" nbButton status="success" style="float: right;"><i class="fas fa-download"></i>&nbsp;IMPORTER LE(S) CONTACT(S)</button>
 </table>

@@ -41,12 +41,12 @@
               <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.telephone}}</td>
               <td style="text-align: center;" *ngIf="g.id!=idUser">{{ g.idRole === 1 ? "Administratateur" : g.idRole === 2 ? "Editeur" :
                 "Responsable Campagne"}}</td>
-              <td *ngIf="g.statut===true && g.id!=idUser" style="text-align: center;"><button nbButton status="success" (click)="open(g.id)"
+              <td *ngIf="g.statut===true && g.id!=idUser" style="text-align: center;"><button class="btn btn-success" (click)="open(g.id)"
                    data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search"></span><i class="fa fa-check" aria-hidden="true"></i>
                   Actif
                 </button></td>
-              <td *ngIf="g.statut===false && g.id!=idUser" style="text-align: center;"><button nbButton status="danger" (click)="open(g.id)"
+              <td *ngIf="g.statut===false && g.id!=idUser" style="text-align: center;"><button class="btn btn-danger" (click)="open(g.id)"
                  data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search"></span><i class="fa fa-ban" aria-hidden="true"></i>
                   Inactif

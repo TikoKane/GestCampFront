@@ -1,4 +1,6 @@
-<nb-card class="col-md-12 col-lg-12 col-xxxl-6" style="float:none;margin:auto;">
+<div class="row">
+    <div class="col-lg-8" style="float:none;margin:auto;">
+<nb-card>
     <nb-card-body>
         <nb-stepper orientation="horizontal">
             <nb-step [label]="labelOne">
@@ -43,11 +45,11 @@
                                             <select class="form-control" id="sexe"
                                                 [(ngModel)]="contact.Sexe" name="Sexe" required>
                                                 <option value="" disabled selected>Veuillez choisir le sexe</option>
-                                                <option value="Homme">
-                                                   Homme
+                                                <option value="MASCULIN">
+                                                   MASCULIN
                                                 </option>
-                                                <option value="Femme">
-                                                    Femme
+                                                <option value="FEMININ">
+                                                    FEMININ
                                                  </option>
                                             </select>
                                         </div>
@@ -224,7 +226,7 @@
                                 <div class="offset-sm-3 col-sm-9">
                                     <br>
                                     <button type="submit" nbButton status="success"
-                                        style="float: right;" (click)="valider()">Valider</button>
+                                        style="float: right;" (click)="valider()"><i class="fas fa-save"></i>&nbsp; Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -343,3 +345,5 @@
         </div>
     </div>
 </nb-card>
+    </div>
+</div>

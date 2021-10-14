@@ -41,6 +41,7 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau contact!`;
     maxdate = new Date;
     mindate = new Date;
 
+    afficheTab = false;
     
   ngOnInit(): void {
   }
@@ -88,6 +89,7 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau contact!`;
   
     onFileChange(evt: any) {
       /* wire up file reader */
+      this.afficheTab = true;
       const target: DataTransfer = <DataTransfer>(evt.target);
       if (target.files.length !== 1) throw new Error('Cannot use multiple files');
       const reader: FileReader = new FileReader();

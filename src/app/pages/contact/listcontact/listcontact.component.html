@@ -38,12 +38,12 @@
               <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===1">Public</td>
               <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===2">Privé</td>
               <td style="text-align: center;" *ngIf="g.idNiveauVisibilite===3">Protégé</td>
-              <td *ngIf="g.statut===true" style="text-align: center;"><button nbButton status="success"
+              <td *ngIf="g.statut===true" style="text-align: center;"><button class="btn btn-success"
                   (click)="open(g.id)" data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search"></span><i class="fa fa-check" aria-hidden="true"></i>
                   Actif
                 </button></td>
-              <td *ngIf="g.statut===false" style="text-align: center;"><button nbButton status="danger"
+              <td *ngIf="g.statut===false" style="text-align: center;"><button class="btn btn-danger"
                   (click)="open(g.id)" data-bs-toggle="modal" data-bs-target="#changeetat">
                   <span class="glyphicon glyphicon-search"></span><i class="fa fa-ban" aria-hidden="true"></i>
                   Inactif
