@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactListeDiffusions } from '../../../modele/contact-liste-diffusions';
 import { ListeDeDiffusions } from "../../../modele/liste-de-diffusions";
 import { ContactListeDiffusionsService } from '../../../services/contact-liste-diffusions.service';
@@ -24,6 +25,12 @@ nom;
 trouve=false;
 id;
 
+listes: any;
+dataliste: any;
+closeResult:string;
+searchedKeyword: string;
+p:number=1;
+
 config: NbToastrConfig;
 
 index = 1;
@@ -44,14 +51,21 @@ titleDanger = 'Ajout d\'une nouvelle liste !';
 contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
  
 
-  constructor(private router : Router,private toastrService: NbToastrService,private niveauDeVisibilite : NiveauDeVisibilitesService,private contactListeDiffService : ContactListeDiffusionsService,private listeDeDiffusionService: ListeDeDiffusionsService, private contactService : ContactsService) { 
+  constructor(private modalService: NgbModal,private router : Router,private toastrService: NbToastrService,private niveauDeVisibilite : NiveauDeVisibilitesService,private contactListeDiffService : ContactListeDiffusionsService,private listeDeDiffusionService: ListeDeDiffusionsService, private contactService : ContactsService) { 
 
   }
 
   ngOnInit(): void {
+    this.listeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.listes = data;
+      console.log(this.listes)
+    }, (err) => {
+      console.log(this.listes)
+      console.log(err);
+    });
+
     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts=data;
-     console.log(this.contacts)
     }, (err) => {
      
       console.log(err);
@@ -59,7 +73,6 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
 
     this.niveauDeVisibilite.getAllNiveauDeVisibilite().subscribe((data) => {
       this.nv=data;
-     console.log(this.nv)
     }, (err) => {
      
       console.log(err);
@@ -146,5 +159,62 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
       body,
       `${titleContent}`,
       config);
+  }
+
+  open(id) {
+    console.log(id);
+    this.listeDeDiffusionService.getListeDeDiffusion(id).subscribe((data) => {
+      this.dataliste = data;
+    }, (err) => {
+      console.log(err);
+    });
+    this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  changeEtat(id){
+    this.listeDeDiffusionService.changeEtatListeDeDiffusion(id).subscribe((data) => {
+       console.log(data)
+       this.listeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+        this.listes = data;
+     //  console.log(this.users)
+      }, (err) => {
+        console.log(err);
+      });
+    }, (err) => {
+      console.log(err);
+    });
+  
+  }
+
+  supprimeruser(id){
+    this.listeDeDiffusionService.DeleteListeDeDiffusion(id).subscribe((data1) => {
+       this.listeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+        this.listes = data;
+      }, (err) => {
+        console.log(err);
+      });
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  listContact(id){
+
+    this.router.navigate(['/pages/liste_de_diffusion/listcontact', id]);
   }
 }

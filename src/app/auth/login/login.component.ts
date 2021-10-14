@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor,
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
@@ -31,11 +32,29 @@ export class JwtInterceptor implements HttpInterceptor {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  closeResult:string;
+config: NbToastrConfig;
+index = 1;
+destroyByClick = true;
+duration = 2000;
+hasIcon = true;
+position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+preventDuplicates = false;
+
+statusNoValide: NbComponentStatus = 'danger';
+titleNoValide = 'Votre compte a été bloqué !';
+contentNoValide = `Echec lors de la connexion`;
+
+status: NbComponentStatus = 'success';
+title = 'Connexion réussie avec succès !';
+content = `Connexion au compte!`;
+
+
   invalidLogin: Boolean;
   users;
-  closeResult = '';
   changemdpfirst: Boolean = false;
-  constructor(private router: Router, private authService: AuthService, private modalService: NgbModal) { }
+  constructor(private toastrService: NbToastrService,private router: Router, private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn = false;
@@ -52,13 +71,19 @@ export class LoginComponent implements OnInit {
       this.users = data;
 
       if (this.users.user.ischange == true) {
-        console.log(this.users)
+        if (this.users.user.statut == true) {
         this.authService.saveToken(this.users.token, this.users.user.id, this.users.user.idRole, this.users.user.nom, this.users.user.prenom, this.users.user.email,
           this.users.user.telephone, this.users.user.login, this.users.user.idEntite, this.users.user.etat, this.users.user.statut)
-
-        this.router.navigate(['pages/accueil/d3']);
+          this.ToastValide(this.status,this.title,this.content);
+          this.router.navigate(['pages/accueil/d3']);
       }
-
+      else {
+        form.reset();
+        this.ToastValideNoValide(this.statusNoValide,this.titleNoValide,this.contentNoValide);
+             
+      }
+    }
+  
       else {
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
@@ -106,5 +131,42 @@ export class LoginComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  private ToastValideNoValide(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: this.destroyByClick,
+      duration: this.duration,
+      hasIcon: this.hasIcon,
+      position: this.position,
+      preventDuplicates: this.preventDuplicates,
+    };
+    const titleContent = title ? `${title}` : '';
+  
+    this.index += 1;
+    this.toastrService.show(
+      body,
+      `${titleContent}`,
+      config);
+  }
+
+
+    private ToastValide(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: this.destroyByClick,
+      duration: this.duration,
+      hasIcon: this.hasIcon,
+      position: this.position,
+      preventDuplicates: this.preventDuplicates,
+    };
+    const titleContent = title ? `${title}` : '';
+
+    this.index += 1;
+    this.toastrService.show(
+      body,
+      `${titleContent}`,
+      config);
   }
 }

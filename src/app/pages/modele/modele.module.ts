@@ -5,7 +5,8 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridMo
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
-  NbStepperModule, } from '@nebular/theme';
+  NbStepperModule,
+  NbTabsetModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { NewsService } from './news.service';
@@ -19,6 +20,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
+    NbTabsetModule,
     ReactiveFormsModule,
     ModeleRoutingModule,
     ThemeModule,

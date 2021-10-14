@@ -35,11 +35,22 @@ statusDanger: NbComponentStatus = 'danger';
 titleDanger = 'Ajout d\'un nouveau modèle !';
 contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
 
+listes;
+dataliste;
+searchedKeyword: string;
+p:number=1;
+
   constructor(private toastrService: NbToastrService,private router: Router
     , private modalService: NgbModal, private canalEnvoiService : CanalEnvoisService, 
     private modeleService : ModelesService) { }
 
   ngOnInit(): void {
+    this.modeleService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.listes = data;
+    }, (err) => {
+      console.log(err);
+    });
+
     this.canalEnvoiService.getAllCanalEnvoi().subscribe((data) => {
     this.canal=data;
     }, (err) => {
@@ -130,6 +141,50 @@ contentDanger = `Erreur lors de l\'ajout d'un modèle!`;
       body,
       `${titleContent}`,
       config);
+  }
+
+  open2(id) {
+    console.log(id);
+    this.modeleService.getModele(id).subscribe((data) => {
+      this.dataliste = data;
+    }, (err) => {
+      console.log(err);
+    });
+    this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
+
+  changeEtat(id){
+    this.modeleService.changeEtatModele(id).subscribe((data) => {
+       console.log(data)
+       this.modeleService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {
+        this.listes = data;
+     //  console.log(this.users)
+      }, (err) => {
+        console.log(err);
+      });
+    }, (err) => {
+      console.log(err);
+    });
+  
+  }
+
+  supprimeruser(id){
+    this.modeleService.DeleteModele(id).subscribe((data1) => {
+       this.modeleService.getAllModele(localStorage.getItem('idEntite')).subscribe((data) => {
+        this.listes = data;
+      }, (err) => {
+        console.log(err);
+      });
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

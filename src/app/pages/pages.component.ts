@@ -43,16 +43,7 @@ export class PagesComponent implements OnInit{
       hidden : this.hiEditeur || this.hiResponsable,
       title: 'Utilisateur',
       icon: 'person-outline',
-      children: [
-        {
-          title: 'Ajouter un utilisateur',
-          link: '/pages/utilisateur/add',
-        },
-        {
-          title: 'Liste des utilisateurs',
-          link: '/pages/utilisateur/list',
-        },
-      ],
+      link: '/pages/utilisateur/add',
     },
     {
       title: 'Contact',
@@ -75,30 +66,12 @@ export class PagesComponent implements OnInit{
     {
       title: 'Liste de diffusion',
       icon: 'file-text-outline',
-      children: [
-        {
-          title: 'Créer une liste de diffusion',
-          link: '/pages/liste_de_diffusion/add',
-        },
-        {
-          title: 'Liste des listes de diffusion',
-          link: '/pages/liste_de_diffusion/list',
-        },
-      ],
+      link: '/pages/liste_de_diffusion/add',
     },
     {
       title: 'Modèle',
       icon: 'clipboard-outline',
-      children: [
-        {
-          title: 'Créer un modèle',
-          link: '/pages/modele/add',
-        },
-        {
-          title: 'Liste des modèles',
-          link: '/pages/modele/list',
-        },
-      ],
+      link: '/pages/modele/add',
     },
     {
       title: 'Catégorie',

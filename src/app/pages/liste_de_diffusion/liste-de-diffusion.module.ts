@@ -5,7 +5,8 @@ NbDatepickerModule,
 NbRadioModule,
 NbSelectModule,
 NbStepperModule,
-NbUserModule, } from '@nebular/theme';
+NbUserModule,
+NbTabsetModule, } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ListeDeDiffusionRoutingModule, routedComponents } from "./liste-de-diffusion-routing.module";
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ListecontactComponent],
   imports: [
     NbStepperModule,
+    NbTabsetModule,
     ReactiveFormsModule,
     ListeDeDiffusionRoutingModule,
     ThemeModule,
