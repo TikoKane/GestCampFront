@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactListeDiffusions } from '../../../modele/contact-liste-diffusions';
-import { ListeDeDiffusions } from "../../../modele/liste-de-diffusions";
+import { ListeDeDiffusions, ListeDeDiffusionsEdit } from "../../../modele/liste-de-diffusions";
 import { ContactListeDiffusionsService } from '../../../services/contact-liste-diffusions.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { ListeDeDiffusionsService } from "../../../services/liste-de-diffusions.service";
@@ -39,16 +39,24 @@ duration = 2000;
 hasIcon = true;
 position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
 preventDuplicates = false;
-status: NbComponentStatus = 'success';
 
+
+status: NbComponentStatus = 'success';
 title = 'Ajout d\'une nouvelle liste !';
 content = `Liste de diffusion ajoutée avec succès!`;
 
-
 statusDanger: NbComponentStatus = 'danger';
-
 titleDanger = 'Ajout d\'une nouvelle liste !';
 contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
+
+statusE: NbComponentStatus = 'success';
+titleE = 'Modification d\'une liste de diffusion!';
+contentE = `Liste de diffusion modifiée avec succès!`;
+
+statusED: NbComponentStatus = 'danger';
+titleED = 'Modification d\'une liste !';
+contentED = `Erreur lors de la modification de la liste!`;
+
  
 
   constructor(private modalService: NgbModal,private router : Router,private toastrService: NbToastrService,private niveauDeVisibilite : NiveauDeVisibilitesService,private contactListeDiffService : ContactListeDiffusionsService,private listeDeDiffusionService: ListeDeDiffusionsService, private contactService : ContactsService) { 
@@ -58,9 +66,7 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   ngOnInit(): void {
     this.listeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
       this.listes = data;
-      console.log(this.listes)
     }, (err) => {
-      console.log(this.listes)
       console.log(err);
     });
 
@@ -79,9 +85,16 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
     });
   }
   
+listeE : ListeDeDiffusionsEdit = {
+  IdNiveauVisibilite: '',
+  Titre: '',
+  IdEntite : localStorage.getItem('idEntite'),
+  Reference :'',
+}
+
 
   liste: ListeDeDiffusions = {
-    NiveauDeVisibilite: '',
+    IdNiveauVisibilite: '',
     Id: 0,
     IdEntite : localStorage.getItem('idEntite'),
     Titre: '',
@@ -113,13 +126,13 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
          this.contactlistdiff.IdContact = this.selected[index]
         this.contactListeDiffService.AddContactListeDiffusion(this.contactlistdiff).subscribe((data) => {
         }, (err) => {
-          this.ToastValideDanger(this.statusDanger,this.titleDanger,this.contentDanger)
           console.log(err);
         });
        }
       form.reset();
     }, (err) => {
       console.log(err);
+      this.ToastValide(this.statusDanger,this.titleDanger,this.contentDanger)
     });
   }
 
@@ -142,29 +155,13 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
       config);
   }
 
-
-  private ToastValideDanger(type: NbComponentStatus, title: string, body: string) {
-    const config = {
-      status: type,
-      destroyByClick: this.destroyByClick,
-      duration: this.duration,
-      hasIcon: this.hasIcon,
-      position: this.position,
-      preventDuplicates: this.preventDuplicates,
-    };
-    const titleContent = title ? `${title}` : '';
-  
-    this.index += 1;
-    this.toastrService.show(
-      body,
-      `${titleContent}`,
-      config);
-  }
-
   open(id) {
     console.log(id);
     this.listeDeDiffusionService.getListeDeDiffusion(id).subscribe((data) => {
       this.dataliste = data;
+      this.listeE.Reference = this.dataliste.reference;
+      this.listeE.IdNiveauVisibilite = this.dataliste.idNiveauVisibilite;
+      this.listeE.Titre = this.dataliste.titre;
     }, (err) => {
       console.log(err);
     });
@@ -216,5 +213,20 @@ contentDanger = `Erreur lors de l\'ajout d'une nouvelle liste!`;
   listContact(id){
 
     this.router.navigate(['/pages/liste_de_diffusion/listcontact', id]);
+  }
+
+  saveModification(id,form :NgForm){
+    console.log(this.listeE)
+
+    this.listeDeDiffusionService.EditListeDeDiffusion(id,this.listeE).subscribe((data1) => {
+      this.ToastValide(this.statusE, this.statusE, this.statusE);
+      this.listeDeDiffusionService.getAllListeDeDiffusion(localStorage.getItem('idEntite')).subscribe((data) => {
+       this.listes = data;
+     }, (err) => {
+      this.ToastValide(this.statusED, this.titleED, this.contentED);
+     });
+   }, (err) => {
+     console.log(err);
+   });
   }
 }

@@ -24,18 +24,15 @@ export class ListutilisateurComponent implements OnInit{
   searchedKeyword: string;
   p:number=1;
 
-  user: UpdateUser = {
+  user: AddUser = {
     email: '',
     telephone :'',
-    idRole: 0,
+    idEntite : localStorage.get('idEntite'),
+    idRole :'0',
     login:'',
     nom :'',
     prenom :'',
-    etat : true,
-    statut:true,
-    password :'passer',
-    confirmPassword:'passer',
-    idEntite:localStorage.getItem('idEntite')
+
   };
 
   userModel: UserModel;

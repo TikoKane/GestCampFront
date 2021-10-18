@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbToastrService,  NbComponentStatus,
-  NbGlobalLogicalPosition,
   NbGlobalPhysicalPosition,
   NbGlobalPosition,
   NbToastrConfig, } from '@nebular/theme';
@@ -58,12 +57,23 @@ editForm: FormGroup;
   hasIcon = true;
   position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
   preventDuplicates = false;
-  status: NbComponentStatus = 'success';
 
+
+  status: NbComponentStatus = 'success';
   title = 'Ajout d\'un nouveau utilisateur !';
   content = `Utilisateur ajouté avec suucès!`;
 
+  statusD: NbComponentStatus = 'danger';
+  titleD = 'Ajout d\'un nouveau utilisateur !';
+  contentD = `Error lors de l'ajouté d'un nouveau utilisateur!`;
 
+  statusModif: NbComponentStatus = 'success';
+  titleModif = 'Modification d\'un nouveau utilisateur !';
+  contentModif = `Utilisateur modifié avec suucès!`;
+  
+  statusED: NbComponentStatus = 'danger';
+  titleED = 'Modification d\'un nouveau utilisateur !';
+  contentED = `Error lors de la modification d'un nouveau utilisateur!`;
 
 
   ngOnInit() {
@@ -102,7 +112,7 @@ editForm: FormGroup;
       this.ToastValide(this.status, this.title, this.content);
       this.router.navigateByUrl('pages/utilisateur/list')
     }, (err) => {
-      console.log(this.user)
+      this.ToastValide(this.statusD, this.titleD, this.contentD);
       console.log(err);
     });
   }
@@ -128,6 +138,7 @@ editForm: FormGroup;
   
 open(id) {
   this.UtilisateursService.getUtilisateurById(id).subscribe((data) => {
+    console.log(data)
     this.datauser = data;
     this.user.email=data['email'];
     this.user.idRole=data['idRole'];
@@ -135,7 +146,6 @@ open(id) {
     this.user.prenom=data['prenom'];
     this.user.login=data['login'];
     this.user.telephone=data['telephone'];
-  
   }, (err) => {
     console.log(err);
   });
@@ -185,15 +195,14 @@ open(id) {
   }
   
   saveModification(id,form :NgForm){
+   
     
-    console.log(form);
-    console.log(this.user)
-    this.UtilisateursService.UpdateUtilisateur(id,this.userUp).subscribe((data1) => {
-      console.log(data1)
+    this.UtilisateursService.UpdateUtilisateur(id,this.user).subscribe((data1) => {
+      this.ToastValide(this.statusModif, this.titleModif, this.contentModif);
       this.UtilisateursService.getAllUtilisateur(localStorage.getItem('idEntite')).subscribe((data) => {
        this.users = data;
      }, (err) => {
-       console.log(err);
+      this.ToastValide(this.statusED, this.titleED, this.contentED);
      });
    }, (err) => {
      console.log(err);

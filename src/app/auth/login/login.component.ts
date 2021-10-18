@@ -109,7 +109,6 @@ content = `Connexion au compte!`;
       Nmp: form.value.nmp,
       Cnmp: form.value.cnmp
     }
-    console.log(this.users.user.id)
     this.authService.changeMdp(credentialsUpdatePsw, this.users.user.id).subscribe((data) => {
    
       this.authService.saveToken(this.users.token, this.users.user.id, this.users.user.idRole, this.users.user.nom, this.users.user.prenom, this.users.user.email,

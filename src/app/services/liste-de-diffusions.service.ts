@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ListeDeDiffusions} from '../modele/liste-De-Diffusions';
+import {ListeDeDiffusions, ListeDeDiffusionsEdit} from '../modele/liste-De-Diffusions';
 
 
 @Injectable({
@@ -27,8 +27,8 @@ export class ListeDeDiffusionsService {
     return this.http.get<ListeDeDiffusions>(this.url + id);
   }
 
-  EditListeDeDiffusion(id, listeDeDiffusion: ListeDeDiffusions): Observable<ListeDeDiffusions> {
-    return this.http.put<ListeDeDiffusions>(this.url + 'put/' + id, listeDeDiffusion);
+  EditListeDeDiffusion(id, listeDeDiffusion: ListeDeDiffusionsEdit): Observable<ListeDeDiffusionsEdit> {
+    return this.http.put<ListeDeDiffusionsEdit>(this.url + 'changeesdonnees/' + id, listeDeDiffusion);
   }
 
   DeleteListeDeDiffusion(id): Observable<ListeDeDiffusions> {

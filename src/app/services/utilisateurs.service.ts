@@ -3,6 +3,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { User } from '../@core/data/users';
 import { AddContact } from '../modele/contacts.model';
 import { AddUser, serverResponse, UtilisateurModelServer, UserModel, UpdateUser } from '../modele/utilisateurs.model';
 
@@ -53,8 +54,8 @@ export class UtilisateursService {
   }
 
   
-  UpdateUtilisateur(id,utilisateur : UpdateUser){
-    return this.http.put(this.url + 'utilisateurs/put/' + id , utilisateur);
+  UpdateUtilisateur(id,utilisateur : AddUser){
+    return this.http.put(this.url + 'utilisateurs/changedonnees/' + id , utilisateur);
   }
 
 }

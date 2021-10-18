@@ -112,7 +112,7 @@
                 <tr
                   *ngFor="let g of users | filter:searchedKeyword | paginate:{ itemsPerPage:10,currentPage:p};let i =index">
                   <th scope='row' *ngIf="g.id!=idUser">{{i+1}}</th>
-                  <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.nom | uppercase}} {{g.prenom}}</td>
+                  <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.nom}} {{g.prenom}}</td>
                   <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.email}}</td>
                   <td style="text-align: center;" *ngIf="g.id!=idUser">{{g.telephone}}</td>
                   <td style="text-align: center;" *ngIf="g.id!=idUser">{{ g.idRole === 1 ? "Administratateur" :
@@ -249,7 +249,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Modification utilisateur</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <form #form="ngForm">
@@ -306,14 +306,13 @@
 
                       <div class="form-group">
                         <label for="inputFirstName" class="label">Role</label>
-                        <select name="idRole" id="IdRole" [(ngModel)]="userUp.idRole" class="col-sm-12 form-control"
+                        <select name="idRole" id="IdRole" [(ngModel)]="user.idRole" class="col-sm-12 form-control"
                           fullWidth required>
-                          <option *ngIf="userUp.idRole===1" value="{{userUp.idRole}}" disabled selected ngI>Administrateur
+                          <option *ngIf="user.idRole==='1'" value="{{user.idRole}}" disabled selected ngI>Administrateur
                           </option>
-                          <option *ngIf="userUp.idRole===2" value="{{userUp.idRole}}" disabled selected ngI>Editeur
+                          <option *ngIf="user.idRole==='2'" value="{{user.idRole}}" disabled selected ngI>Editeur
                           </option>
-                          <option *ngIf="userUp.idRole===3" value="{{userUp.idRole}}" disabled selected ngI>Responsable
-                            campagne</option>
+                          <option *ngIf="user.idRole==='3'" value="{{user.idRole}}" disabled selected ngI>Responsable campagne</option>
                           <option *ngFor="let data of roles" [value]="data.id" [selected]="data.libelle == true">
                             {{data.libelle}}</option>
                         </select>
@@ -326,7 +325,7 @@
                   <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
                       class="fas fa-undo"></i>&nbsp;Annuler</button>
                   <button type="submit" class="btn btn-success" data-bs-dismiss="modal"
-                    (click)="saveModification(datauser?.id,form)"><i class="fas fa-save"></i>&nbsp;Enregistrer</button>
+                    (click)="saveModification(datauser?.id,form)"><i class="fas fa-edit"></i>&nbsp;Modifier</button>
                 </div>
               </form>
             </div>

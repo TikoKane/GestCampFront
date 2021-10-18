@@ -20,7 +20,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="inputLastName" class="label">Niveau de visibilté</label>
-                    <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.NiveauDeVisibilite"
+                    <select class="form-control" name="pays" id="pays" [(ngModel)]="liste.IdNiveauVisibilite"
                       name="NiveauDeVisibilite">
                       <option value="" disabled selected>Veuillez choisir le niveau de visiblité</option>
                       <option *ngFor="let ndvl of nv" [value]="ndvl.id">
@@ -194,11 +194,48 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-success">Enregistrer</button>
+                <form #form="ngForm">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="inputFirstName" class="label">Titre</label>
+                          <input nbInput fullWidth [(ngModel)]="listeE.Titre" #nameInput="ngModel" name="Titre"
+                            type="text" required minlength="2" maxlength="50" value="{{listeE?.Titre}}">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+
+
+                        <div class="form-group">
+                          <label for="inputLastName" class="label">Niveau de visibilté</label>
+                          <select class="form-control" name="pays" id="pays" [(ngModel)]="listeE.IdNiveauVisibilite"
+                            name="NiveauDeVisibilite">
+                            <option *ngIf="listeE.IdNiveauVisibilite==='1'" value="{{listeE.IdNiveauVisibilite}}"
+                              disabled selected ngI>Public
+                            </option>
+                            <option *ngIf="listeE.IdNiveauVisibilite==='2'" value="{{listeE.IdNiveauVisibilite}}"
+                              disabled selected ngI>Privé
+                            </option>
+                            <option *ngIf="listeE.IdNiveauVisibilite==='3'" value="{{listeE.IdNiveauVisibilite}}"
+                              disabled selected ngI>Protégé
+
+                            </option>
+                            <option *ngFor="let ndvl of nv" [value]="ndvl.id">
+                              {{ndvl.libelle}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
+                        class="fas fa-undo"></i>&nbsp;Annuler</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal"
+                      (click)="saveModification(dataliste?.id,form)"><i class="fas fa-edit"></i>&nbsp;Modifier</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
