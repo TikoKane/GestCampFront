@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
-import { MENU_ITEMS } from './pages-menu';
-
 @Component({
   selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
@@ -97,10 +95,6 @@ export class PagesComponent implements OnInit{
       title: 'Canal Envoie',
       icon: 'paper-plane-outline',
       children: [
-       /* {
-          title: 'Ajouter un canal',
-          link: '/pages/canalenvoi/add',
-        },*/
         {
           title: 'Liste des canaux',
           link: '/pages/canalenvoi/list',
