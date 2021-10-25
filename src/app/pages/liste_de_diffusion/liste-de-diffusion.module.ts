@@ -18,7 +18,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ListecontactComponent } from './listecontact/listecontact.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AdddiffusionComponent,
     ListecontactComponent],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
     NbStepperModule,
     NbTabsetModule,
     ReactiveFormsModule,

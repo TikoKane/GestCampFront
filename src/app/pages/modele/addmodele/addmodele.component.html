@@ -33,7 +33,7 @@
                                     <div class="form-group">
                                         <label for="inputLastName" class="label">Canal Envoi</label>
                                         <select class="form-control" [(ngModel)]="model.IdCanalEnvoi"
-                                            name="IdCanalEnvoi" (change)="onChangeModel($event.target.value)">
+                                            name="IdCanalEnvoi" (change)="onChangeModel($event.target.value)" required>
                                             <option value="" disabled selected>Veuillez choisir le canal</option>
                                             <option *ngFor="let ndvl of canal" [value]="ndvl.id">
                                                 {{ndvl.titre}}
@@ -48,7 +48,7 @@
                                 <br>
                                 <button type="submit" nbButton status="success" style="float: right;"
                                     [disabled]="!form.valid" data-bs-toggle="modal" data-bs-target="#addVariable"
-                                    (click)="open()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</button>
+                                    (click)="openVar()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</button>
                             </div>
                             <br>
                             <br>
@@ -100,13 +100,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <p class="text-center">
-                                        <select name="pets" id="pet-select">
+                                        <select name="variable" id="pet-select" [(ngModel)]="variable">
                                             <option value="">--Veuillez choisir une variable--</option>
-                                            <option value="dog">Nom</option>
-                                            <option value="cat">Prénom</option>
-                                            <option value="hamster">Téléphone</option>
-                                            <option value="parrot">Adresse</option>
-                                            <option value="spider">Date de naissance</option>
+                                            <option value="{nom}">Nom</option>
+                                            <option value="{prenom}">Prénom</option>
+                                            <option value="{tel}">Téléphone</option>
+                                            <option value="{adresse}">Adresse</option>
+                                            <option value="{datenaissance}">Date de naissance</option>
                                         </select>
                                     </p>
                                 </div>
@@ -114,14 +114,14 @@
                                     <button type="button" class="btn btn-warning"
                                         data-bs-dismiss="modal">Annuler</button>
                                     <button type="button" class="btn btn-success"
-                                        data-bs-dismiss="modal">Valider</button>
+                                        data-bs-dismiss="modal"  (click)="variableFonction()">Valider</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </nb-card>
             </nb-tab>
-            <nb-tab tabTitle="Liste des modèles">
+            <nb-tab tabTitle="Liste des modèles" >
                 <nb-card>
                     <nb-card-header style="text-align: center;">
                         <div class="row">

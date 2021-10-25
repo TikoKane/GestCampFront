@@ -35,12 +35,19 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="inputFirstName" class="label">Liste des listes de diffusion</label>
-                    <ng-select bindLabel="name" placeholder="Séléctionner les contacts" appendTo="body" multiple="true"
-                      [searchable]="true" [clearable]="true" required [(ngModel)]="selected" name="selected">
-                      <ng-option [value]="contacts.id" *ngFor="let contacts of contacts">
-                        {{contacts.nom}} {{contacts.prenom}}
-                      </ng-option>
-                    </ng-select>
+                    <ng-multiselect-dropdown
+                            [placeholder]="'Veuillez choisir les contacts'"
+                            [data]="contacts"
+                            name="contact"
+                            [(ngModel)]="selectedItems"
+                            [settings]="dropdownSettings"
+                            (onSelect)="onItemSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelect)="onDeselect($event)"
+                            (onDeSelectAll)="onDeselectAll($event)"
+                    >
+                    </ng-multiselect-dropdown>
+                    <br><br><br><br>
                   </div>
                 </div>
               </div>
@@ -59,7 +66,7 @@
 
 
 
-      <nb-tab tabTitle="Liste des catégories">
+      <nb-tab tabTitle="Liste des listes de diffusion">
         <nb-card>
           <nb-card-header style="text-align: center;">
             <div class="row">

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrConfig, NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ContactListeDiffusions } from '../../../modele/contact-liste-diffusions';
 import { ListeDeDiffusions, ListeDeDiffusionsEdit } from "../../../modele/liste-de-diffusions";
 import { ContactListeDiffusionsService } from '../../../services/contact-liste-diffusions.service';
@@ -57,7 +58,8 @@ statusED: NbComponentStatus = 'danger';
 titleED = 'Modification d\'une liste !';
 contentED = `Erreur lors de la modification de la liste!`;
 
- 
+dropdownSettings:IDropdownSettings;
+    selectedItems = [];
 
   constructor(private modalService: NgbModal,private router : Router,private toastrService: NbToastrService,private niveauDeVisibilite : NiveauDeVisibilitesService,private contactListeDiffService : ContactListeDiffusionsService,private listeDeDiffusionService: ListeDeDiffusionsService, private contactService : ContactsService) { 
 
@@ -72,6 +74,7 @@ contentED = `Erreur lors de la modification de la liste!`;
 
     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts=data;
+
     }, (err) => {
      
       console.log(err);
@@ -83,8 +86,52 @@ contentED = `Erreur lors de la modification de la liste!`;
      
       console.log(err);
     });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField:'nomComplet',
+      selectAllText: 'Tout Sélectionner',
+      unSelectAllText: 'Tout Déselectionner',
+      searchPlaceholderText:'Rechercher',
+      allowSearchFilter: true
+  };
   }
   
+  onItemSelect(item: any) {
+    //console.log(item);
+    this.selectedItems.push(item);
+}
+
+onSelectAll(items: any) {
+    this.selectedItems = [];
+    for (let i = 0; i < items.length; i++) {
+        this.selectedItems.push(items[i]);
+    }
+}
+
+onDeselect(items: any) {
+
+
+  for (let i = 0; i < this.selectedItems.length; i++) {
+      if (this.selectedItems[i].id == items.id) {
+      //    console.log(i);
+      //    console.log('mon tab');
+        //  console.log(this.selectedItems[i]);
+          this.selectedItems.splice(i, 1);
+      }
+
+  }
+//  console.log('restant');
+//  console.log(this.selectedItems);
+
+}
+
+onDeselectAll(items: any) {
+  // console.log(items);
+  this.selectedItems.splice(0, this.selectedItems.length);
+}
+
 listeE : ListeDeDiffusionsEdit = {
   IdNiveauVisibilite: '',
   Titre: '',
@@ -117,13 +164,13 @@ listeE : ListeDeDiffusionsEdit = {
   
   
   Ajout(form :NgForm){
-    //
+
     this.listeDeDiffusionService.AddListeDeDiffusion(this.liste).subscribe((data) => {
       this.contactlistdiff.IdListeDiffusion = data['id']
       this.ToastValide(this.status,this.title,this.content)
       this.router.navigate(['pages/liste_de_diffusion/list']);
-       for (let index = 0; index < this.selected.length; index++) {
-         this.contactlistdiff.IdContact = this.selected[index]
+       for (let index = 0; index < this.selectedItems.length; index++) {
+         this.contactlistdiff.IdContact = this.selectedItems[index]['id']
         this.contactListeDiffService.AddContactListeDiffusion(this.contactlistdiff).subscribe((data) => {
         }, (err) => {
           console.log(err);
@@ -229,4 +276,6 @@ listeE : ListeDeDiffusionsEdit = {
      console.log(err);
    });
   }
+
+ 
 }

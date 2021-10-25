@@ -38,7 +38,7 @@ con : any;
     position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
     preventDuplicates = false;
     status: NbComponentStatus = 'success';
-    statusSupprim: NbComponentStatus = 'danger';
+    statusSupprim: NbComponentStatus = 'success';
     
     titleSupprim = 'Supression d\'un contact !';
     contentSupprim = `Contact supprimé avec suucès!`;
@@ -66,7 +66,6 @@ con : any;
   ngOnInit() {
     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
-      console.log(this.contacts)
     }, (err) => {
       console.log(err);
     });
@@ -118,10 +117,8 @@ private getDismissReason(reason: any): string {
 
 changestatut(id){
   this.contactService.changerStatutContactt(id).subscribe((data) => {
-     console.log(data)
      this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
-      console.log(this.contacts)
     }, (err) => {
       console.log(err);
     });

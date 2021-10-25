@@ -19,6 +19,11 @@ export class ContactCanalsService {
     return this.http.post<ContactCanals>(this.url + 'add', contactCanal);
   }
 
+  AddContactCana(contactCanal: ContactCanals): Observable<ContactCanals> {
+    return this.http.post<ContactCanals>(this.url + 'addContactCanal', contactCanal);
+  }
+
+  
   getAllContactCanal(): Observable<ContactCanals> {
     return this.http.get<ContactCanals>(this.url);
   }

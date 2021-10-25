@@ -16,6 +16,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddmodeleComponent implements OnInit {
 canal;
+variable;
 config: NbToastrConfig;
 closeResult:string;
 index = 1;
@@ -62,7 +63,7 @@ p:number=1;
    console.log(deviceValue)
   }
 
-  open() {
+  openVar() {
     
     this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -72,6 +73,22 @@ p:number=1;
     });
   }
 
+  open(id) {
+    console.log(id);
+    this.modeleService.getModele(id).subscribe((data) => {
+      this.dataliste = data;
+    }, (err) => {
+      console.log(err);
+    });
+    this.modalService.open( {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -83,6 +100,7 @@ p:number=1;
     }
   }
 
+ 
   model: Modeles = {
     Libelle: '',
     Contenu :'',
@@ -96,12 +114,17 @@ p:number=1;
   Ajout(form :NgForm){
     this.modeleService.AddModele(this.model).subscribe((data) => {
       this.ToastValide(this.status,this.title,this.content)
-      this.router.navigate(['pages/modele/list']);
+      form.reset()
+      this.router.navigate(['pages/modele/add']);
+
     }, (err) => {
       this.ToastValideDanger(this.statusDanger,this.titleDanger,this.contentDanger)
       console.log(err);
     });
     console.log(this.model.Contenu);
+
+ 
+
   }
 
 
@@ -187,4 +210,7 @@ p:number=1;
     });
   }
 
+  variableFonction() { // without type info
+    this.model.Contenu += ' '+this.variable;  
+  }
 }

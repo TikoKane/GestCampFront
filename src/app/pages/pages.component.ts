@@ -27,7 +27,7 @@ export class PagesComponent implements OnInit{
 
     this.MENU_ITEMS=[ {
      
-      title: 'Dashboard',
+      title: 'Accueil',
       icon: 'home-outline',
       link: '/pages/accueil/d3',
       home: true,

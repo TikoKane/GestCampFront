@@ -14,12 +14,26 @@
                     <nb-card-body>
                       <form #form="ngForm">
                         <div class="row">
-
-                          <div class="form-group">
-                            <label for="inputFirstName" class="label">Titre </label>
-                            <input [(ngModel)]="camp.Titre" nbInput placeholder="Entrer le titre de la campagne "
-                              fullWidth #nameInput="ngModel" name="titre" type="text" required minlength="2"
-                              maxlength="50">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Titre </label>
+                              <input [(ngModel)]="camp.Titre" nbInput placeholder="Entrer le titre de la campagne "
+                                fullWidth #nameInput="ngModel" name="titre" type="text" required minlength="2"
+                                maxlength="50">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Catégorie</label>
+                              <select name="IdCategorie"
+                                id="IdCategorie" [(ngModel)]="camp.IdCategorie"
+                                class="col-sm-12 form-control" fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir la catégorie</option>
+                                <option *ngFor="let data of categories" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                         <div class="row">
@@ -326,12 +340,26 @@
                           </div>
                         </div>
                         <div class="row">
-
-                          <div class="form-group">
-                            <label for="inputFirstName" class="label">Titre </label>
-                            <input [(ngModel)]="campUnitaire.Titre" nbInput
-                              placeholder="Entrer le titre de la campagne " fullWidth #nameInput="ngModel" name="titre"
-                              type="text" required minlength="2" maxlength="50">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Titre </label>
+                              <input [(ngModel)]="camp.Titre" nbInput placeholder="Entrer le titre de la campagne "
+                                fullWidth #nameInput="ngModel" name="titre" type="text" required minlength="2"
+                                maxlength="50">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="inputFirstName" class="label">Catégorie</label>
+                              <select name="IdCategorie"
+                                id="IdCategorie" [(ngModel)]="camp.IdCategorie"
+                                class="col-sm-12 form-control" fullWidth required>
+                                <option value="" disabled selected>Veuillez choisir la catégorie</option>
+                                <option *ngFor="let data of categories" [value]="data.id"
+                                  [selected]="data.libelle == true">
+                                  {{data.libelle}}</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                         <div class="row">

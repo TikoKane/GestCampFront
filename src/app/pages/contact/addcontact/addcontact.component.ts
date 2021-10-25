@@ -211,7 +211,7 @@ supTelephone(){
        console.log(err);
      });
   }
-  this.router.navigateByUrl('pages/contact/list')
+  this.router.navigate(['pages/contact/list'])
 
 }, (err) => {
   this.ToastValideNoValide(this.statusNoValide, this.titleNoValide, this.contentNoValide);

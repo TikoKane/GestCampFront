@@ -14,6 +14,7 @@ import './ckeditor.loader';
 import 'ckeditor';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsService } from '../../../services/contacts.service';
+import { CategoriesService } from '../../../services/categories.service';
 
 @Component({
   selector: 'ngx-addcampagne',
@@ -55,6 +56,7 @@ export class AddcampagneComponent implements OnInit {
   libelleTDC;
   libelleCDE;
   campUni='';
+  categories;
   nomComplet = localStorage.getItem("nom")+" "+localStorage.getItem("prenom");
 
   closeResult:string;
@@ -76,9 +78,10 @@ statusNoValide: NbComponentStatus = 'danger';
 titleNoValide = 'Ajout d\'un nouveau canal !';
 contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
 
-  constructor(private modalService: NgbModal,private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
+  constructor(private modalService: NgbModal, private categorieService: CategoriesService, private toastrService: NbToastrService,private campagneService : CampagnesService,private niveauVisibiliteService : NiveauDeVisibilitesService, private typeCampagneService : TypeDeCampagnesService,private canalEnvoiService : CanalEnvoisService,
     private regleDenvoiService : RegleDEnvoisService, private contactService : ContactsService, private router: Router,private listeDiffusionService : ListeDeDiffusionsService,private modelService : ModelesService) { }
   camp : Campagnes = {
+    IdCategorie:'',
     Code :'Codeeeee',
     DateDeDebut:'',
     DateDeFin:'',
@@ -112,7 +115,8 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
     IdTypeCampagne:'',
     IdUtilisateur:localStorage.getItem('id'),
     Titre:'',
-  Contenu : ''
+    Contenu : '',
+    IdCategorie :''
 
   }
 
@@ -138,14 +142,19 @@ contentNoValide = `Echec lors de l'ajout d'un nouveau canal!`;
     IdEntite: localStorage.getItem('idEntite'),
   }
   ngOnInit(): void {
+
     this.niveauVisibiliteService.getAllNiveauDeVisibilite().subscribe((data) => {
       this.niveaudevisbilite = data;
-      console.log(this.niveaudevisbilite)
     }, (err) => {
       console.log(err);
     });
 
-    
+    this.categorieService.getAllCategorie(localStorage.getItem('idEntite')).subscribe((data) => {
+      this.categories = data;
+      console.log(this.categories)
+    }, (err) => {
+      console.log(err);
+    });
 
     this.contactService.getAllContact(localStorage.getItem('idEntite')).subscribe((data) => {
       this.contacts = data;
